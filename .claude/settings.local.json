@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(curl -s -X POST http://localhost:3001/api/trucks -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiM2RhOWIwMy0wZDVlLTQzMDItYWQwYS04OGZlMjljYzAzMzIiLCJlbWFpbCI6ImFkbWluQHRtcy5jb20iLCJyb2xlIjoiU1VQRVJfQURNSU4iLCJjb21wYW55SWQiOiI5MmRkZDZiMy1jMjZjLTQzZmEtOTAyOC02Njc5ODk2ZTczOTkiLCJpYXQiOjE3NzY0NzM0NjQsImV4cCI6MTc3NzA3ODI2NH0.46gMw3cQiHeIkn09Q24uPEAspLEOvcqTFF87DGUmFzk' -d '{\"matricule\":\"123 TUN 16\",\"capaciteTonnage\":10,\"capacitePalettes\":20,\"type\":\"Plateau\",\"deliveryCompanyId\":\"326865b2-c52f-4970-bede-dec4940aa711\"}')"
+    ]
+  }
+}
