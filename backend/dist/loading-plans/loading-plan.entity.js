@@ -21,6 +21,7 @@ let LoadingPlan = class LoadingPlan {
     tonnageCharge;
     palettesChargees;
     isValidated;
+    signature;
     createdAt;
     truck;
     bonsLivraison;
@@ -51,6 +52,10 @@ __decorate([
     (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], LoadingPlan.prototype, "isValidated", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "signature", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

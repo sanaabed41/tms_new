@@ -23,8 +23,9 @@ let AuthController = class AuthController {
     constructor(service) {
         this.service = service;
     }
-    login(dto) {
-        return this.service.login(dto.email, dto.password);
+    login(dto, req) {
+        const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip;
+        return this.service.login(dto.email, dto.password, ip);
     }
     profile(user) {
         return this.service.profile(user.id);
@@ -43,8 +44,9 @@ exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
 __decorate([

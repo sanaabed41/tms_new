@@ -123,17 +123,20 @@ let LoadingPlansService = class LoadingPlansService {
             palettesChargees: newPalettes,
         });
     }
-    async validate(planId, userId) {
-        await this.repo.update(planId, {
-            isValidated: true,
-            validatedBy: { id: userId },
-        });
+    async validate(planId, userId, signature) {
+        const update = { isValidated: true, validatedBy: { id: userId } };
+        if (signature)
+            update.signature = signature;
+        await this.repo.update(planId, update);
         return this.findOne(planId);
     }
-    async validateAll(companyId, date, userId) {
+    async validateAll(companyId, date, userId, signature) {
         const plans = await this.findAll(companyId, date);
         const toValidate = plans.filter((p) => !p.isValidated && p.bonsLivraison?.length > 0);
-        await Promise.all(toValidate.map((p) => this.repo.update(p.id, { isValidated: true, validatedBy: { id: userId } })));
+        const update = { isValidated: true, validatedBy: { id: userId } };
+        if (signature)
+            update.signature = signature;
+        await Promise.all(toValidate.map((p) => this.repo.update(p.id, update)));
         return { validated: toValidate.length };
     }
     async remove(id) {

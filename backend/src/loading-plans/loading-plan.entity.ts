@@ -26,6 +26,9 @@ export class LoadingPlan {
   @Column({ default: false })
   isValidated: boolean;
 
+  @Column({ type: 'text', nullable: true })
+  signature: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

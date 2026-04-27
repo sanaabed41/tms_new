@@ -10,7 +10,7 @@ import { MailService } from '../mail/mail.service';
 import { Role } from '../common/enums/role.enum';
 
 // Rôles qu'un COMPANY_ADMIN est autorisé à inviter
-const COMPANY_ADMIN_ALLOWED_ROLES: Role[] = [Role.COMPANY_ADMIN, Role.PURCHASE_MANAGER];
+const COMPANY_ADMIN_ALLOWED_ROLES: Role[] = [Role.COMPANY_ADMIN];
 
 @Injectable()
 export class InvitationsService {

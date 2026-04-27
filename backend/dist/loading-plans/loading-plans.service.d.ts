@@ -12,8 +12,8 @@ export declare class LoadingPlansService {
     create(dto: any): Promise<LoadingPlan>;
     assignBl(planId: string, blId: string, _userId: string, force?: boolean): Promise<LoadingPlan>;
     removeBl(planId: string, blId: string): Promise<void>;
-    validate(planId: string, userId: string): Promise<LoadingPlan>;
-    validateAll(companyId: string, date: string, userId: string): Promise<{
+    validate(planId: string, userId: string, signature?: string): Promise<LoadingPlan>;
+    validateAll(companyId: string, date: string, userId: string, signature?: string): Promise<{
         validated: number;
     }>;
     remove(id: string): Promise<import("typeorm").DeleteResult>;

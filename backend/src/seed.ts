@@ -27,7 +27,7 @@ async function seed() {
 
   // 1. Société cliente
   const company = await companiesService.create({
-    nom: 'Groupe Poulina',
+    nom: 'TransFood',
     adresse: 'Route de la Marsa, Tunis',
     telephone: '+216 71 000 000',
   });

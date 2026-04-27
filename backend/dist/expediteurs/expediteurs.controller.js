@@ -54,7 +54,7 @@ let ExpediteursController = class ExpediteursController {
 exports.ExpediteursController = ExpediteursController;
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -62,7 +62,7 @@ __decorate([
 ], ExpediteursController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -70,7 +70,7 @@ __decorate([
 ], ExpediteursController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -79,7 +79,7 @@ __decorate([
 ], ExpediteursController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -96,7 +96,7 @@ __decorate([
 ], ExpediteursController.prototype, "remove", null);
 __decorate([
     (0, common_1.Post)(':id/filieres'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -105,7 +105,7 @@ __decorate([
 ], ExpediteursController.prototype, "createFiliere", null);
 __decorate([
     (0, common_1.Put)('filieres/:filiereId'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('filiereId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

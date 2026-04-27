@@ -13,6 +13,8 @@ import { InvitationsModule } from './invitations/invitations.module';
 import { MailModule } from './mail/mail.module';
 import { ExpediteursModule } from './expediteurs/expediteurs.module';
 import { TruckAvailabilityModule } from './truck-availability/truck-availability.module';
+import { ErpModule } from './erp/erp.module';
+import { AuditLogsModule } from './audit-logs/audit-logs.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { TruckAvailabilityModule } from './truck-availability/truck-availability
     InvitationsModule,
     ExpediteursModule,
     TruckAvailabilityModule,
+    ErpModule,
+    AuditLogsModule,
   ],
 })
 export class AppModule {}

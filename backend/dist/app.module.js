@@ -22,6 +22,8 @@ const invitations_module_1 = require("./invitations/invitations.module");
 const mail_module_1 = require("./mail/mail.module");
 const expediteurs_module_1 = require("./expediteurs/expediteurs.module");
 const truck_availability_module_1 = require("./truck-availability/truck-availability.module");
+const erp_module_1 = require("./erp/erp.module");
+const audit_logs_module_1 = require("./audit-logs/audit-logs.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -56,6 +58,8 @@ exports.AppModule = AppModule = __decorate([
             invitations_module_1.InvitationsModule,
             expediteurs_module_1.ExpediteursModule,
             truck_availability_module_1.TruckAvailabilityModule,
+            erp_module_1.ErpModule,
+            audit_logs_module_1.AuditLogsModule,
         ],
     })
 ], AppModule);

@@ -35,9 +35,11 @@ let UsersController = class UsersController {
     update(id, dto, user) {
         return this.service.update(id, dto, { role: user.role, companyId: user.companyId });
     }
-    toggleActive(id) { return this.service.toggleActive(id); }
+    toggleActive(id, user) {
+        return this.service.toggleActive(id, { id: user.id, email: user.email, role: user.role });
+    }
     remove(id, user) {
-        return this.service.remove(id, { role: user.role, companyId: user.companyId });
+        return this.service.remove(id, { role: user.role, companyId: user.companyId, id: user.id, email: user.email });
     }
 };
 exports.UsersController = UsersController;
@@ -79,10 +81,11 @@ __decorate([
 ], UsersController.prototype, "update", null);
 __decorate([
     (0, common_1.Patch)(':id/toggle-active'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "toggleActive", null);
 __decorate([

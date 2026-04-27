@@ -56,31 +56,89 @@ const crypto = __importStar(require("crypto"));
 const users_service_1 = require("../users/users.service");
 const user_entity_1 = require("../users/user.entity");
 const mail_service_1 = require("../mail/mail.service");
+const audit_logs_service_1 = require("../audit-logs/audit-logs.service");
 let AuthService = class AuthService {
     usersService;
     jwtService;
     config;
     mailService;
+    auditLogs;
     userRepo;
-    constructor(usersService, jwtService, config, mailService, userRepo) {
+    constructor(usersService, jwtService, config, mailService, auditLogs, userRepo) {
         this.usersService = usersService;
         this.jwtService = jwtService;
         this.config = config;
         this.mailService = mailService;
+        this.auditLogs = auditLogs;
         this.userRepo = userRepo;
     }
-    async login(email, password) {
+    async login(email, password, ip) {
         const user = await this.usersService.findByEmail(email);
-        if (!user)
+        if (!user) {
+            await this.auditLogs.log({
+                action: 'LOGIN_FAILED',
+                actorEmail: email,
+                ip,
+                metadata: { reason: 'email_not_found' },
+            });
             throw new common_1.UnauthorizedException('Email ou mot de passe incorrect');
-        if (!user.isActive)
+        }
+        if (!user.isActive) {
+            await this.auditLogs.log({
+                action: 'LOGIN_FAILED',
+                actorId: user.id,
+                actorEmail: user.email,
+                actorRole: user.role,
+                companyId: user.company?.id,
+                companyNom: user.company?.nom,
+                ip,
+                metadata: { reason: 'account_inactive' },
+            });
             throw new common_1.UnauthorizedException('Compte inactif — contactez votre administrateur');
-        if (!user.password)
+        }
+        if (!user.password) {
+            await this.auditLogs.log({
+                action: 'LOGIN_FAILED',
+                actorId: user.id,
+                actorEmail: user.email,
+                actorRole: user.role,
+                companyId: user.company?.id,
+                companyNom: user.company?.nom,
+                ip,
+                metadata: { reason: 'password_not_set' },
+            });
             throw new common_1.UnauthorizedException('Compte non activé — vérifiez votre email d\'invitation');
+        }
         const match = await bcrypt.compare(password, user.password);
-        if (!match)
+        if (!match) {
+            await this.auditLogs.log({
+                action: 'LOGIN_FAILED',
+                actorId: user.id,
+                actorEmail: user.email,
+                actorRole: user.role,
+                companyId: user.company?.id,
+                companyNom: user.company?.nom,
+                ip,
+                metadata: { reason: 'wrong_password' },
+            });
             throw new common_1.UnauthorizedException('Email ou mot de passe incorrect');
-        const payload = { sub: user.id, email: user.email, role: user.role, companyId: user.company?.id, companyNom: user.company?.nom };
+        }
+        await this.auditLogs.log({
+            action: 'LOGIN_SUCCESS',
+            actorId: user.id,
+            actorEmail: user.email,
+            actorRole: user.role,
+            companyId: user.company?.id,
+            companyNom: user.company?.nom,
+            ip,
+        });
+        const payload = {
+            sub: user.id,
+            email: user.email,
+            role: user.role,
+            companyId: user.company?.id,
+            companyNom: user.company?.nom,
+        };
         return {
             access_token: this.jwtService.sign(payload),
             user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email, role: user.role, company: user.company },
@@ -140,11 +198,12 @@ let AuthService = class AuthService {
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(4, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(5, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         jwt_1.JwtService,
         config_1.ConfigService,
         mail_service_1.MailService,
+        audit_logs_service_1.AuditLogsService,
         typeorm_2.Repository])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

@@ -8,6 +8,7 @@ import * as crypto from 'crypto';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.entity';
 import { MailService } from '../mail/mail.service';
+import { AuditLogsService } from '../audit-logs/audit-logs.service';
 
 @Injectable()
 export class AuthService {
@@ -16,19 +17,83 @@ export class AuthService {
     private jwtService: JwtService,
     private config: ConfigService,
     private mailService: MailService,
+    private auditLogs: AuditLogsService,
     @InjectRepository(User) private userRepo: Repository<User>,
   ) {}
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string, ip?: string) {
     const user = await this.usersService.findByEmail(email);
-    if (!user) throw new UnauthorizedException('Email ou mot de passe incorrect');
-    if (!user.isActive) throw new UnauthorizedException('Compte inactif — contactez votre administrateur');
-    if (!user.password) throw new UnauthorizedException('Compte non activé — vérifiez votre email d\'invitation');
+
+    if (!user) {
+      await this.auditLogs.log({
+        action: 'LOGIN_FAILED',
+        actorEmail: email,
+        ip,
+        metadata: { reason: 'email_not_found' },
+      });
+      throw new UnauthorizedException('Email ou mot de passe incorrect');
+    }
+
+    if (!user.isActive) {
+      await this.auditLogs.log({
+        action: 'LOGIN_FAILED',
+        actorId: user.id,
+        actorEmail: user.email,
+        actorRole: user.role,
+        companyId: user.company?.id,
+        companyNom: user.company?.nom,
+        ip,
+        metadata: { reason: 'account_inactive' },
+      });
+      throw new UnauthorizedException('Compte inactif — contactez votre administrateur');
+    }
+
+    if (!user.password) {
+      await this.auditLogs.log({
+        action: 'LOGIN_FAILED',
+        actorId: user.id,
+        actorEmail: user.email,
+        actorRole: user.role,
+        companyId: user.company?.id,
+        companyNom: user.company?.nom,
+        ip,
+        metadata: { reason: 'password_not_set' },
+      });
+      throw new UnauthorizedException('Compte non activé — vérifiez votre email d\'invitation');
+    }
 
     const match = await bcrypt.compare(password, user.password);
-    if (!match) throw new UnauthorizedException('Email ou mot de passe incorrect');
+    if (!match) {
+      await this.auditLogs.log({
+        action: 'LOGIN_FAILED',
+        actorId: user.id,
+        actorEmail: user.email,
+        actorRole: user.role,
+        companyId: user.company?.id,
+        companyNom: user.company?.nom,
+        ip,
+        metadata: { reason: 'wrong_password' },
+      });
+      throw new UnauthorizedException('Email ou mot de passe incorrect');
+    }
 
-    const payload = { sub: user.id, email: user.email, role: user.role, companyId: user.company?.id, companyNom: user.company?.nom };
+    await this.auditLogs.log({
+      action: 'LOGIN_SUCCESS',
+      actorId: user.id,
+      actorEmail: user.email,
+      actorRole: user.role,
+      companyId: user.company?.id,
+      companyNom: user.company?.nom,
+      ip,
+    });
+
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+      companyId: user.company?.id,
+      companyNom: user.company?.nom,
+    };
     return {
       access_token: this.jwtService.sign(payload),
       user: { id: user.id, nom: user.nom, prenom: user.prenom, email: user.email, role: user.role, company: user.company },
@@ -41,12 +106,11 @@ export class AuthService {
 
   async forgotPassword(email: string) {
     const user = await this.usersService.findByEmail(email);
-    // Toujours répondre OK pour ne pas révéler si l'email existe
     if (!user || !user.isActive) return { message: 'Si cet email existe, un lien a été envoyé.' };
 
     const rawToken = crypto.randomBytes(32).toString('hex');
     const hashedToken = await bcrypt.hash(rawToken, 8);
-    const expires = new Date(Date.now() + 60 * 60 * 1000); // 1h
+    const expires = new Date(Date.now() + 60 * 60 * 1000);
 
     await this.userRepo.update(user.id, {
       resetPasswordToken: hashedToken,

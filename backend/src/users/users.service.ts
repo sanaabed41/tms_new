@@ -4,10 +4,14 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { User } from './user.entity';
 import { Role } from '../common/enums/role.enum';
+import { AuditLogsService } from '../audit-logs/audit-logs.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private repo: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private repo: Repository<User>,
+    private auditLogs: AuditLogsService,
+  ) {}
 
   findAll(companyId?: string) {
     if (companyId) {
@@ -31,23 +35,29 @@ export class UsersService {
       throw new ForbiddenException('Cannot create user for another company');
     }
     const hashed = await bcrypt.hash(dto.password, 10);
-    const user = this.repo.create({
-      ...dto,
-      password: hashed,
-      company: { id: dto.companyId },
+    const user = this.repo.create({ ...dto, password: hashed, company: { id: dto.companyId } });
+    const saved = await this.repo.save(user) as unknown as User;
+
+    await this.auditLogs.log({
+      action: 'USER_CREATED',
+      actorId: createdBy.id,
+      actorEmail: createdBy.email,
+      actorRole: createdBy.role,
+      targetId: saved.id,
+      targetEmail: saved.email,
+      companyId: dto.companyId,
+      metadata: { role: dto.role },
     });
-    return this.repo.save(user);
+
+    return saved;
   }
 
   async update(id: string, dto: any, caller: { role: Role; companyId: string }) {
     const target = await this.findOne(id);
 
-    // COMPANY_ADMIN ne peut modifier que les users de sa propre société
     if (caller.role === Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
       throw new ForbiddenException('Accès interdit');
     }
-
-    // Personne ne peut s'auto-élever au rang SUPER_ADMIN sauf un SUPER_ADMIN
     if (dto.role === Role.SUPER_ADMIN && caller.role !== Role.SUPER_ADMIN) {
       throw new ForbiddenException('Vous ne pouvez pas attribuer ce rôle');
     }
@@ -57,23 +67,45 @@ export class UsersService {
     return this.findOne(id);
   }
 
-  async toggleActive(id: string) {
+  async toggleActive(id: string, actor?: { id: string; email: string; role: string }) {
     const user = await this.findOne(id);
-    await this.repo.update(id, { isActive: !user.isActive });
+    const newState = !user.isActive;
+    await this.repo.update(id, { isActive: newState });
+
+    await this.auditLogs.log({
+      action: newState ? 'USER_ACTIVATED' : 'USER_DEACTIVATED',
+      actorId: actor?.id,
+      actorEmail: actor?.email,
+      actorRole: actor?.role,
+      targetId: user.id,
+      targetEmail: user.email,
+      companyId: user.company?.id,
+      companyNom: user.company?.nom,
+    });
+
     return this.findOne(id);
   }
 
-  async remove(id: string, caller: { role: Role; companyId: string }) {
+  async remove(id: string, caller: { role: Role; companyId: string; id?: string; email?: string }) {
     const target = await this.findOne(id);
 
     if (caller.role === Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
       throw new ForbiddenException('Accès interdit');
     }
-
-    // Personne ne peut supprimer un SUPER_ADMIN sauf un autre SUPER_ADMIN
     if (target.role === Role.SUPER_ADMIN && caller.role !== Role.SUPER_ADMIN) {
       throw new ForbiddenException('Accès interdit');
     }
+
+    await this.auditLogs.log({
+      action: 'USER_DELETED',
+      actorId: caller.id,
+      actorEmail: caller.email,
+      actorRole: caller.role,
+      targetId: target.id,
+      targetEmail: target.email,
+      companyId: target.company?.id,
+      companyNom: target.company?.nom,
+    });
 
     return this.repo.remove(target);
   }

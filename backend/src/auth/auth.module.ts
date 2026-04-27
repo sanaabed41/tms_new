@@ -7,11 +7,13 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
 import { UsersModule } from '../users/users.module';
+import { AuditLogsModule } from '../audit-logs/audit-logs.module';
 import { User } from '../users/user.entity';
 
 @Module({
   imports: [
     UsersModule,
+    AuditLogsModule,
     PassportModule,
     TypeOrmModule.forFeature([User]),
     JwtModule.registerAsync({

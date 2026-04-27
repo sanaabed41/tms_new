@@ -8,6 +8,7 @@ export declare class LoadingPlan {
     tonnageCharge: number;
     palettesChargees: number;
     isValidated: boolean;
+    signature: string;
     createdAt: Date;
     truck: Truck;
     bonsLivraison: BonLivraison[];

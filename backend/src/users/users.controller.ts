@@ -17,7 +17,6 @@ export class UsersController {
   @Get()
   @Roles(Role.SUPER_ADMIN, Role.COMPANY_ADMIN)
   findAll(@Query('companyId') companyId: string, @CurrentUser() user: any) {
-    // COMPANY_ADMIN est toujours limité à sa propre société
     const cid = user.role === Role.COMPANY_ADMIN ? user.companyId : companyId;
     return this.service.findAll(cid);
   }
@@ -37,12 +36,14 @@ export class UsersController {
   }
 
   @Patch(':id/toggle-active')
-  @Roles(Role.SUPER_ADMIN)
-  toggleActive(@Param('id') id: string) { return this.service.toggleActive(id); }
+  @Roles(Role.SUPER_ADMIN, Role.COMPANY_ADMIN)
+  toggleActive(@Param('id') id: string, @CurrentUser() user: any) {
+    return this.service.toggleActive(id, { id: user.id, email: user.email, role: user.role });
+  }
 
   @Delete(':id')
   @Roles(Role.SUPER_ADMIN, Role.COMPANY_ADMIN)
   remove(@Param('id') id: string, @CurrentUser() user: any) {
-    return this.service.remove(id, { role: user.role, companyId: user.companyId });
+    return this.service.remove(id, { role: user.role, companyId: user.companyId, id: user.id, email: user.email });
   }
 }

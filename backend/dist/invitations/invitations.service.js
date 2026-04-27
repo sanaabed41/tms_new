@@ -56,7 +56,7 @@ const invitation_entity_1 = require("./invitation.entity");
 const user_entity_1 = require("../users/user.entity");
 const mail_service_1 = require("../mail/mail.service");
 const role_enum_1 = require("../common/enums/role.enum");
-const COMPANY_ADMIN_ALLOWED_ROLES = [role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.PURCHASE_MANAGER];
+const COMPANY_ADMIN_ALLOWED_ROLES = [role_enum_1.Role.COMPANY_ADMIN];
 let InvitationsService = class InvitationsService {
     repo;
     userRepo;

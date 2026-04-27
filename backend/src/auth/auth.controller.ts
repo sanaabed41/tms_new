@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, UseGuards, Req } from '@nestjs/common';
+import type { Request } from 'express';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
@@ -10,8 +11,9 @@ export class AuthController {
   constructor(private readonly service: AuthService) {}
 
   @Post('login')
-  login(@Body() dto: { email: string; password: string }) {
-    return this.service.login(dto.email, dto.password);
+  login(@Body() dto: { email: string; password: string }, @Req() req: Request) {
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip;
+    return this.service.login(dto.email, dto.password, ip);
   }
 
   @Get('profile')

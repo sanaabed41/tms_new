@@ -41,8 +41,8 @@ export class LoadingPlansController {
 
   @Put('validate-all')
   @Roles(Role.COMPANY_ADMIN)
-  validateAll(@CurrentUser() user: any, @Query('date') date: string) {
-    return this.service.validateAll(user.companyId, date, user.id);
+  validateAll(@CurrentUser() user: any, @Query('date') date: string, @Body('signature') signature?: string) {
+    return this.service.validateAll(user.companyId, date, user.id, signature);
   }
 
   @Delete(':id/remove-bl/:blId')
@@ -53,8 +53,8 @@ export class LoadingPlansController {
 
   @Put(':id/validate')
   @Roles(Role.COMPANY_ADMIN)
-  validate(@Param('id') id: string, @CurrentUser() user: any) {
-    return this.service.validate(id, user.id);
+  validate(@Param('id') id: string, @CurrentUser() user: any, @Body('signature') signature?: string) {
+    return this.service.validate(id, user.id, signature);
   }
 
   @Delete(':id')

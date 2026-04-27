@@ -132,22 +132,19 @@ export class LoadingPlansService {
     });
   }
 
-  async validate(planId: string, userId: string) {
-    await this.repo.update(planId, {
-      isValidated: true,
-      validatedBy: { id: userId } as any,
-    });
+  async validate(planId: string, userId: string, signature?: string) {
+    const update: any = { isValidated: true, validatedBy: { id: userId } };
+    if (signature) update.signature = signature;
+    await this.repo.update(planId, update);
     return this.findOne(planId);
   }
 
-  async validateAll(companyId: string, date: string, userId: string) {
+  async validateAll(companyId: string, date: string, userId: string, signature?: string) {
     const plans = await this.findAll(companyId, date);
     const toValidate = plans.filter((p) => !p.isValidated && p.bonsLivraison?.length > 0);
-    await Promise.all(
-      toValidate.map((p) =>
-        this.repo.update(p.id, { isValidated: true, validatedBy: { id: userId } as any }),
-      ),
-    );
+    const update: any = { isValidated: true, validatedBy: { id: userId } as any };
+    if (signature) update.signature = signature;
+    await Promise.all(toValidate.map((p) => this.repo.update(p.id, update)));
     return { validated: toValidate.length };
   }
 

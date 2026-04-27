@@ -19,7 +19,7 @@ export class User {
   @Column({ nullable: true })
   password: string;
 
-  @Column({ type: 'enum', enum: Role, default: Role.PURCHASE_MANAGER })
+  @Column({ type: 'enum', enum: Role, default: Role.COMPANY_ADMIN })
   role: Role;
 
   @Column({ default: false })

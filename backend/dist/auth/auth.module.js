@@ -16,6 +16,7 @@ const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
 const jwt_strategy_1 = require("./jwt.strategy");
 const users_module_1 = require("../users/users.module");
+const audit_logs_module_1 = require("../audit-logs/audit-logs.module");
 const user_entity_1 = require("../users/user.entity");
 let AuthModule = class AuthModule {
 };
@@ -24,6 +25,7 @@ exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
             users_module_1.UsersModule,
+            audit_logs_module_1.AuditLogsModule,
             passport_1.PassportModule,
             typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
             jwt_1.JwtModule.registerAsync({

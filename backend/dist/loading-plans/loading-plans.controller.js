@@ -34,14 +34,14 @@ let LoadingPlansController = class LoadingPlansController {
     assignBl(id, blId, user, force) {
         return this.service.assignBl(id, blId, user.id, force);
     }
-    validateAll(user, date) {
-        return this.service.validateAll(user.companyId, date, user.id);
+    validateAll(user, date, signature) {
+        return this.service.validateAll(user.companyId, date, user.id, signature);
     }
     removeBl(id, blId) {
         return this.service.removeBl(id, blId);
     }
-    validate(id, user) {
-        return this.service.validate(id, user.id);
+    validate(id, user, signature) {
+        return this.service.validate(id, user.id, signature);
     }
     remove(id) { return this.service.remove(id); }
 };
@@ -87,8 +87,9 @@ __decorate([
     (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Query)('date')),
+    __param(2, (0, common_1.Body)('signature')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "validateAll", null);
 __decorate([
@@ -105,8 +106,9 @@ __decorate([
     (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
+    __param(2, (0, common_1.Body)('signature')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, Object, String]),
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "validate", null);
 __decorate([

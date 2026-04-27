@@ -52,10 +52,13 @@ const typeorm_2 = require("typeorm");
 const bcrypt = __importStar(require("bcryptjs"));
 const user_entity_1 = require("./user.entity");
 const role_enum_1 = require("../common/enums/role.enum");
+const audit_logs_service_1 = require("../audit-logs/audit-logs.service");
 let UsersService = class UsersService {
     repo;
-    constructor(repo) {
+    auditLogs;
+    constructor(repo, auditLogs) {
         this.repo = repo;
+        this.auditLogs = auditLogs;
     }
     findAll(companyId) {
         if (companyId) {
@@ -77,12 +80,19 @@ let UsersService = class UsersService {
             throw new common_1.ForbiddenException('Cannot create user for another company');
         }
         const hashed = await bcrypt.hash(dto.password, 10);
-        const user = this.repo.create({
-            ...dto,
-            password: hashed,
-            company: { id: dto.companyId },
+        const user = this.repo.create({ ...dto, password: hashed, company: { id: dto.companyId } });
+        const saved = await this.repo.save(user);
+        await this.auditLogs.log({
+            action: 'USER_CREATED',
+            actorId: createdBy.id,
+            actorEmail: createdBy.email,
+            actorRole: createdBy.role,
+            targetId: saved.id,
+            targetEmail: saved.email,
+            companyId: dto.companyId,
+            metadata: { role: dto.role },
         });
-        return this.repo.save(user);
+        return saved;
     }
     async update(id, dto, caller) {
         const target = await this.findOne(id);
@@ -97,9 +107,20 @@ let UsersService = class UsersService {
         await this.repo.update(id, dto);
         return this.findOne(id);
     }
-    async toggleActive(id) {
+    async toggleActive(id, actor) {
         const user = await this.findOne(id);
-        await this.repo.update(id, { isActive: !user.isActive });
+        const newState = !user.isActive;
+        await this.repo.update(id, { isActive: newState });
+        await this.auditLogs.log({
+            action: newState ? 'USER_ACTIVATED' : 'USER_DEACTIVATED',
+            actorId: actor?.id,
+            actorEmail: actor?.email,
+            actorRole: actor?.role,
+            targetId: user.id,
+            targetEmail: user.email,
+            companyId: user.company?.id,
+            companyNom: user.company?.nom,
+        });
         return this.findOne(id);
     }
     async remove(id, caller) {
@@ -110,6 +131,16 @@ let UsersService = class UsersService {
         if (target.role === role_enum_1.Role.SUPER_ADMIN && caller.role !== role_enum_1.Role.SUPER_ADMIN) {
             throw new common_1.ForbiddenException('Accès interdit');
         }
+        await this.auditLogs.log({
+            action: 'USER_DELETED',
+            actorId: caller.id,
+            actorEmail: caller.email,
+            actorRole: caller.role,
+            targetId: target.id,
+            targetEmail: target.email,
+            companyId: target.company?.id,
+            companyNom: target.company?.nom,
+        });
         return this.repo.remove(target);
     }
 };
@@ -117,6 +148,7 @@ exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        audit_logs_service_1.AuditLogsService])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map
