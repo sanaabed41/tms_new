@@ -8,6 +8,7 @@ export declare class SocieteExpeditrice {
     adresse: string;
     telephone: string;
     createdAt: Date;
-    company: Company;
+    company: Company | null;
+    expediteurCompany: Company | null;
     filieres: Filiere[];
 }

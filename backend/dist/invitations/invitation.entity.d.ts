@@ -7,6 +7,8 @@ export declare class Invitation {
     token: string;
     expiresAt: Date;
     isUsed: boolean;
+    filiereIds: string[] | null;
+    deliveryCompanyNom: string | null;
     createdAt: Date;
     company: Company;
 }

@@ -14,16 +14,22 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../users/user.entity");
 const delivery_company_entity_1 = require("../delivery-companies/delivery-company.entity");
 const bon_livraison_entity_1 = require("../bons-livraison/bon-livraison.entity");
+const company_type_enum_1 = require("../common/enums/company-type.enum");
 let Company = class Company {
     id;
     nom;
+    type;
     adresse;
     telephone;
+    couleur;
+    code;
     isActive;
     createdAt;
     users;
     deliveryCompanies;
     bonsLivraison;
+    logistiqueCompany;
+    expediteurClients;
 };
 exports.Company = Company;
 __decorate([
@@ -35,6 +41,10 @@ __decorate([
     __metadata("design:type", String)
 ], Company.prototype, "nom", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'enum', enum: company_type_enum_1.CompanyType, default: company_type_enum_1.CompanyType.LOGISTIQUE }),
+    __metadata("design:type", String)
+], Company.prototype, "type", void 0);
+__decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], Company.prototype, "adresse", void 0);
@@ -42,6 +52,14 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], Company.prototype, "telephone", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Company.prototype, "couleur", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, unique: true }),
+    __metadata("design:type", String)
+], Company.prototype, "code", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
@@ -62,6 +80,15 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => bon_livraison_entity_1.BonLivraison, (bl) => bl.company),
     __metadata("design:type", Array)
 ], Company.prototype, "bonsLivraison", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Company, (c) => c.expediteurClients, { nullable: true, onDelete: 'SET NULL' }),
+    (0, typeorm_1.JoinColumn)({ name: 'logistiqueCompanyId' }),
+    __metadata("design:type", Object)
+], Company.prototype, "logistiqueCompany", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Company, (c) => c.logistiqueCompany),
+    __metadata("design:type", Array)
+], Company.prototype, "expediteurClients", void 0);
 exports.Company = Company = __decorate([
     (0, typeorm_1.Entity)('companies')
 ], Company);

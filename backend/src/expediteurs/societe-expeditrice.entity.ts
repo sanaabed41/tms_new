@@ -25,8 +25,14 @@ export class SocieteExpeditrice {
   @CreateDateColumn()
   createdAt!: Date;
 
-  @ManyToOne(() => Company, { nullable: false, onDelete: 'CASCADE' })
-  company!: Company;
+  // Société logistique partenaire (optionnel — la fiche peut exister sans partenaire logistique)
+  @ManyToOne(() => Company, { nullable: true, onDelete: 'SET NULL' })
+  company!: Company | null;
+
+  // Compte portail expéditeur (Company de type EXPEDITEUR) — optionnel
+  // Quand défini, les EXPEDITEUR_ADMIN de cette Company peuvent gérer cette société
+  @ManyToOne(() => Company, { nullable: true, onDelete: 'SET NULL', eager: false })
+  expediteurCompany!: Company | null;
 
   @OneToMany(() => Filiere, (f) => f.societeExpeditrice, { cascade: true, eager: true })
   filieres!: Filiere[];

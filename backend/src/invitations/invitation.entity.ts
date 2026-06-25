@@ -5,26 +5,33 @@ import { Role } from '../common/enums/role.enum';
 @Entity('invitations')
 export class Invitation {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ unique: true })
-  email: string;
+  email!: string;
 
-  @Column({ type: 'enum', enum: Role, default: Role.PURCHASE_MANAGER })
-  role: Role;
+  @Column({ type: 'enum', enum: Role, default: Role.LOGISTIC_ADMIN })
+  role!: Role;
 
   @Column()
-  token: string;
+  token!: string;
 
   @Column({ type: 'timestamptz' })
-  expiresAt: Date;
+  expiresAt!: Date;
 
   @Column({ default: false })
-  isUsed: boolean;
+  isUsed!: boolean;
+
+  @Column({ type: 'jsonb', nullable: true })
+  filiereIds!: string[] | null;
+
+  // Pour TRANSPORT_ADMIN : nom de la société de transport à créer
+  @Column({ type: 'varchar', nullable: true })
+  deliveryCompanyNom!: string | null;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @ManyToOne(() => Company, { eager: true })
-  company: Company;
+  company!: Company;
 }

@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const invitation_entity_1 = require("./invitation.entity");
 const user_entity_1 = require("../users/user.entity");
+const filiere_entity_1 = require("../expediteurs/filiere.entity");
+const delivery_company_entity_1 = require("../delivery-companies/delivery-company.entity");
 const invitations_service_1 = require("./invitations.service");
 const invitations_controller_1 = require("./invitations.controller");
 let InvitationsModule = class InvitationsModule {
@@ -18,9 +20,10 @@ let InvitationsModule = class InvitationsModule {
 exports.InvitationsModule = InvitationsModule;
 exports.InvitationsModule = InvitationsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([invitation_entity_1.Invitation, user_entity_1.User])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([invitation_entity_1.Invitation, user_entity_1.User, filiere_entity_1.Filiere, delivery_company_entity_1.DeliveryCompany])],
         providers: [invitations_service_1.InvitationsService],
         controllers: [invitations_controller_1.InvitationsController],
+        exports: [invitations_service_1.InvitationsService],
     })
 ], InvitationsModule);
 //# sourceMappingURL=invitations.module.js.map

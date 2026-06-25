@@ -38,6 +38,7 @@ let BonLivraison = class BonLivraison {
     datelivraison;
     erpReference;
     notes;
+    ordreChargement;
     createdAt;
     company;
     societeExpeditrice;
@@ -99,6 +100,10 @@ __decorate([
     __metadata("design:type", String)
 ], BonLivraison.prototype, "notes", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
+    __metadata("design:type", Object)
+], BonLivraison.prototype, "ordreChargement", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], BonLivraison.prototype, "createdAt", void 0);
@@ -111,7 +116,7 @@ __decorate([
     __metadata("design:type", Object)
 ], BonLivraison.prototype, "societeExpeditrice", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => filiere_entity_1.Filiere, { nullable: true, eager: false, onDelete: 'SET NULL' }),
+    (0, typeorm_1.ManyToOne)(() => filiere_entity_1.Filiere, { nullable: true, eager: false, onDelete: 'CASCADE' }),
     __metadata("design:type", Object)
 ], BonLivraison.prototype, "filiere", void 0);
 __decorate([

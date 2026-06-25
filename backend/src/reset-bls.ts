@@ -65,7 +65,7 @@ async function resetBls() {
     },
     {
       numeroBl: 'BL-2025-005', statut: BlStatus.VALIDATED,
-      clientNom: 'Industriel Gabès SA', clientAdresse: 'Zone Chimique, Port de Gabès',
+      clientNom: 'Industriel Gabès  ', clientAdresse: 'Zone Chimique, Port de Gabès',
       origine: 'Sfax', destination: 'Gabès',
       typeChargement: TypeChargement.CITERNE, tonnageTotal: 8.0, nombrePalettes: 0,
       datelivraison: new Date('2025-05-10'), erpReference: 'ERP-10049',

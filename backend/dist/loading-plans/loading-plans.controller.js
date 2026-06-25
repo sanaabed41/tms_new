@@ -29,8 +29,25 @@ let LoadingPlansController = class LoadingPlansController {
     findAll(user, date) {
         return this.service.findAll(user.companyId, date);
     }
+    getHistory(user, dateFrom, dateTo) {
+        return this.service.findHistory(user.companyId, dateFrom, dateTo);
+    }
+    getMagasin(user, date) {
+        return this.service.getMagasinPlans(user.companyId, date);
+    }
+    getQuaisLibres(user, date) {
+        return this.service.getQuaisLibres(user.companyId, date);
+    }
+    getSecurity(user, date) {
+        return this.service.getSecurityPlans(user.companyId, date);
+    }
+    getDayReport(user, date) {
+        return this.service.getDayReport(user.companyId, date);
+    }
     findOne(id) { return this.service.findOne(id); }
-    create(dto) { return this.service.create(dto); }
+    create(dto, user) {
+        return this.service.create({ ...dto, logistiqueCompanyId: user.companyId });
+    }
     assignBl(id, blId, user, force) {
         return this.service.assignBl(id, blId, user.id, force);
     }
@@ -43,12 +60,27 @@ let LoadingPlansController = class LoadingPlansController {
     validate(id, user, signature) {
         return this.service.validate(id, user.id, signature);
     }
+    setArrivalTime(id, heureArrivee) {
+        return this.service.setArrivalTime(id, heureArrivee);
+    }
+    nextStation(id) {
+        return this.service.nextStation(id);
+    }
+    loadingAction(id, action) {
+        return this.service.loadingAction(id, action);
+    }
+    entryAction(id, action, quai) {
+        return this.service.entryAction(id, action, quai);
+    }
+    reorderBls(id, blIds) {
+        return this.service.reorderBls(id, blIds ?? []);
+    }
     remove(id) { return this.service.remove(id); }
 };
 exports.LoadingPlansController = LoadingPlansController;
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Query)('date')),
     __metadata("design:type", Function),
@@ -56,8 +88,54 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)('history'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.EXPEDITEUR_ADMIN, role_enum_1.Role.FILIERE_ADMIN, role_enum_1.Role.MAGASINIER, role_enum_1.Role.SECURITE),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('dateFrom')),
+    __param(2, (0, common_1.Query)('dateTo')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "getHistory", null);
+__decorate([
+    (0, common_1.Get)('magasin'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.SECURITE, role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "getMagasin", null);
+__decorate([
+    (0, common_1.Get)('quais-libres'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "getQuaisLibres", null);
+__decorate([
+    (0, common_1.Get)('security'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SECURITE, role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "getSecurity", null);
+__decorate([
+    (0, common_1.Get)('day-report'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "getDayReport", null);
+__decorate([
     (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.MAGASINIER),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -65,15 +143,16 @@ __decorate([
 ], LoadingPlansController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "create", null);
 __decorate([
     (0, common_1.Post)(':id/assign-bl'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)('blId')),
     __param(2, (0, current_user_decorator_1.CurrentUser)()),
@@ -84,7 +163,7 @@ __decorate([
 ], LoadingPlansController.prototype, "assignBl", null);
 __decorate([
     (0, common_1.Put)('validate-all'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Query)('date')),
     __param(2, (0, common_1.Body)('signature')),
@@ -94,7 +173,7 @@ __decorate([
 ], LoadingPlansController.prototype, "validateAll", null);
 __decorate([
     (0, common_1.Delete)(':id/remove-bl/:blId'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Param)('blId')),
     __metadata("design:type", Function),
@@ -103,7 +182,7 @@ __decorate([
 ], LoadingPlansController.prototype, "removeBl", null);
 __decorate([
     (0, common_1.Put)(':id/validate'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __param(2, (0, common_1.Body)('signature')),
@@ -112,8 +191,53 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "validate", null);
 __decorate([
+    (0, common_1.Put)(':id/heure-arrivee'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('heureArrivee')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "setArrivalTime", null);
+__decorate([
+    (0, common_1.Put)(':id/next-station'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "nextStation", null);
+__decorate([
+    (0, common_1.Put)(':id/loading-action'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('action')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "loadingAction", null);
+__decorate([
+    (0, common_1.Put)(':id/entry-action'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.MAGASINIER, role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('action')),
+    __param(2, (0, common_1.Body)('quai')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "entryAction", null);
+__decorate([
+    (0, common_1.Put)(':id/reorder-bls'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('blIds')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Array]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "reorderBls", null);
+__decorate([
     (0, common_1.Delete)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

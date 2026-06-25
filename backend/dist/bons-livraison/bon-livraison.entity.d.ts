@@ -24,6 +24,7 @@ export declare class BonLivraison {
     datelivraison: Date;
     erpReference: string;
     notes: string;
+    ordreChargement: number | null;
     createdAt: Date;
     company: Company;
     societeExpeditrice: SocieteExpeditrice | null;

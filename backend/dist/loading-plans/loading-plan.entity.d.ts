@@ -9,6 +9,18 @@ export declare class LoadingPlan {
     palettesChargees: number;
     isValidated: boolean;
     signature: string;
+    heureArrivee: string;
+    loadingStatus: string;
+    entryStatus: string;
+    quai: string;
+    stationsSequence: string[];
+    currentStationIdx: number;
+    currentStation: string;
+    loadingStartedAt: Date;
+    loadingElapsedSeconds: number;
+    calledAt: Date;
+    enteredAt: Date;
+    logistiqueCompanyId: string;
     createdAt: Date;
     truck: Truck;
     bonsLivraison: BonLivraison[];

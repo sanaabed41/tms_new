@@ -15,31 +15,31 @@ export class ExpediteursController {
   constructor(private readonly service: ExpediteursService) {}
 
   @Get()
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   findAll(@CurrentUser() user: any) {
     return this.service.findAll(user.companyId);
   }
 
   @Get(':id')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   findOne(@Param('id') id: string) {
     return this.service.findOne(id);
   }
 
   @Post()
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   create(@Body() dto: any, @CurrentUser() user: any) {
     return this.service.create(dto, user.companyId);
   }
 
   @Put(':id')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   update(@Param('id') id: string, @Body() dto: any) {
     return this.service.update(id, dto);
   }
 
   @Delete(':id')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   remove(@Param('id') id: string) {
     return this.service.remove(id);
   }
@@ -47,19 +47,19 @@ export class ExpediteursController {
   // ── Filières ──────────────────────────────────────────────────────────────
 
   @Post(':id/filieres')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   createFiliere(@Param('id') id: string, @Body() dto: any) {
     return this.service.createFiliere(id, dto);
   }
 
   @Put('filieres/:filiereId')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   updateFiliere(@Param('filiereId') filiereId: string, @Body() dto: any) {
     return this.service.updateFiliere(filiereId, dto);
   }
 
   @Delete('filieres/:filiereId')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   removeFiliere(@Param('filiereId') filiereId: string) {
     return this.service.removeFiliere(filiereId);
   }

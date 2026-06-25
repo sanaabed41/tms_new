@@ -1,7 +1,7 @@
 /**
  * Seeder — Scénario Rose Blanche
  * Ajoute des camions, expéditeurs, filières et BLs à la société "TransFood"
- * Prérequis : npm run seed (seed principal) doit avoir été exécuté en premier
+ * Prérequis : npm run seed (seed principal) doit avoirété exécuté en premier
  *
  * Lancer : npm run seed:rb
  */
@@ -214,7 +214,7 @@ async function seed() {
   await makeBl({ filiere: filMcsr, destination: 'Sfax',
     client: 'Grossiste du Sud', adresse: 'Zone Commerciale Thyna, Sfax',
     type: TypeChargement.VRAC, palettes: 0,
-    notes: 'Vrac — prévoir bâche étanche',
+    notes: 'Vrac — prévoir bâcheétanche',
     lignes: [{ code: 'MC-SG-1KG', qte: 3000 }, { code: 'MC-SF-1KG', qte: 3000 }] });
 
   await makeBl({ filiere: filCouscous, destination: 'Sfax',

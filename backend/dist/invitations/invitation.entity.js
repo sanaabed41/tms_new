@@ -20,6 +20,8 @@ let Invitation = class Invitation {
     token;
     expiresAt;
     isUsed;
+    filiereIds;
+    deliveryCompanyNom;
     createdAt;
     company;
 };
@@ -33,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], Invitation.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: role_enum_1.Role, default: role_enum_1.Role.PURCHASE_MANAGER }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: role_enum_1.Role, default: role_enum_1.Role.LOGISTIC_ADMIN }),
     __metadata("design:type", String)
 ], Invitation.prototype, "role", void 0);
 __decorate([
@@ -48,6 +50,14 @@ __decorate([
     (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], Invitation.prototype, "isUsed", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'jsonb', nullable: true }),
+    __metadata("design:type", Object)
+], Invitation.prototype, "filiereIds", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: true }),
+    __metadata("design:type", Object)
+], Invitation.prototype, "deliveryCompanyNom", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

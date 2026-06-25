@@ -35,6 +35,12 @@ let TruckAvailabilityController = class TruckAvailabilityController {
     bulkSet(user, body) {
         return this.service.bulkSet(user.companyId, body.truckIds, body.date);
     }
+    bulkSetRange(user, body) {
+        return this.service.bulkSetRange(user.companyId, body.truckIds, body.dateDebut, body.dateFin);
+    }
+    findByDateRange(user, dateDebut, dateFin) {
+        return this.service.getByDateRange(user.companyId, dateDebut, dateFin);
+    }
     remove(user, id) {
         return this.service.remove(user.companyId, id);
     }
@@ -42,7 +48,7 @@ let TruckAvailabilityController = class TruckAvailabilityController {
 exports.TruckAvailabilityController = TruckAvailabilityController;
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Query)('date')),
     __metadata("design:type", Function),
@@ -51,7 +57,7 @@ __decorate([
 ], TruckAvailabilityController.prototype, "findByDate", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -60,7 +66,7 @@ __decorate([
 ], TruckAvailabilityController.prototype, "addTruck", null);
 __decorate([
     (0, common_1.Post)('bulk-set'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -68,8 +74,27 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TruckAvailabilityController.prototype, "bulkSet", null);
 __decorate([
+    (0, common_1.Post)('bulk-set-range'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], TruckAvailabilityController.prototype, "bulkSetRange", null);
+__decorate([
+    (0, common_1.Get)('range'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('dateDebut')),
+    __param(2, (0, common_1.Query)('dateFin')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:returntype", void 0)
+], TruckAvailabilityController.prototype, "findByDateRange", null);
+__decorate([
     (0, common_1.Delete)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

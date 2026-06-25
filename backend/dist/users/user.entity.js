@@ -13,6 +13,8 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const company_entity_1 = require("../companies/company.entity");
 const role_enum_1 = require("../common/enums/role.enum");
+const filiere_entity_1 = require("../expediteurs/filiere.entity");
+const delivery_company_entity_1 = require("../delivery-companies/delivery-company.entity");
 let User = class User {
     id;
     nom;
@@ -25,6 +27,8 @@ let User = class User {
     resetPasswordExpires;
     createdAt;
     company;
+    deliveryCompany;
+    filieres;
 };
 exports.User = User;
 __decorate([
@@ -48,7 +52,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: role_enum_1.Role, default: role_enum_1.Role.COMPANY_ADMIN }),
+    (0, typeorm_1.Column)({ type: 'enum', enum: role_enum_1.Role, default: role_enum_1.Role.LOGISTIC_ADMIN }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
 __decorate([
@@ -71,6 +75,15 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, (company) => company.users, { nullable: true }),
     __metadata("design:type", company_entity_1.Company)
 ], User.prototype, "company", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => delivery_company_entity_1.DeliveryCompany, { nullable: true, eager: false, onDelete: 'SET NULL' }),
+    __metadata("design:type", Object)
+], User.prototype, "deliveryCompany", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => filiere_entity_1.Filiere, { eager: true }),
+    (0, typeorm_1.JoinTable)({ name: 'user_filieres' }),
+    __metadata("design:type", Array)
+], User.prototype, "filieres", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)('users')
 ], User);

@@ -1,0 +1,204 @@
+@startuml LogiFlow_Backend_Packages
+title LogiFlow - Diagramme de Packages Backend
+
+skinparam packageStyle rectangle
+skinparam ArrowColor #444444
+skinparam PackageBorderColor #1890ff
+skinparam PackageBackgroundColor #f5f5f5
+skinparam ComponentBackgroundColor #ffffff
+skinparam ComponentBorderColor #91caff
+skinparam defaultFontSize 11
+skinparam linetype ortho
+
+' ═══════════════════════════════════════════════════
+'  INFRASTRUCTURE TRANSVERSALE
+' ═══════════════════════════════════════════════════
+
+package "src/auth/" #FFE7BA {
+  [auth/auth.module.ts]
+  [auth/auth.controller.ts]
+  [auth/auth.service.ts]
+  [auth/jwt.strategy.ts]
+}
+
+package "src/common/" #FFE7BA {
+  package "src/common/enums/" {
+    [common/enums/role.enum.ts]
+    [common/enums/bl-status.enum.ts]
+    [common/enums/company-type.enum.ts]
+  }
+  package "src/common/decorators/" {
+    [common/decorators/roles.decorator.ts]
+    [common/decorators/current-user.decorator.ts]
+  }
+  package "src/common/guards/" {
+    [common/guards/jwt-auth.guard.ts]
+    [common/guards/roles.guard.ts]
+  }
+}
+
+package "src/mail/" #FFE7BA {
+  [mail/mail.module.ts]
+  [mail/mail.service.ts]
+}
+
+' ═══════════════════════════════════════════════════
+'  GESTION DES SOCIÉTÉS & UTILISATEURS
+' ═══════════════════════════════════════════════════
+
+package "src/companies/" #BAE0FF {
+  [companies/companies.module.ts]
+  [companies/companies.controller.ts]
+  [companies/companies.service.ts]
+  [companies/company.entity.ts]
+}
+
+package "src/users/" #BAE0FF {
+  [users/users.module.ts]
+  [users/users.controller.ts]
+  [users/users.service.ts]
+  [users/user.entity.ts]
+}
+
+package "src/invitations/" #BAE0FF {
+  [invitations/invitations.module.ts]
+  [invitations/invitations.controller.ts]
+  [invitations/invitations.service.ts]
+  [invitations/invitation.entity.ts]
+}
+
+package "src/audit-logs/" #BAE0FF {
+  [audit-logs/audit-logs.module.ts]
+  [audit-logs/audit-logs.controller.ts]
+  [audit-logs/audit-logs.service.ts]
+  [audit-logs/audit-log.entity.ts]
+}
+
+' ═══════════════════════════════════════════════════
+'  PORTAILS EXPÉDITEUR
+' ═══════════════════════════════════════════════════
+
+package "src/expediteurs/" #D9F7BE {
+  [expediteurs/expediteurs.module.ts]
+  [expediteurs/expediteurs.controller.ts]
+  [expediteurs/expediteurs.service.ts]
+  [expediteurs/societe-expeditrice.entity.ts]
+  [expediteurs/filiere.entity.ts]
+}
+
+package "src/expediteur-portal/" #D9F7BE {
+  [expediteur-portal/expediteur-portal.module.ts]
+  [expediteur-portal/expediteur-portal.controller.ts]
+  [expediteur-portal/expediteur-portal.service.ts]
+}
+
+' ═══════════════════════════════════════════════════
+'  GESTION DU TRANSPORT
+' ═══════════════════════════════════════════════════
+
+package "src/delivery-companies/" #B7EB8F {
+  [delivery-companies/delivery-companies.module.ts]
+  [delivery-companies/delivery-companies.controller.ts]
+  [delivery-companies/delivery-companies.service.ts]
+  [delivery-companies/delivery-company.entity.ts]
+}
+
+package "src/trucks/" #B7EB8F {
+  [trucks/trucks.module.ts]
+  [trucks/trucks.controller.ts]
+  [trucks/trucks.service.ts]
+  [trucks/truck.entity.ts]
+}
+
+package "src/chauffeurs/" #B7EB8F {
+  [chauffeurs/chauffeurs.module.ts]
+  [chauffeurs/chauffeurs.controller.ts]
+  [chauffeurs/chauffeurs.service.ts]
+  [chauffeurs/chauffeur.entity.ts]
+}
+
+package "src/truck-availability/" #B7EB8F {
+  [truck-availability/truck-availability.module.ts]
+  [truck-availability/truck-availability.controller.ts]
+  [truck-availability/truck-availability.service.ts]
+  [truck-availability/truck-availability.entity.ts]
+}
+
+package "src/transport-portal/" #B7EB8F {
+  [transport-portal/transport-portal.module.ts]
+  [transport-portal/transport-portal.controller.ts]
+  [transport-portal/transport-portal.service.ts]
+  [transport-portal/transport-declaration.entity.ts]
+}
+
+' ═══════════════════════════════════════════════════
+'  LOGISTIQUE & PLANNING
+' ═══════════════════════════════════════════════════
+
+package "src/articles/" #FFD6E7 {
+  [articles/articles.module.ts]
+  [articles/articles.controller.ts]
+  [articles/articles.service.ts]
+  [articles/article.entity.ts]
+}
+
+package "src/bons-livraison/" #FFD6E7 {
+  [bons-livraison/bons-livraison.module.ts]
+  [bons-livraison/bons-livraison.controller.ts]
+  [bons-livraison/bons-livraison.service.ts]
+  [bons-livraison/bon-livraison.entity.ts]
+  [bons-livraison/bl-article.entity.ts]
+}
+
+package "src/loading-plans/" #FFD6E7 {
+  [loading-plans/loading-plans.module.ts]
+  [loading-plans/loading-plans.controller.ts]
+  [loading-plans/loading-plans.service.ts]
+  [loading-plans/loading-plan.entity.ts]
+}
+
+package "src/quais/" #FFD6E7 {
+  [quais/quais.module.ts]
+  [quais/quais.controller.ts]
+  [quais/quais.service.ts]
+  [quais/quai.entity.ts]
+}
+
+package "src/erp/" #FFD6E7 {
+  [erp/erp.module.ts]
+  [erp/erp.controller.ts]
+  [erp/erp.service.ts]
+}
+
+' ═══════════════════════════════════════════════════
+'  BASE DE DONNÉES
+' ═══════════════════════════════════════════════════
+
+database "PostgreSQL" #E9D8FD {
+  [TypeORM Repository<Entity>] as TypeORMRepo
+}
+
+' ═══════════════════════════════════════════════════
+'  DÉPENDANCES
+' ═══════════════════════════════════════════════════
+
+[auth/jwt.strategy.ts]               --> [common/enums/role.enum.ts]          : utilise
+[auth/auth.service.ts]               --> [common/guards/jwt-auth.guard.ts]    : protège
+[common/guards/roles.guard.ts]       --> [common/enums/role.enum.ts]          : vérifie
+
+[invitations/invitations.service.ts] --> [mail/mail.service.ts]               : envoie credentials
+
+[loading-plans/loading-plans.service.ts] --> [bons-livraison/bons-livraison.service.ts] : assigne BL
+[loading-plans/loading-plans.service.ts] --> [quais/quais.service.ts]                   : affecte quai
+
+[expediteur-portal/expediteur-portal.service.ts] --> [expediteurs/expediteurs.service.ts] : délègue
+
+[companies/companies.service.ts]      --> TypeORMRepo : accède
+[users/users.service.ts]              --> TypeORMRepo : accède
+[invitations/invitations.service.ts]  --> TypeORMRepo : accède
+[loading-plans/loading-plans.service.ts] --> TypeORMRepo : accède
+[bons-livraison/bons-livraison.service.ts] --> TypeORMRepo : accède
+[trucks/trucks.service.ts]            --> TypeORMRepo : accède
+[expediteurs/expediteurs.service.ts]  --> TypeORMRepo : accède
+
+@enduml

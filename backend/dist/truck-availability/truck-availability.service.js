@@ -64,6 +64,37 @@ let TruckAvailabilityService = class TruckAvailabilityService {
         await this.repo.save(entities);
         return { set: entities.length };
     }
+    async bulkSetRange(companyId, truckIds, dateDebut, dateFin) {
+        if (truckIds.length === 0)
+            return { set: 0 };
+        const trucks = await this.truckRepo.findBy({ id: (0, typeorm_2.In)(truckIds) });
+        const entities = [];
+        const start = new Date(dateDebut);
+        const end = new Date(dateFin);
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+            const dateStr = d.toISOString().split('T')[0];
+            for (const truck of trucks) {
+                const exists = await this.repo.findOne({ where: { truck: { id: truck.id }, date: dateStr } });
+                if (!exists) {
+                    entities.push(this.repo.create({ date: dateStr, truck, company: { id: companyId } }));
+                }
+            }
+        }
+        await this.repo.save(entities);
+        return { set: entities.length };
+    }
+    async getByDateRange(companyId, dateDebut, dateFin) {
+        return this.repo.createQueryBuilder('ta')
+            .leftJoinAndSelect('ta.truck', 'truck')
+            .leftJoinAndSelect('truck.deliveryCompany', 'dc')
+            .leftJoinAndSelect('dc.company', 'company')
+            .where('company.id = :companyId', { companyId })
+            .andWhere('ta.date >= :dateDebut', { dateDebut })
+            .andWhere('ta.date <= :dateFin', { dateFin })
+            .orderBy('ta.date')
+            .addOrderBy('truck.matricule')
+            .getMany();
+    }
     async remove(companyId, id) {
         const ta = await this.repo.findOne({ where: { id } });
         if (!ta)

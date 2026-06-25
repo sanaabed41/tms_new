@@ -7,5 +7,6 @@ export declare class UsersController {
     create(dto: any, user: any): Promise<import("./user.entity").User>;
     update(id: string, dto: any, user: any): Promise<import("./user.entity").User>;
     toggleActive(id: string, user: any): Promise<import("./user.entity").User>;
+    setFilieres(id: string, filiereIds: string[]): Promise<import("./user.entity").User>;
     remove(id: string, user: any): Promise<import("./user.entity").User>;
 }

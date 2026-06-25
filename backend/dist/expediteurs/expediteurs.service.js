@@ -59,11 +59,13 @@ let ExpediteursService = class ExpediteursService {
     }
     async createFiliere(societeId, dto) {
         await this.findOne(societeId);
-        const f = this.filiereRepo.create({ ...dto, societeExpeditrice: { id: societeId } });
+        const code = dto.code?.trim().toUpperCase() ?? dto.code;
+        const f = this.filiereRepo.create({ ...dto, code, societeExpeditrice: { id: societeId } });
         return this.filiereRepo.save(f);
     }
     async updateFiliere(filiereId, dto) {
-        await this.filiereRepo.update(filiereId, { nom: dto.nom, code: dto.code });
+        const code = dto.code?.trim().toUpperCase() ?? dto.code;
+        await this.filiereRepo.update(filiereId, { nom: dto.nom, code });
         return this.filiereRepo.findOne({ where: { id: filiereId } });
     }
     async removeFiliere(filiereId) {

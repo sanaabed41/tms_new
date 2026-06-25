@@ -9,13 +9,15 @@ import { JwtStrategy } from './jwt.strategy';
 import { UsersModule } from '../users/users.module';
 import { AuditLogsModule } from '../audit-logs/audit-logs.module';
 import { User } from '../users/user.entity';
+import { Company } from '../companies/company.entity';
+import { SocieteExpeditrice } from '../expediteurs/societe-expeditrice.entity';
 
 @Module({
   imports: [
     UsersModule,
     AuditLogsModule,
     PassportModule,
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Company, SocieteExpeditrice]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

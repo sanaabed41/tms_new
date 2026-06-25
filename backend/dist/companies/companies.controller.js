@@ -19,29 +19,39 @@ const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
 const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const role_enum_1 = require("../common/enums/role.enum");
+const company_type_enum_1 = require("../common/enums/company-type.enum");
 const swagger_1 = require("@nestjs/swagger");
 let CompaniesController = class CompaniesController {
     service;
     constructor(service) {
         this.service = service;
     }
-    findAll() { return this.service.findAll(); }
+    findAll(type) {
+        return this.service.findAll(type);
+    }
     findOne(id) { return this.service.findOne(id); }
     create(dto) { return this.service.create(dto); }
     update(id, dto) { return this.service.update(id, dto); }
     remove(id) { return this.service.remove(id); }
+    findByLogistique(logistiqueId) {
+        return this.service.findByLogistique(logistiqueId);
+    }
+    setLogistiqueCompany(expediteurId, logistiqueId) {
+        return this.service.setLogistiqueCompany(expediteurId, logistiqueId);
+    }
 };
 exports.CompaniesController = CompaniesController;
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Query)('type')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -72,6 +82,23 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CompaniesController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('logistique/:logistiqueId/expediteurs'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
+    __param(0, (0, common_1.Param)('logistiqueId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CompaniesController.prototype, "findByLogistique", null);
+__decorate([
+    (0, common_1.Put)(':id/logistique'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('logistiqueId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], CompaniesController.prototype, "setLogistiqueCompany", null);
 exports.CompaniesController = CompaniesController = __decorate([
     (0, swagger_1.ApiTags)('Companies'),
     (0, swagger_1.ApiBearerAuth)(),

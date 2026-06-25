@@ -19,7 +19,11 @@ export declare class InvitationsController {
     create(dto: {
         email: string;
         role: Role;
+        nom: string;
+        prenom: string;
+        filiereIds?: string[];
         companyId?: string;
+        deliveryCompanyNom?: string;
     }, user: any): Promise<{
         preview: string;
         messageId?: undefined;

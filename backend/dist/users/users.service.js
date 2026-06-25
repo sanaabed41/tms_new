@@ -53,30 +53,42 @@ const bcrypt = __importStar(require("bcryptjs"));
 const user_entity_1 = require("./user.entity");
 const role_enum_1 = require("../common/enums/role.enum");
 const audit_logs_service_1 = require("../audit-logs/audit-logs.service");
+const filiere_entity_1 = require("../expediteurs/filiere.entity");
 let UsersService = class UsersService {
     repo;
+    filiereRepo;
     auditLogs;
-    constructor(repo, auditLogs) {
+    constructor(repo, filiereRepo, auditLogs) {
         this.repo = repo;
+        this.filiereRepo = filiereRepo;
         this.auditLogs = auditLogs;
     }
     findAll(companyId) {
         if (companyId) {
-            return this.repo.find({ where: { company: { id: companyId } }, relations: ['company'] });
+            return this.repo.find({ where: { company: { id: companyId } }, relations: ['company', 'filieres', 'filieres.societeExpeditrice', 'deliveryCompany'] });
         }
-        return this.repo.find({ relations: ['company'] });
+        return this.repo.find({ relations: ['company', 'filieres', 'filieres.societeExpeditrice', 'deliveryCompany'] });
     }
     async findOne(id) {
-        const user = await this.repo.findOne({ where: { id }, relations: ['company'] });
+        const user = await this.repo.findOne({ where: { id }, relations: ['company', 'filieres', 'filieres.societeExpeditrice'] });
         if (!user)
             throw new common_1.NotFoundException('User not found');
         return user;
     }
+    async setFilieres(userId, filiereIds) {
+        const user = await this.repo.findOne({ where: { id: userId }, relations: ['filieres'] });
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        user.filieres = filiereIds.length > 0
+            ? await this.filiereRepo.findBy({ id: (0, typeorm_2.In)(filiereIds) })
+            : [];
+        return this.repo.save(user);
+    }
     findByEmail(email) {
-        return this.repo.findOne({ where: { email }, relations: ['company'] });
+        return this.repo.findOne({ where: { email }, relations: ['company', 'deliveryCompany'] });
     }
     async create(dto, createdBy) {
-        if (createdBy.role === role_enum_1.Role.COMPANY_ADMIN && dto.companyId !== createdBy.company?.id) {
+        if (createdBy.role === role_enum_1.Role.LOGISTIC_ADMIN && dto.companyId !== createdBy.company?.id) {
             throw new common_1.ForbiddenException('Cannot create user for another company');
         }
         const hashed = await bcrypt.hash(dto.password, 10);
@@ -96,7 +108,7 @@ let UsersService = class UsersService {
     }
     async update(id, dto, caller) {
         const target = await this.findOne(id);
-        if (caller.role === role_enum_1.Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
+        if (caller.role === role_enum_1.Role.LOGISTIC_ADMIN && target.company?.id !== caller.companyId) {
             throw new common_1.ForbiddenException('Accès interdit');
         }
         if (dto.role === role_enum_1.Role.SUPER_ADMIN && caller.role !== role_enum_1.Role.SUPER_ADMIN) {
@@ -125,7 +137,7 @@ let UsersService = class UsersService {
     }
     async remove(id, caller) {
         const target = await this.findOne(id);
-        if (caller.role === role_enum_1.Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
+        if (caller.role === role_enum_1.Role.LOGISTIC_ADMIN && target.company?.id !== caller.companyId) {
             throw new common_1.ForbiddenException('Accès interdit');
         }
         if (target.role === role_enum_1.Role.SUPER_ADMIN && caller.role !== role_enum_1.Role.SUPER_ADMIN) {
@@ -148,7 +160,9 @@ exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(1, (0, typeorm_1.InjectRepository)(filiere_entity_1.Filiere)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         audit_logs_service_1.AuditLogsService])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

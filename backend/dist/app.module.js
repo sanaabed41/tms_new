@@ -24,6 +24,10 @@ const expediteurs_module_1 = require("./expediteurs/expediteurs.module");
 const truck_availability_module_1 = require("./truck-availability/truck-availability.module");
 const erp_module_1 = require("./erp/erp.module");
 const audit_logs_module_1 = require("./audit-logs/audit-logs.module");
+const quais_module_1 = require("./quais/quais.module");
+const expediteur_portal_module_1 = require("./expediteur-portal/expediteur-portal.module");
+const chauffeurs_module_1 = require("./chauffeurs/chauffeurs.module");
+const transport_portal_module_1 = require("./transport-portal/transport-portal.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -60,6 +64,10 @@ exports.AppModule = AppModule = __decorate([
             truck_availability_module_1.TruckAvailabilityModule,
             erp_module_1.ErpModule,
             audit_logs_module_1.AuditLogsModule,
+            quais_module_1.QuaisModule,
+            expediteur_portal_module_1.ExpediteursPortalModule,
+            chauffeurs_module_1.ChauffeursModule,
+            transport_portal_module_1.TransportPortalModule,
         ],
     })
 ], AppModule);

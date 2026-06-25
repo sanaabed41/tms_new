@@ -27,7 +27,7 @@ let UsersController = class UsersController {
         this.service = service;
     }
     findAll(companyId, user) {
-        const cid = user.role === role_enum_1.Role.COMPANY_ADMIN ? user.companyId : companyId;
+        const cid = user.role === role_enum_1.Role.SUPER_ADMIN ? companyId : user.companyId;
         return this.service.findAll(cid);
     }
     findOne(id) { return this.service.findOne(id); }
@@ -38,6 +38,9 @@ let UsersController = class UsersController {
     toggleActive(id, user) {
         return this.service.toggleActive(id, { id: user.id, email: user.email, role: user.role });
     }
+    setFilieres(id, filiereIds) {
+        return this.service.setFilieres(id, filiereIds ?? []);
+    }
     remove(id, user) {
         return this.service.remove(id, { role: user.role, companyId: user.companyId, id: user.id, email: user.email });
     }
@@ -45,7 +48,7 @@ let UsersController = class UsersController {
 exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Query)('companyId')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -54,7 +57,7 @@ __decorate([
 ], UsersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -62,7 +65,7 @@ __decorate([
 ], UsersController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -71,7 +74,7 @@ __decorate([
 ], UsersController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, current_user_decorator_1.CurrentUser)()),
@@ -81,7 +84,7 @@ __decorate([
 ], UsersController.prototype, "update", null);
 __decorate([
     (0, common_1.Patch)(':id/toggle-active'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -89,8 +92,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "toggleActive", null);
 __decorate([
+    (0, common_1.Put)(':id/filieres'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('filiereIds')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Array]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "setFilieres", null);
+__decorate([
     (0, common_1.Delete)(':id'),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),

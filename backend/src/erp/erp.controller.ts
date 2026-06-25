@@ -19,7 +19,7 @@ export class ErpController {
    * Accessible to any authenticated company admin or super admin.
    */
   @Post('articles')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   upsertArticles(@Body() body: { articles: any[] }) {
     return this.service.upsertArticles(body.articles);
   }
@@ -30,7 +30,7 @@ export class ErpController {
    * BLs already LOADED or DELIVERED are skipped.
    */
   @Post('bons-livraison')
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
   upsertBons(@CurrentUser() user: any, @Body() body: { bons: any[] }) {
     return this.service.upsertBons(user.companyId, body.bons);
   }

@@ -28,7 +28,10 @@ __decorate([
     __metadata("design:type", String)
 ], Filiere.prototype, "nom", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)({ nullable: true, unique: true, transformer: {
+            to: (v) => v?.trim().toUpperCase() ?? v,
+            from: (v) => v,
+        } }),
     __metadata("design:type", String)
 ], Filiere.prototype, "code", void 0);
 __decorate([

@@ -9,7 +9,10 @@ export class Filiere {
   @Column()
   nom!: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true, transformer: {
+    to: (v: string) => v?.trim().toUpperCase() ?? v,
+    from: (v: string) => v,
+  }})
   code!: string;
 
   @ManyToOne(() => SocieteExpeditrice, (s) => s.filieres, { onDelete: 'CASCADE' })

@@ -34,6 +34,7 @@ let TrucksController = class TrucksController {
 exports.TrucksController = TrucksController;
 __decorate([
     (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.MAGASINIER, role_enum_1.Role.SECURITE),
     __param(0, (0, common_1.Query)('deliveryCompanyId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -41,6 +42,7 @@ __decorate([
 ], TrucksController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -48,6 +50,7 @@ __decorate([
 ], TrucksController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -55,6 +58,7 @@ __decorate([
 ], TrucksController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -63,6 +67,7 @@ __decorate([
 ], TrucksController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -72,7 +77,6 @@ exports.TrucksController = TrucksController = __decorate([
     (0, swagger_1.ApiTags)('Trucks'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
     (0, common_1.Controller)('trucks'),
     __metadata("design:paramtypes", [trucks_service_1.TrucksService])
 ], TrucksController);

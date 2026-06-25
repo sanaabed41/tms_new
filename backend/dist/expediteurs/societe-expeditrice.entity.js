@@ -22,6 +22,7 @@ let SocieteExpeditrice = class SocieteExpeditrice {
     telephone;
     createdAt;
     company;
+    expediteurCompany;
     filieres;
 };
 exports.SocieteExpeditrice = SocieteExpeditrice;
@@ -54,9 +55,13 @@ __decorate([
     __metadata("design:type", Date)
 ], SocieteExpeditrice.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, { nullable: false, onDelete: 'CASCADE' }),
-    __metadata("design:type", company_entity_1.Company)
+    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, { nullable: true, onDelete: 'SET NULL' }),
+    __metadata("design:type", Object)
 ], SocieteExpeditrice.prototype, "company", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, { nullable: true, onDelete: 'SET NULL', eager: false }),
+    __metadata("design:type", Object)
+], SocieteExpeditrice.prototype, "expediteurCompany", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => filiere_entity_1.Filiere, (f) => f.societeExpeditrice, { cascade: true, eager: true }),
     __metadata("design:type", Array)

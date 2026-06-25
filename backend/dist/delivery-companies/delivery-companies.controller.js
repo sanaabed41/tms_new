@@ -35,6 +35,7 @@ let DeliveryCompaniesController = class DeliveryCompaniesController {
 exports.DeliveryCompaniesController = DeliveryCompaniesController;
 __decorate([
     (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -42,6 +43,7 @@ __decorate([
 ], DeliveryCompaniesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -49,6 +51,7 @@ __decorate([
 ], DeliveryCompaniesController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -57,6 +60,7 @@ __decorate([
 ], DeliveryCompaniesController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -65,6 +69,7 @@ __decorate([
 ], DeliveryCompaniesController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -74,7 +79,6 @@ exports.DeliveryCompaniesController = DeliveryCompaniesController = __decorate([
     (0, swagger_1.ApiTags)('Delivery Companies'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.COMPANY_ADMIN),
     (0, common_1.Controller)('delivery-companies'),
     __metadata("design:paramtypes", [delivery_companies_service_1.DeliveryCompaniesService])
 ], DeliveryCompaniesController);

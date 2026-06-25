@@ -10,5 +10,9 @@ export declare class TruckAvailabilityService {
     bulkSet(companyId: string, truckIds: string[], date: string): Promise<{
         set: number;
     }>;
+    bulkSetRange(companyId: string, truckIds: string[], dateDebut: string, dateFin: string): Promise<{
+        set: number;
+    }>;
+    getByDateRange(companyId: string, dateDebut: string, dateFin: string): Promise<TruckAvailability[]>;
     remove(companyId: string, id: string): Promise<void>;
 }

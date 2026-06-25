@@ -10,6 +10,14 @@ import { ApiTags } from '@nestjs/swagger';
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
+  @Post('register')
+  register(@Body() dto: {
+    companyNom: string; companyType: string; code?: string; couleur?: string;
+    prenom: string; nom: string; email: string; password: string;
+  }) {
+    return this.service.register(dto as any);
+  }
+
   @Post('login')
   login(@Body() dto: { email: string; password: string }, @Req() req: Request) {
     const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip;

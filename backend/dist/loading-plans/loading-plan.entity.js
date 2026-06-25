@@ -22,6 +22,18 @@ let LoadingPlan = class LoadingPlan {
     palettesChargees;
     isValidated;
     signature;
+    heureArrivee;
+    loadingStatus;
+    entryStatus;
+    quai;
+    stationsSequence;
+    currentStationIdx;
+    currentStation;
+    loadingStartedAt;
+    loadingElapsedSeconds;
+    calledAt;
+    enteredAt;
+    logistiqueCompanyId;
     createdAt;
     truck;
     bonsLivraison;
@@ -56,6 +68,54 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'text', nullable: true }),
     __metadata("design:type", String)
 ], LoadingPlan.prototype, "signature", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 20, nullable: true }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "heureArrivee", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 20, default: 'WAITING' }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "loadingStatus", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 20, default: 'IDLE' }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "entryStatus", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 30, nullable: true }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "quai", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'jsonb', nullable: true }),
+    __metadata("design:type", Array)
+], LoadingPlan.prototype, "stationsSequence", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'int', default: 0 }),
+    __metadata("design:type", Number)
+], LoadingPlan.prototype, "currentStationIdx", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 50, nullable: true }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "currentStation", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'timestamptz', nullable: true }),
+    __metadata("design:type", Date)
+], LoadingPlan.prototype, "loadingStartedAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'int', default: 0 }),
+    __metadata("design:type", Number)
+], LoadingPlan.prototype, "loadingElapsedSeconds", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'timestamptz', nullable: true }),
+    __metadata("design:type", Date)
+], LoadingPlan.prototype, "calledAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'timestamptz', nullable: true }),
+    __metadata("design:type", Date)
+], LoadingPlan.prototype, "enteredAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'uuid', nullable: true }),
+    __metadata("design:type", String)
+], LoadingPlan.prototype, "logistiqueCompanyId", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

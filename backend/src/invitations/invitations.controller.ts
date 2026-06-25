@@ -12,7 +12,7 @@ import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 export class InvitationsController {
   constructor(private readonly service: InvitationsService) {}
 
-  // Routes publiques (sans auth)
+  // ── Routes publiques ──────────────────────────────────────────────────────
   @Get('verify/:token')
   verify(@Param('token') token: string) {
     return this.service.verify(token);
@@ -26,43 +26,47 @@ export class InvitationsController {
     return this.service.accept(token, dto);
   }
 
-  // Routes protégées — COMPANY_ADMIN uniquement sur sa société
+  // ── Routes protégées ─────────────────────────────────────────────────────
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.EXPEDITEUR_ADMIN, Role.FILIERE_ADMIN, Role.SUPER_ADMIN, Role.LOGISTIC_ADMIN)
   @Get()
   findAll(@CurrentUser() user: any, @Query('companyId') companyId?: string) {
-    // SUPER_ADMIN peut cibler n'importe quelle société via query param
-    const cid = user.role === Role.SUPER_ADMIN ? companyId ?? user.companyId : user.companyId;
+    const cid = user.role === Role.SUPER_ADMIN ? (companyId ?? user.companyId) : user.companyId;
     return this.service.findAll(cid);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.EXPEDITEUR_ADMIN, Role.FILIERE_ADMIN, Role.SUPER_ADMIN, Role.LOGISTIC_ADMIN)
   @Post()
-  create(@Body() dto: { email: string; role: Role; companyId?: string }, @CurrentUser() user: any) {
-    // COMPANY_ADMIN ne peut créer que pour sa propre société
-    const cid = user.role === Role.SUPER_ADMIN ? dto.companyId ?? user.companyId : user.companyId;
+  create(
+    @Body() dto: {
+      email: string; role: Role; nom: string; prenom: string;
+      filiereIds?: string[]; companyId?: string; deliveryCompanyNom?: string;
+    },
+    @CurrentUser() user: any,
+  ) {
+    const cid = user.role === Role.SUPER_ADMIN ? (dto.companyId ?? user.companyId) : user.companyId;
     return this.service.create(
-      { email: dto.email, role: dto.role },
+      { email: dto.email, role: dto.role, nom: dto.nom, prenom: dto.prenom, filiereIds: dto.filiereIds, deliveryCompanyNom: dto.deliveryCompanyNom },
       cid,
-      user.companyNom || 'votre société',
+      user.companyNom ?? 'votre société',
       user.role,
     );
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.EXPEDITEUR_ADMIN, Role.FILIERE_ADMIN, Role.SUPER_ADMIN, Role.LOGISTIC_ADMIN)
   @Post(':id/resend')
   resend(@Param('id') id: string, @CurrentUser() user: any) {
-    return this.service.resend(id, user.companyId, user.role, user.companyNom || 'votre société');
+    return this.service.resend(id, user.companyId, user.role, user.companyNom ?? 'votre société');
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.COMPANY_ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.EXPEDITEUR_ADMIN, Role.FILIERE_ADMIN, Role.SUPER_ADMIN, Role.LOGISTIC_ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string, @CurrentUser() user: any) {
     return this.service.remove(id, user.companyId, user.role);

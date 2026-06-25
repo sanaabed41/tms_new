@@ -13,5 +13,13 @@ export declare class TruckAvailabilityController {
     }): Promise<{
         set: number;
     }>;
+    bulkSetRange(user: any, body: {
+        truckIds: string[];
+        dateDebut: string;
+        dateFin: string;
+    }): Promise<{
+        set: number;
+    }>;
+    findByDateRange(user: any, dateDebut: string, dateFin: string): Promise<import("./truck-availability.entity").TruckAvailability[]>;
     remove(user: any, id: string): Promise<void>;
 }

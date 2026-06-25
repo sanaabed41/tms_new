@@ -57,6 +57,9 @@ export class BonLivraison {
   @Column({ nullable: true, type: 'text' })
   notes!: string;
 
+  @Column({ type: 'int', nullable: true })
+  ordreChargement!: number | null;
+
   @CreateDateColumn()
   createdAt!: Date;
 
@@ -66,7 +69,7 @@ export class BonLivraison {
   @ManyToOne(() => SocieteExpeditrice, { nullable: true, eager: false, onDelete: 'SET NULL' })
   societeExpeditrice!: SocieteExpeditrice | null;
 
-  @ManyToOne(() => Filiere, { nullable: true, eager: false, onDelete: 'SET NULL' })
+  @ManyToOne(() => Filiere, { nullable: true, eager: false, onDelete: 'CASCADE' })
   filiere!: Filiere | null;
 
   @OneToMany(() => BlArticle, (bla) => bla.bonLivraison, { cascade: true })

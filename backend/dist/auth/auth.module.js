@@ -18,6 +18,8 @@ const jwt_strategy_1 = require("./jwt.strategy");
 const users_module_1 = require("../users/users.module");
 const audit_logs_module_1 = require("../audit-logs/audit-logs.module");
 const user_entity_1 = require("../users/user.entity");
+const company_entity_1 = require("../companies/company.entity");
+const societe_expeditrice_entity_1 = require("../expediteurs/societe-expeditrice.entity");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -27,7 +29,7 @@ exports.AuthModule = AuthModule = __decorate([
             users_module_1.UsersModule,
             audit_logs_module_1.AuditLogsModule,
             passport_1.PassportModule,
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, company_entity_1.Company, societe_expeditrice_entity_1.SocieteExpeditrice]),
             jwt_1.JwtModule.registerAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],

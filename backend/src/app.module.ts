@@ -15,6 +15,10 @@ import { ExpediteursModule } from './expediteurs/expediteurs.module';
 import { TruckAvailabilityModule } from './truck-availability/truck-availability.module';
 import { ErpModule } from './erp/erp.module';
 import { AuditLogsModule } from './audit-logs/audit-logs.module';
+import { QuaisModule } from './quais/quais.module';
+import { ExpediteursPortalModule } from './expediteur-portal/expediteur-portal.module';
+import { ChauffeursModule } from './chauffeurs/chauffeurs.module';
+import { TransportPortalModule } from './transport-portal/transport-portal.module';
 
 @Module({
   imports: [
@@ -48,6 +52,10 @@ import { AuditLogsModule } from './audit-logs/audit-logs.module';
     TruckAvailabilityModule,
     ErpModule,
     AuditLogsModule,
+    QuaisModule,
+    ExpediteursPortalModule,
+    ChauffeursModule,
+    TransportPortalModule,
   ],
 })
 export class AppModule {}

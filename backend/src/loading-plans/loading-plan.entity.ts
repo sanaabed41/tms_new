@@ -29,6 +29,43 @@ export class LoadingPlan {
   @Column({ type: 'text', nullable: true })
   signature: string;
 
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  heureArrivee: string;
+
+  @Column({ type: 'varchar', length: 20, default: 'WAITING' })
+  loadingStatus: string;
+
+  @Column({ type: 'varchar', length: 20, default: 'IDLE' })
+  entryStatus: string; // IDLE | CALLED | ENTERED | EXITED
+
+  @Column({ type: 'varchar', length: 30, nullable: true })
+  quai: string;
+
+  // Séquence de stations filière à parcourir dans l'ordre (ex: ["AMT","PW","MCSR"])
+  @Column({ type: 'jsonb', nullable: true })
+  stationsSequence: string[];
+
+  @Column({ type: 'int', default: 0 })
+  currentStationIdx: number;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  currentStation: string;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  loadingStartedAt: Date;
+
+  @Column({ type: 'int', default: 0 })
+  loadingElapsedSeconds: number;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  calledAt: Date;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  enteredAt: Date;
+
+  @Column({ type: 'uuid', nullable: true })
+  logistiqueCompanyId: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

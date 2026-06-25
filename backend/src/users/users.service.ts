@@ -1,37 +1,48 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { User } from './user.entity';
 import { Role } from '../common/enums/role.enum';
 import { AuditLogsService } from '../audit-logs/audit-logs.service';
+import { Filiere } from '../expediteurs/filiere.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private repo: Repository<User>,
+    @InjectRepository(Filiere) private filiereRepo: Repository<Filiere>,
     private auditLogs: AuditLogsService,
   ) {}
 
   findAll(companyId?: string) {
     if (companyId) {
-      return this.repo.find({ where: { company: { id: companyId } }, relations: ['company'] });
+      return this.repo.find({ where: { company: { id: companyId } }, relations: ['company', 'filieres', 'filieres.societeExpeditrice', 'deliveryCompany'] });
     }
-    return this.repo.find({ relations: ['company'] });
+    return this.repo.find({ relations: ['company', 'filieres', 'filieres.societeExpeditrice', 'deliveryCompany'] });
   }
 
   async findOne(id: string) {
-    const user = await this.repo.findOne({ where: { id }, relations: ['company'] });
+    const user = await this.repo.findOne({ where: { id }, relations: ['company', 'filieres', 'filieres.societeExpeditrice'] });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
+  async setFilieres(userId: string, filiereIds: string[]) {
+    const user = await this.repo.findOne({ where: { id: userId }, relations: ['filieres'] });
+    if (!user) throw new NotFoundException('User not found');
+    user.filieres = filiereIds.length > 0
+      ? await this.filiereRepo.findBy({ id: In(filiereIds) })
+      : [];
+    return this.repo.save(user);
+  }
+
   findByEmail(email: string) {
-    return this.repo.findOne({ where: { email }, relations: ['company'] });
+    return this.repo.findOne({ where: { email }, relations: ['company', 'deliveryCompany'] });
   }
 
   async create(dto: any, createdBy: User) {
-    if (createdBy.role === Role.COMPANY_ADMIN && dto.companyId !== createdBy.company?.id) {
+    if (createdBy.role === Role.LOGISTIC_ADMIN && dto.companyId !== createdBy.company?.id) {
       throw new ForbiddenException('Cannot create user for another company');
     }
     const hashed = await bcrypt.hash(dto.password, 10);
@@ -55,7 +66,7 @@ export class UsersService {
   async update(id: string, dto: any, caller: { role: Role; companyId: string }) {
     const target = await this.findOne(id);
 
-    if (caller.role === Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
+    if (caller.role === Role.LOGISTIC_ADMIN && target.company?.id !== caller.companyId) {
       throw new ForbiddenException('Accès interdit');
     }
     if (dto.role === Role.SUPER_ADMIN && caller.role !== Role.SUPER_ADMIN) {
@@ -89,7 +100,7 @@ export class UsersService {
   async remove(id: string, caller: { role: Role; companyId: string; id?: string; email?: string }) {
     const target = await this.findOne(id);
 
-    if (caller.role === Role.COMPANY_ADMIN && target.company?.id !== caller.companyId) {
+    if (caller.role === Role.LOGISTIC_ADMIN && target.company?.id !== caller.companyId) {
       throw new ForbiddenException('Accès interdit');
     }
     if (target.role === Role.SUPER_ADMIN && caller.role !== Role.SUPER_ADMIN) {

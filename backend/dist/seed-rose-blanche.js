@@ -150,7 +150,7 @@ async function seed() {
     await makeBl({ filiere: filMcsr, destination: 'Sfax',
         client: 'Grossiste du Sud', adresse: 'Zone Commerciale Thyna, Sfax',
         type: bon_livraison_entity_1.TypeChargement.VRAC, palettes: 0,
-        notes: 'Vrac — prévoir bâche étanche',
+        notes: 'Vrac — prévoir bâcheétanche',
         lignes: [{ code: 'MC-SG-1KG', qte: 3000 }, { code: 'MC-SF-1KG', qte: 3000 }] });
     await makeBl({ filiere: filCouscous, destination: 'Sfax',
         client: 'Supérette Sfaxia', adresse: 'Avenue de la Liberté, Sfax',

@@ -31,10 +31,8 @@ async function seed() {
     console.log(`✓ Société: ${company.nom}`);
     await usersService.create({ nom: 'Admin', prenom: 'Super', email: 'admin@tms.com', password: 'Admin123!', role: role_enum_1.Role.SUPER_ADMIN, companyId: company.id }, { role: role_enum_1.Role.SUPER_ADMIN, company: { id: company.id } });
     console.log('✓ Super Admin    : admin@tms.com / Admin123!');
-    await usersService.create({ nom: 'Ben Salem', prenom: 'Karim', email: 'logistique@tms.com', password: 'Logistique123!', role: role_enum_1.Role.COMPANY_ADMIN, companyId: company.id }, { role: role_enum_1.Role.SUPER_ADMIN, company: { id: company.id } });
+    await usersService.create({ nom: 'Ben Salem', prenom: 'Karim', email: 'logistique@tms.com', password: 'Logistique123!', role: role_enum_1.Role.LOGISTIC_ADMIN, companyId: company.id }, { role: role_enum_1.Role.SUPER_ADMIN, company: { id: company.id } });
     console.log('✓ Resp. Logistique: logistique@tms.com / Logistique123!');
-    await usersService.create({ nom: 'Trabelsi', prenom: 'Salma', email: 'achat@tms.com', password: 'Achat123!', role: role_enum_1.Role.PURCHASE_MANAGER, companyId: company.id }, { role: role_enum_1.Role.SUPER_ADMIN, company: { id: company.id } });
-    console.log('✓ Resp. Achat    : achat@tms.com / Achat123!');
     const dc = await dcService.create({
         nom: 'Trans Tunisie Transport',
         adresse: 'Zone Industrielle, Sousse',
@@ -81,7 +79,7 @@ async function seed() {
         },
         {
             numeroBl: 'BL-2025-005', statut: bl_status_enum_1.BlStatus.VALIDATED,
-            clientNom: 'Industriel Gabès SA', clientAdresse: 'Zone Chimique, Port de Gabès',
+            clientNom: 'Industriel Gabès ', clientAdresse: 'Zone Chimique, Port de Gabès',
             origine: 'Sfax', destination: 'Gabès',
             typeChargement: bon_livraison_entity_1.TypeChargement.CITERNE, tonnageTotal: 8.0, nombrePalettes: 0,
             datelivraison: new Date('2025-05-10'), erpReference: 'ERP-10049',
@@ -151,7 +149,6 @@ async function seed() {
     }
     console.log('\n=== COMPTES ===');
     console.log('Resp. Logistique : logistique@tms.com / Logistique123!');
-    console.log('Resp. Achat      : achat@tms.com      / Achat123!');
     console.log('Super Admin      : admin@tms.com       / Admin123!');
     console.log('\n=== BLs ===');
     console.log('10 BLs VALIDATED → visibles dans le planning');

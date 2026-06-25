@@ -33,15 +33,15 @@ let InvitationsController = class InvitationsController {
         return this.service.accept(token, dto);
     }
     findAll(user, companyId) {
-        const cid = user.role === role_enum_1.Role.SUPER_ADMIN ? companyId ?? user.companyId : user.companyId;
+        const cid = user.role === role_enum_1.Role.SUPER_ADMIN ? (companyId ?? user.companyId) : user.companyId;
         return this.service.findAll(cid);
     }
     create(dto, user) {
-        const cid = user.role === role_enum_1.Role.SUPER_ADMIN ? dto.companyId ?? user.companyId : user.companyId;
-        return this.service.create({ email: dto.email, role: dto.role }, cid, user.companyNom || 'votre société', user.role);
+        const cid = user.role === role_enum_1.Role.SUPER_ADMIN ? (dto.companyId ?? user.companyId) : user.companyId;
+        return this.service.create({ email: dto.email, role: dto.role, nom: dto.nom, prenom: dto.prenom, filiereIds: dto.filiereIds, deliveryCompanyNom: dto.deliveryCompanyNom }, cid, user.companyNom ?? 'votre société', user.role);
     }
     resend(id, user) {
-        return this.service.resend(id, user.companyId, user.role, user.companyNom || 'votre société');
+        return this.service.resend(id, user.companyId, user.role, user.companyNom ?? 'votre société');
     }
     remove(id, user) {
         return this.service.remove(id, user.companyId, user.role);
@@ -66,7 +66,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.EXPEDITEUR_ADMIN, role_enum_1.Role.FILIERE_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     (0, common_1.Get)(),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Query)('companyId')),
@@ -77,7 +77,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.EXPEDITEUR_ADMIN, role_enum_1.Role.FILIERE_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
@@ -88,7 +88,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.EXPEDITEUR_ADMIN, role_enum_1.Role.FILIERE_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     (0, common_1.Post)(':id/resend'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
@@ -99,7 +99,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.Role.COMPANY_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.EXPEDITEUR_ADMIN, role_enum_1.Role.FILIERE_ADMIN, role_enum_1.Role.SUPER_ADMIN, role_enum_1.Role.LOGISTIC_ADMIN),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
