@@ -4,9 +4,10 @@ import { TransportPortalController } from './transport-portal.controller';
 import { TransportPortalService } from './transport-portal.service';
 import { TransportDeclaration } from './transport-declaration.entity';
 import { Truck } from '../trucks/truck.entity';
+import { LoadingPlan } from '../loading-plans/loading-plan.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TransportDeclaration, Truck])],
+  imports: [TypeOrmModule.forFeature([TransportDeclaration, Truck, LoadingPlan])],
   controllers: [TransportPortalController],
   providers: [TransportPortalService],
 })

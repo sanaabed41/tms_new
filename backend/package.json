@@ -34,6 +34,8 @@
     "seed:bls-logistique": "ts-node -r tsconfig-paths/register src/seed-bls-logistique.ts",
     "seed:mag1-volume": "ts-node -r tsconfig-paths/register src/seed-mag1-volume.ts",
     "seed:volume": "ts-node -r tsconfig-paths/register src/seed-volume.ts",
+    "seed:report-test": "ts-node -r tsconfig-paths/register src/seed-report-test.ts",
+    "seed:transport-portal": "ts-node -r tsconfig-paths/register src/seed-transport-portal.ts",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",

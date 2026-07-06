@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TransportDeclaration } from './transport-declaration.entity';
 import { Truck } from '../trucks/truck.entity';
+import { LoadingPlan } from '../loading-plans/loading-plan.entity';
 
 @Injectable()
 export class TransportPortalService {
   constructor(
     @InjectRepository(TransportDeclaration) private declRepo: Repository<TransportDeclaration>,
     @InjectRepository(Truck) private truckRepo: Repository<Truck>,
+    @InjectRepository(LoadingPlan) private planRepo: Repository<LoadingPlan>,
   ) {}
 
   // ── Flotte : camions + leur disponibilité ────────────────────────────────
@@ -157,6 +159,30 @@ export class TransportPortalService {
       .execute();
 
     return this.truckRepo.remove(truck);
+  }
+
+  async getRapport(deliveryCompanyId: string, date: string) {
+    const trucks = await this.truckRepo.find({
+      where: { deliveryCompany: { id: deliveryCompanyId }, isActive: true },
+      relations: ['deliveryCompany'],
+    });
+
+    const plans = await this.planRepo
+      .createQueryBuilder('lp')
+      .leftJoinAndSelect('lp.truck', 'truck')
+      .leftJoinAndSelect('truck.deliveryCompany', 'dc')
+      .leftJoinAndSelect('lp.bonsLivraison', 'bl')
+      .leftJoinAndSelect('bl.filiere', 'filiere')
+      .leftJoinAndSelect('bl.societeExpeditrice', 'soc')
+      .where('dc.id = :deliveryCompanyId', { deliveryCompanyId })
+      .andWhere('lp.dateLivraison = :date', { date })
+      .orderBy('bl.ordreChargement', 'ASC')
+      .getMany();
+
+    return trucks.map((truck) => ({
+      truck,
+      plan: plans.find((p) => p.truck?.id === truck.id) ?? null,
+    }));
   }
 
   // ── Vue LOGISTIC_ADMIN : déclarations des transporteurs ─────────────────

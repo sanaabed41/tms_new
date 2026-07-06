@@ -1,85 +1,85 @@
 <mxfile host="65bd71144e">
     <diagram id="packages-tms" name="Packages TMS">
-        <mxGraphModel dx="1315" dy="1298" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1800" math="0" shadow="0">
+        <mxGraphModel dx="2650" dy="1510" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1800" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="backend_root" value="Backend NestJS - Modules" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#dae8fc;strokeColor=#3c8dbc;fontStyle=1;fontSize=16" parent="1" vertex="1">
+                <mxCell id="backend_root" value="Backend NestJS - Modules" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#dae8fc;strokeColor=#3c8dbc;fontStyle=1;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="30" y="70" width="1300" height="720" as="geometry"/>
                 </mxCell>
-                <mxCell id="backend_security" value="Securite et comptes" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" parent="backend_root" vertex="1">
+                <mxCell id="backend_security" value="Securite et comptes" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;" parent="backend_root" vertex="1">
                     <mxGeometry x="40" y="55" width="610" height="305" as="geometry"/>
                 </mxCell>
-                <mxCell id="auth" value="&lt;b&gt;auth&lt;/b&gt;&lt;hr&gt;JWT, login, register&lt;br&gt;reset password" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top" parent="backend_security" vertex="1">
+                <mxCell id="auth" value="&lt;span&gt;auth&lt;/span&gt;&lt;hr&gt;JWT, login, register&lt;br&gt;reset password" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_security" vertex="1">
                     <mxGeometry x="25" y="45" width="150" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="users" value="&lt;b&gt;users&lt;/b&gt;&lt;hr&gt;CRUD utilisateurs&lt;br&gt;activation" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top" parent="backend_security" vertex="1">
+                <mxCell id="users" value="&lt;span&gt;users&lt;/span&gt;&lt;hr&gt;CRUD utilisateurs&lt;br&gt;activation" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_security" vertex="1">
                     <mxGeometry x="240" y="45" width="140" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="invitations" value="&lt;b&gt;invitations&lt;/b&gt;&lt;hr&gt;Invitations&lt;br&gt;creation comptes" style="shape=folder;tabWidth=85;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top" parent="backend_security" vertex="1">
+                <mxCell id="invitations" value="&lt;span&gt;invitations&lt;/span&gt;&lt;hr&gt;Invitations&lt;br&gt;creation comptes" style="shape=folder;tabWidth=85;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_security" vertex="1">
                     <mxGeometry x="420" y="65" width="145" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="mail" value="&lt;b&gt;mail&lt;/b&gt;&lt;hr&gt;Envoi emails&lt;br&gt;Gmail" style="shape=folder;tabWidth=60;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top" parent="backend_security" vertex="1">
+                <mxCell id="mail" value="&lt;span&gt;mail&lt;/span&gt;&lt;hr&gt;Envoi emails&lt;br&gt;Gmail" style="shape=folder;tabWidth=60;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_security" vertex="1">
                     <mxGeometry x="50" y="195" width="140" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="audit_logs" value="&lt;b&gt;audit-logs&lt;/b&gt;&lt;hr&gt;Journal actions&lt;br&gt;logs audit" style="shape=folder;tabWidth=90;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top" parent="backend_security" vertex="1">
+                <mxCell id="audit_logs" value="&lt;span&gt;audit-logs&lt;/span&gt;&lt;hr&gt;Journal actions&lt;br&gt;logs audit" style="shape=folder;tabWidth=90;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_security" vertex="1">
                     <mxGeometry x="320" y="195" width="150" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_auth_users" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_security" source="auth" target="users" edge="1">
+                <mxCell id="dep_auth_users" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_security" source="auth" target="users" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_auth_mail" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_security" source="auth" target="mail" edge="1">
+                <mxCell id="dep_auth_mail" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_security" source="auth" target="mail" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_inv_mail" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_security" source="invitations" target="mail" edge="1">
+                <mxCell id="dep_inv_mail" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_security" source="invitations" target="mail" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="backend_company" value="Societes et transport" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="backend_root" vertex="1">
+                <mxCell id="backend_company" value="Societes et transport" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" parent="backend_root" vertex="1">
                     <mxGeometry x="680" y="55" width="600" height="300" as="geometry"/>
                 </mxCell>
-                <mxCell id="companies" value="&lt;b&gt;companies&lt;/b&gt;&lt;hr&gt;Societes logistiques&lt;br&gt;et expeditrices" style="shape=folder;tabWidth=85;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top" parent="backend_company" vertex="1">
+                <mxCell id="companies" value="&lt;span&gt;companies&lt;/span&gt;&lt;hr&gt;Societes logistiques&lt;br&gt;et expeditrices" style="shape=folder;tabWidth=85;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_company" vertex="1">
                     <mxGeometry x="25" y="45" width="155" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="delivery_companies" value="&lt;b&gt;delivery-companies&lt;/b&gt;&lt;hr&gt;Societes&lt;br&gt;de transport" style="shape=folder;tabWidth=115;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top" parent="backend_company" vertex="1">
+                <mxCell id="delivery_companies" value="&lt;span&gt;delivery-companies&lt;/span&gt;&lt;hr&gt;Societes&lt;br&gt;de transport" style="shape=folder;tabWidth=115;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_company" vertex="1">
                     <mxGeometry x="245" y="45" width="160" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="trucks" value="&lt;b&gt;trucks&lt;/b&gt;&lt;hr&gt;Gestion&lt;br&gt;des camions" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top" parent="backend_company" vertex="1">
+                <mxCell id="trucks" value="&lt;span&gt;trucks&lt;/span&gt;&lt;hr&gt;Gestion&lt;br&gt;des camions" style="shape=folder;tabWidth=70;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_company" vertex="1">
                     <mxGeometry x="460" y="55" width="125" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="truck_availability" value="&lt;b&gt;truck-availability&lt;/b&gt;&lt;hr&gt;Disponibilite&lt;br&gt;par date" style="shape=folder;tabWidth=110;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top" parent="backend_company" vertex="1">
+                <mxCell id="truck_availability" value="&lt;span&gt;truck-availability&lt;/span&gt;&lt;hr&gt;Disponibilite&lt;br&gt;par date" style="shape=folder;tabWidth=110;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_company" vertex="1">
                     <mxGeometry x="85" y="170" width="160" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_company_delivery" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_company" source="delivery_companies" target="companies" edge="1">
+                <mxCell id="dep_company_delivery" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_company" source="delivery_companies" target="companies" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_trucks_delivery" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_company" source="trucks" target="delivery_companies" edge="1">
+                <mxCell id="dep_trucks_delivery" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_company" source="trucks" target="delivery_companies" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_avail_trucks" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_company" source="truck_availability" target="trucks" edge="1">
+                <mxCell id="dep_avail_trucks" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_company" source="truck_availability" target="trucks" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="backend_logistics" value="Logistique et chargement" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="backend_root" vertex="1">
+                <mxCell id="backend_logistics" value="Logistique et chargement" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" parent="backend_root" vertex="1">
                     <mxGeometry x="50" y="380" width="680" height="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="bons_livraison" value="&lt;b&gt;bons-livraison&lt;/b&gt;&lt;hr&gt;Gestion des BL" style="shape=folder;tabWidth=105;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top" parent="backend_logistics" vertex="1">
+                <mxCell id="bons_livraison" value="&lt;span&gt;bons-livraison&lt;/span&gt;&lt;hr&gt;Gestion des BL" style="shape=folder;tabWidth=105;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_logistics" vertex="1">
                     <mxGeometry x="25" y="50" width="155" height="75" as="geometry"/>
                 </mxCell>
-                <mxCell id="articles" value="&lt;b&gt;articles&lt;/b&gt;&lt;hr&gt;Catalogue&lt;br&gt;articles" style="shape=folder;tabWidth=75;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top" parent="backend_logistics" vertex="1">
+                <mxCell id="articles" value="&lt;span&gt;articles&lt;/span&gt;&lt;hr&gt;Catalogue&lt;br&gt;articles" style="shape=folder;tabWidth=75;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_logistics" vertex="1">
                     <mxGeometry x="270" y="67" width="135" height="75" as="geometry"/>
                 </mxCell>
-                <mxCell id="loading_plans" value="&lt;b&gt;loading-plans&lt;/b&gt;&lt;hr&gt;Planning&lt;br&gt;chargement" style="shape=folder;tabWidth=105;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top" parent="backend_logistics" vertex="1">
+                <mxCell id="loading_plans" value="&lt;span&gt;loading-plans&lt;/span&gt;&lt;hr&gt;Planning&lt;br&gt;chargement" style="shape=folder;tabWidth=105;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_logistics" vertex="1">
                     <mxGeometry x="510" y="50" width="145" height="75" as="geometry"/>
                 </mxCell>
-                <mxCell id="expediteurs" value="&lt;b&gt;expediteurs&lt;/b&gt;&lt;hr&gt;Societes expeditrices&lt;br&gt;filieres" style="shape=folder;tabWidth=95;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top" parent="backend_logistics" vertex="1">
+                <mxCell id="expediteurs" value="&lt;span&gt;expediteurs&lt;/span&gt;&lt;hr&gt;Societes expeditrices&lt;br&gt;filieres" style="shape=folder;tabWidth=95;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_logistics" vertex="1">
                     <mxGeometry x="80" y="170" width="170" height="85" as="geometry"/>
                 </mxCell>
-                <mxCell id="quais" value="&lt;b&gt;quais&lt;/b&gt;&lt;hr&gt;Quais de&lt;br&gt;chargement" style="shape=folder;tabWidth=65;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top" parent="backend_logistics" vertex="1">
+                <mxCell id="quais" value="&lt;span&gt;quais&lt;/span&gt;&lt;hr&gt;Quais de&lt;br&gt;chargement" style="shape=folder;tabWidth=65;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_logistics" vertex="1">
                     <mxGeometry x="360" y="170" width="140" height="85" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_bl_articles" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_logistics" source="bons_livraison" target="articles" edge="1">
+                <mxCell id="dep_bl_articles" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_logistics" source="bons_livraison" target="articles" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_loading_bl" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11;edgeStyle=orthogonalEdgeStyle;" parent="backend_logistics" source="loading_plans" target="bons_livraison" edge="1">
+                <mxCell id="dep_loading_bl" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;edgeStyle=orthogonalEdgeStyle;fontStyle=1" parent="backend_logistics" source="loading_plans" target="bons_livraison" edge="1">
                     <mxGeometry x="-0.0089" y="13" relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="583" y="37"/>
@@ -88,61 +88,61 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="dep_quais_expediteurs" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11" parent="backend_logistics" source="quais" target="expediteurs" edge="1">
+                <mxCell id="dep_quais_expediteurs" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="backend_logistics" source="quais" target="expediteurs" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="backend_portals" value="Portails et integrations" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" parent="backend_root" vertex="1">
+                <mxCell id="backend_portals" value="Portails et integrations" style="swimlane;html=1;startSize=26;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=13;" parent="backend_root" vertex="1">
                     <mxGeometry x="760" y="380" width="510" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="transport_portal" value="&lt;b&gt;transport-portal&lt;/b&gt;&lt;hr&gt;Portail Admin Transport&lt;br&gt;flotte + declarations" style="shape=folder;tabWidth=115;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top" parent="backend_portals" vertex="1">
+                <mxCell id="transport_portal" value="&lt;span&gt;transport-portal&lt;/span&gt;&lt;hr&gt;Portail Admin Transport&lt;br&gt;flotte + declarations" style="shape=folder;tabWidth=115;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_portals" vertex="1">
                     <mxGeometry x="25" y="45" width="190" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="expediteur_portal" value="&lt;b&gt;expediteur-portal&lt;/b&gt;&lt;hr&gt;Portail Admin Expediteur&lt;br&gt;BL, planning, quais" style="shape=folder;tabWidth=120;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top" parent="backend_portals" vertex="1">
+                <mxCell id="expediteur_portal" value="&lt;span&gt;expediteur-portal&lt;/span&gt;&lt;hr&gt;Portail Admin Expediteur&lt;br&gt;BL, planning, quais" style="shape=folder;tabWidth=120;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_portals" vertex="1">
                     <mxGeometry x="255" y="45" width="200" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="erp" value="&lt;b&gt;erp&lt;/b&gt;&lt;hr&gt;Integration&lt;br&gt;ERP externe" style="shape=folder;tabWidth=55;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top" parent="backend_portals" vertex="1">
+                <mxCell id="erp" value="&lt;span&gt;erp&lt;/span&gt;&lt;hr&gt;Integration&lt;br&gt;ERP externe" style="shape=folder;tabWidth=55;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=10;verticalAlign=top;fontStyle=1;fontSize=13;" parent="backend_portals" vertex="1">
                     <mxGeometry x="165" y="170" width="150" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_expediteur_portal_logistics" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=11;entryX=0.602;entryY=0.231;entryDx=0;entryDy=0;entryPerimeter=0;" parent="backend_portals" source="expediteur_portal" target="erp" edge="1">
+                <mxCell id="dep_expediteur_portal_logistics" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;entryX=0.602;entryY=0.231;entryDx=0;entryDy=0;entryPerimeter=0;fontStyle=1" parent="backend_portals" source="expediteur_portal" target="erp" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="frontend_root" value="Frontend React&amp;nbsp;" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=16" parent="1" vertex="1">
+                <mxCell id="frontend_root" value="Frontend React&amp;nbsp;" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="1353" y="73" width="1180" height="718" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_auth" value="Authentification&lt;hr&gt;LoginPage&lt;br&gt;RegisterPage&lt;br&gt;ForgotPasswordPage&lt;br&gt;ResetPasswordPage&lt;br&gt;AcceptInvitationPage" style="swimlane;html=1;startSize=134;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_auth" value="Authentification&lt;hr&gt;LoginPage&lt;br&gt;RegisterPage&lt;br&gt;ForgotPasswordPage&lt;br&gt;ResetPasswordPage&lt;br&gt;AcceptInvitationPage" style="swimlane;html=1;startSize=134;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="35" y="55" width="330" height="155" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_logistique" value="Super Admin / Admin Logistique&lt;hr&gt;DashboardPage&lt;br&gt;BonsLivraisonPage&lt;br&gt;PlanningPage&lt;br&gt;TransportPage&lt;br&gt;HistoriquePage&lt;br&gt;UsersPage&lt;br&gt;TrucksPage&lt;br&gt;DeliveryCompaniesPage&lt;br&gt;ArticlesPage&lt;br&gt;ExpediteursPage&lt;br&gt;QuaisPage" style="swimlane;html=1;startSize=227;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_logistique" value="Super Admin / Admin Logistique&lt;hr&gt;DashboardPage&lt;br&gt;BonsLivraisonPage&lt;br&gt;PlanningPage&lt;br&gt;TransportPage&lt;br&gt;HistoriquePage&lt;br&gt;UsersPage&lt;br&gt;TrucksPage&lt;br&gt;DeliveryCompaniesPage&lt;br&gt;ArticlesPage&lt;br&gt;ExpediteursPage&lt;br&gt;QuaisPage" style="swimlane;html=1;startSize=227;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="410" y="90" width="330" height="267" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_super_admin" value="Super Admin uniquement&lt;hr&gt;AdminDashboardPage&lt;br&gt;CompaniesPage&lt;br&gt;AdminLogsPage" style="swimlane;html=1;startSize=104;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_super_admin" value="Super Admin uniquement&lt;hr&gt;AdminDashboardPage&lt;br&gt;CompaniesPage&lt;br&gt;AdminLogsPage" style="swimlane;html=1;startSize=104;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="765" y="55" width="330" height="125" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_magasinier" value="Magasinier&lt;hr&gt;MagasinPage / DashboardPage&lt;br&gt;PlanningPage&lt;br&gt;QuaiPage&lt;br&gt;ParametresPage" style="swimlane;html=1;startSize=114;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_magasinier" value="Magasinier&lt;hr&gt;MagasinPage / DashboardPage&lt;br&gt;PlanningPage&lt;br&gt;QuaiPage&lt;br&gt;ParametresPage" style="swimlane;html=1;startSize=114;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="35" y="250" width="330" height="145" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_securite" value="Agent Securite&lt;hr&gt;SecuritePage&lt;br&gt;SecuriteTVPage" style="swimlane;html=1;startSize=82;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_securite" value="Agent Securite&lt;hr&gt;SecuritePage&lt;br&gt;SecuriteTVPage" style="swimlane;html=1;startSize=82;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="765" y="220" width="330" height="105" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_expediteur" value="Admin Expediteur&lt;hr&gt;DashboardPage&lt;br&gt;BLsPage&lt;br&gt;PlanningPage&lt;br&gt;SocietePage&lt;br&gt;FilieresPage&lt;br&gt;UsersPage&lt;br&gt;LogistiquePage" style="swimlane;html=1;startSize=169;rounded=0;fillColor=default;strokeColor=#9673a6;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_expediteur" value="Admin Expediteur&lt;hr&gt;DashboardPage&lt;br&gt;BLsPage&lt;br&gt;PlanningPage&lt;br&gt;SocietePage&lt;br&gt;FilieresPage&lt;br&gt;UsersPage&lt;br&gt;LogistiquePage" style="swimlane;html=1;startSize=169;rounded=0;fillColor=default;strokeColor=#9673a6;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="35" y="445" width="330" height="215" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_filiere" value="Admin Filiere" style="swimlane;html=1;startSize=34;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_filiere" value="Admin Filiere" style="swimlane;html=1;startSize=34;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="400" y="495" width="330" height="160" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="&lt;h4 style=&quot;text-align: justify;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;DashboardPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;BLsPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;PlanningPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;QuaisPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;UsersPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;ProfilePage&lt;/font&gt;&lt;/h4&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="front_filiere">
-                    <mxGeometry y="15" width="110" height="130" as="geometry"/>
+                <mxCell id="2" value="&lt;h4 style=&quot;text-align: justify;&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;DashboardPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;BLsPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;PlanningPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;QuaisPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;UsersPage&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#000000&quot;&gt;ProfilePage&lt;/font&gt;&lt;/h4&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=13;" parent="front_filiere" vertex="1">
+                    <mxGeometry x="-3" y="10" width="117" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="front_transport" value="Admin Transport&lt;hr&gt;TransportPortalPage&lt;br&gt;Gestion de la flotte&lt;br&gt;Disponibilites" style="swimlane;html=1;startSize=96;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=8" parent="frontend_root" vertex="1">
+                <mxCell id="front_transport" value="Admin Transport&lt;hr&gt;TransportPortalPage&lt;br&gt;Gestion de la flotte&lt;br&gt;Disponibilites" style="swimlane;html=1;startSize=96;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=left;spacingLeft=8;fontSize=13;" parent="frontend_root" vertex="1">
                     <mxGeometry x="765" y="445" width="330" height="125" as="geometry"/>
                 </mxCell>
-                <mxCell id="api_boundary" value="API REST / JWT" style="shape=folder;tabWidth=90;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#666666;fontStyle=1;align=center;verticalAlign=middle" parent="1" vertex="1">
+                <mxCell id="api_boundary" value="API REST / JWT" style="shape=folder;tabWidth=90;tabHeight=18;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffffff;strokeColor=#666666;fontStyle=1;align=center;verticalAlign=middle;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="1064" y="880" width="250" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_front_api" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=12" parent="1" source="frontend_root" target="api_boundary" edge="1">
+                <mxCell id="dep_front_api" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="1" source="frontend_root" target="api_boundary" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_api_backend" value="&lt;&lt; use &gt;&gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=12" parent="1" source="api_boundary" target="backend_root" edge="1">
+                <mxCell id="dep_api_backend" value="&amp;lt;&amp;lt; use &amp;gt;&amp;gt;" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#666666;fontSize=13;fontStyle=1" parent="1" source="api_boundary" target="backend_root" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>

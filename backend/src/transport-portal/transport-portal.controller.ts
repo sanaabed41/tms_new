@@ -39,6 +39,13 @@ export class TransportPortalController {
     return this.service.removeTruck(id, user.deliveryCompanyId);
   }
 
+  @Get('rapport')
+  @Roles(Role.TRANSPORT_ADMIN)
+  getRapport(@CurrentUser() user: any, @Query('date') date: string) {
+    if (!user.deliveryCompanyId) return [];
+    return this.service.getRapport(user.deliveryCompanyId, date);
+  }
+
   // ── Vue LOGISTIC_ADMIN : déclarations actives des transporteurs ──────────
 
   @Get('declarations')

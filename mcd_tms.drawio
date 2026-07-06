@@ -1,184 +1,344 @@
 <mxfile host="65bd71144e">
     <diagram id="mcd-tms" name="MCD TMS">
-        <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="2400" pageHeight="1700" math="0" shadow="0">
+        <mxGraphModel dx="1713" dy="1948" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1700" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="invitation" value="&lt;b&gt;Invitation&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;email&lt;br&gt;role&lt;br&gt;token&lt;br&gt;expiresAt&lt;br&gt;isUsed&lt;br&gt;filiereIds&lt;br&gt;deliveryCompanyNom&lt;br&gt;#companyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="18" y="157" width="220" height="220" as="geometry"/>
+                <mxCell id="invitation" value="&lt;b&gt;Invitation&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;email&lt;br&gt;role&lt;br&gt;token&lt;br&gt;expiresAt&lt;br&gt;isUsed&lt;br&gt;filiereIds&lt;br&gt;deliveryCompanyNom&lt;br&gt;#companyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="25.2" y="219.8" width="308" height="308" as="geometry"/>
                 </mxCell>
-                <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;prenom&lt;br&gt;email&lt;br&gt;password&lt;br&gt;role&lt;br&gt;isActive&lt;br&gt;resetPasswordToken&lt;br&gt;resetPasswordExpires&lt;br&gt;#companyId&lt;br&gt;#deliveryCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="360" y="140" width="230" height="250" as="geometry"/>
+                <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;prenom&lt;br&gt;email&lt;br&gt;password&lt;br&gt;role&lt;br&gt;isActive&lt;br&gt;resetPasswordToken&lt;br&gt;resetPasswordExpires&lt;br&gt;#companyId&lt;br&gt;#deliveryCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="504" y="196" width="322" height="350" as="geometry"/>
                 </mxCell>
-                <mxCell id="audit_log" value="&lt;b&gt;AuditLog&lt;/b&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;id&lt;/b&gt;&lt;/i&gt;&lt;br&gt;action&lt;br&gt;actorId&lt;br&gt;actorEmail&lt;br&gt;actorRole&lt;br&gt;targetId&lt;br&gt;targetEmail&lt;br&gt;companyId&lt;br&gt;#companyNom&lt;br&gt;ip&lt;br&gt;metadata&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="738" y="132" width="220" height="250" as="geometry"/>
+                <mxCell id="audit_log" value="&lt;b&gt;AuditLog&lt;/b&gt;&lt;hr&gt;&lt;i&gt;&lt;b&gt;id&lt;/b&gt;&lt;/i&gt;&lt;br&gt;action&lt;br&gt;actorId&lt;br&gt;actorEmail&lt;br&gt;actorRole&lt;br&gt;targetId&lt;br&gt;targetEmail&lt;br&gt;companyId&lt;br&gt;#companyNom&lt;br&gt;ip&lt;br&gt;metadata&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1033.2" y="184.8" width="308" height="350" as="geometry"/>
                 </mxCell>
-                <mxCell id="company" value="&lt;b&gt;Company&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;type&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;couleur&lt;br&gt;code&lt;br&gt;isActive&lt;br&gt;#logistiqueCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1046" y="132" width="230" height="225" as="geometry"/>
+                <mxCell id="company" value="&lt;b&gt;Company&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;type&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;couleur&lt;br&gt;code&lt;br&gt;isActive&lt;br&gt;#logistiqueCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1464.4" y="184.8" width="322" height="315" as="geometry"/>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-33" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="delivery_company" target="5ink73KHIqXWHUQT9Rnp-30">
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-33" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;endArrow=none;endFill=0;fontSize=15" parent="1" source="delivery_company" target="5ink73KHIqXWHUQT9Rnp-30" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="976" y="24"/>
-                            <mxPoint x="976" y="548"/>
+                            <mxPoint x="1366.4" y="33.6"/>
+                            <mxPoint x="1366.4" y="767.2"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="delivery_company" value="&lt;b&gt;DeliveryCompany&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;isActive&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1398" y="11" width="230" height="180" as="geometry"/>
+                <mxCell id="delivery_company" value="&lt;b&gt;DeliveryCompany&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;isActive&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1957.2" y="15.4" width="322" height="252" as="geometry"/>
                 </mxCell>
-                <mxCell id="societe_exped" value="&lt;b&gt;SocieteExpeditrice&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;&lt;b&gt;&lt;u&gt;code&lt;br&gt;&lt;/u&gt;&lt;/b&gt;couleur&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1403" y="228" width="230" height="215" as="geometry"/>
+                <mxCell id="societe_exped" value="&lt;b&gt;SocieteExpeditrice&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;&lt;b&gt;&lt;u&gt;code&lt;br&gt;&lt;/u&gt;&lt;/b&gt;couleur&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1964.2" y="319.2" width="322" height="301" as="geometry"/>
                 </mxCell>
-                <mxCell id="truck" value="&lt;b&gt;Truck&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;matricule&lt;br&gt;capaciteTonnage&lt;br&gt;capacitePalettes&lt;br&gt;type&lt;br&gt;isActive&lt;br&gt;#deliveryCompanyId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1945" y="30" width="220" height="170" as="geometry"/>
+                <mxCell id="truck" value="&lt;b&gt;Truck&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;matricule&lt;br&gt;capaciteTonnage&lt;br&gt;capacitePalettes&lt;br&gt;type&lt;br&gt;isActive&lt;br&gt;#deliveryCompanyId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="2723" y="42" width="308" height="238" as="geometry"/>
                 </mxCell>
-                <mxCell id="availability" value="&lt;b&gt;TruckAvailability&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;date&lt;br&gt;#truckId&lt;br&gt;#companyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1825" y="372.33" width="220" height="130" as="geometry"/>
+                <mxCell id="availability" value="&lt;b&gt;TruckAvailability&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;date&lt;br&gt;#truckId&lt;br&gt;#companyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="2555" y="521.3" width="308" height="182" as="geometry"/>
                 </mxCell>
-                <mxCell id="transport_declaration" value="&lt;b&gt;TransportDeclaration&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;dateDebut&lt;br&gt;dateFin&lt;br&gt;chauffeurNom&lt;br&gt;chauffeurTel&lt;br&gt;isActive&lt;br&gt;#declaredByUserId&lt;br&gt;#logistiqueCompanyId&lt;br&gt;#truckId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="2070" y="340" width="240" height="230" as="geometry"/>
+                <mxCell id="transport_declaration" value="&lt;b&gt;TransportDeclaration&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;dateDebut&lt;br&gt;dateFin&lt;br&gt;chauffeurNom&lt;br&gt;chauffeurTel&lt;br&gt;isActive&lt;br&gt;#declaredByUserId&lt;br&gt;#logistiqueCompanyId&lt;br&gt;#truckId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="2898" y="476" width="336" height="322" as="geometry"/>
                 </mxCell>
-                <mxCell id="article" value="&lt;b&gt;Article&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;code&lt;br&gt;libelle&lt;br&gt;poidsUnitaire&lt;br&gt;unite" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="80" y="720" width="220" height="135" as="geometry"/>
+                <mxCell id="article" value="&lt;b&gt;Article&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;code&lt;br&gt;libelle&lt;br&gt;poidsUnitaire&lt;br&gt;unite" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="112" y="1008" width="308" height="189" as="geometry"/>
                 </mxCell>
-                <mxCell id="bon_livraison" value="&lt;b&gt;BonLivraison&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;numeroBl&lt;br&gt;clientNom&lt;br&gt;clientAdresse&lt;br&gt;origine&lt;br&gt;destination&lt;br&gt;typeChargement&lt;br&gt;tonnageTotal&lt;br&gt;nombrePalettes&lt;br&gt;statut&lt;br&gt;dateLivraison&lt;br&gt;erpReference&lt;br&gt;notes&lt;br&gt;ordreChargement&lt;br&gt;#companyId&lt;br&gt;#societeExpeditriceId&lt;br&gt;#filiereId&lt;br&gt;#loadingPlanId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=11" vertex="1" parent="1">
-                    <mxGeometry x="718" y="620" width="245" height="350" as="geometry"/>
+                <mxCell id="bon_livraison" value="&lt;b&gt;BonLivraison&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;numeroBl&lt;br&gt;clientNom&lt;br&gt;clientAdresse&lt;br&gt;origine&lt;br&gt;destination&lt;br&gt;typeChargement&lt;br&gt;tonnageTotal&lt;br&gt;nombrePalettes&lt;br&gt;statut&lt;br&gt;dateLivraison&lt;br&gt;erpReference&lt;br&gt;notes&lt;br&gt;ordreChargement&lt;br&gt;#companyId&lt;br&gt;#societeExpeditriceId&lt;br&gt;#filiereId&lt;br&gt;#loadingPlanId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1005.2" y="868" width="343" height="490" as="geometry"/>
                 </mxCell>
-                <mxCell id="loading_plan" value="&lt;b&gt;LoadingPlan&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;reference&lt;br&gt;dateLivraison&lt;br&gt;tonnageCharge&lt;br&gt;palettesChargees&lt;br&gt;isValidated&lt;br&gt;signature&lt;br&gt;heureArrivee&lt;br&gt;loadingStatus&lt;br&gt;entryStatus&lt;br&gt;quai&lt;br&gt;stationsSequence&lt;br&gt;currentStationIdx&lt;br&gt;currentStation&lt;br&gt;loadingStartedAt&lt;br&gt;loadingElapsedSeconds&lt;br&gt;calledAt&lt;br&gt;enteredAt&lt;br&gt;#logistiqueCompanyId&lt;br&gt;#truckId&lt;br&gt;#validatedById&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=11" vertex="1" parent="1">
-                    <mxGeometry x="1060" y="610" width="260" height="410" as="geometry"/>
+                <mxCell id="loading_plan" value="&lt;b&gt;LoadingPlan&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;reference&lt;br&gt;dateLivraison&lt;br&gt;tonnageCharge&lt;br&gt;palettesChargees&lt;br&gt;isValidated&lt;br&gt;signature&lt;br&gt;heureArrivee&lt;br&gt;loadingStatus&lt;br&gt;entryStatus&lt;br&gt;quai&lt;br&gt;stationsSequence&lt;br&gt;currentStationIdx&lt;br&gt;currentStation&lt;br&gt;loadingStartedAt&lt;br&gt;loadingElapsedSeconds&lt;br&gt;calledAt&lt;br&gt;enteredAt&lt;br&gt;#logistiqueCompanyId&lt;br&gt;#truckId&lt;br&gt;#validatedById&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1484" y="854" width="364" height="574" as="geometry"/>
                 </mxCell>
-                <mxCell id="quai" value="&lt;b&gt;Quai&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;isActive&lt;br&gt;#companyId&lt;br&gt;#societeExpeditriceId&lt;br&gt;#filiereId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1540" y="700" width="220" height="140" as="geometry"/>
+                <mxCell id="quai" value="&lt;b&gt;Quai&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;isActive&lt;br&gt;#companyId&lt;br&gt;#societeExpeditriceId&lt;br&gt;#filiereId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="2156" y="980" width="308" height="196" as="geometry"/>
                 </mxCell>
-                <mxCell id="filiere" value="&lt;b&gt;Filiere&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;code&lt;br&gt;#societeExpeditriceId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1870" y="700" width="220" height="125" as="geometry"/>
+                <mxCell id="filiere" value="&lt;b&gt;Filiere&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;code&lt;br&gt;#societeExpeditriceId" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="2618" y="980" width="308" height="175" as="geometry"/>
                 </mxCell>
-                <mxCell id="enum_type_chargement" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;TypeChargement&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr&gt;VRAC&lt;br&gt;PALETTE&lt;br&gt;FRIGO&lt;br&gt;CITERNE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="360" y="885" width="135" height="135" as="geometry"/>
+                <mxCell id="enum_type_chargement" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;TypeChargement&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr&gt;VRAC&lt;br&gt;PALETTE&lt;br&gt;FRIGO&lt;br&gt;CITERNE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="504" y="1239" width="189" height="189" as="geometry"/>
                 </mxCell>
-                <mxCell id="enum_bl_status" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;BlStatus&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr style=&quot;text-align: center;&quot;&gt;DRAFT&lt;br&gt;VALIDATED" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="515" y="889" width="118" height="88" as="geometry"/>
+                <mxCell id="enum_bl_status" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;BlStatus&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr style=&quot;text-align: center;&quot;&gt;DRAFT&lt;br&gt;VALIDATED" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="721" y="1244.6" width="165.2" height="123.2" as="geometry"/>
                 </mxCell>
-                <mxCell id="enum_role" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;Role&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr&gt;SUPER_ADMIN&lt;br&gt;LOGISTIC_ADMIN&lt;br&gt;TRANSPORT_ADMIN&lt;br&gt;EXPEDITEUR_ADMIN&lt;br&gt;FILIERE_ADMIN&lt;br&gt;MAGASINIER&lt;br&gt;SECURITE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="409" y="407" width="145" height="175" as="geometry"/>
+                <mxCell id="enum_role" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/b&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;Role&lt;/b&gt;&lt;/div&gt;&lt;/b&gt;&lt;hr&gt;SUPER_ADMIN&lt;br&gt;LOGISTIC_ADMIN&lt;br&gt;TRANSPORT_ADMIN&lt;br&gt;EXPEDITEUR_ADMIN&lt;br&gt;FILIERE_ADMIN&lt;br&gt;MAGASINIER&lt;br&gt;SECURITE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="572.6" y="569.8" width="203" height="245" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_user_invitation" value="envoie&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;1,n / 0,n&lt;/span&gt;&lt;/div&gt;" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="user" target="invitation">
+                <mxCell id="e_user_invitation" value="envoie" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="user" target="invitation" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_company_user" value="possede&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#000000;fontSize=12;edgeStyle=orthogonalEdgeStyle;" parent="1" source="company" target="user" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1155" y="76"/>
-                            <mxPoint x="475" y="76"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e_company_delivery" value="possede&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="company" target="delivery_company">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="e_company_societe" value="represente&#xa;0,1 / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="company" target="societe_exped">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="e_delivery_truck" value="possede&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" parent="1" source="delivery_company" target="truck" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="e_truck_availability" value="disponible&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="truck" target="availability">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="e_truck_transport" value="declare&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="truck" target="transport_declaration">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="e_truck_loading" value="planifie&#xa;1,n / 0,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" parent="1" source="truck" target="loading_plan" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1656" y="482"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="e_article_blarticle" value="concerne&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="article" target="bl_article">
-                    <mxGeometry x="-0.0087" relative="1" as="geometry">
-                        <mxPoint x="380" y="559" as="targetPoint"/>
+                <mxCell id="e_user_invitation-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_user_invitation">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="e_bl_blarticle" value="contient&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="bon_livraison" target="bl_article">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="610" y="785.8082706766918" as="targetPoint"/>
+                <mxCell id="e_user_invitation-ct" value="0,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_user_invitation">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="e_loading_bl" value="contient&#xa;1,n / 0,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="loading_plan" target="bon_livraison">
+                <mxCell id="e_company_user" value="possede" style="endArrow=none;html=1;rounded=0;strokeColor=#000000;fontSize=15;edgeStyle=orthogonalEdgeStyle;" parent="1" source="company" target="user" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1617" y="106.4"/>
+                            <mxPoint x="665" y="106.4"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_user-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_user">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_user-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_user">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_delivery" value="possede" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="company" target="delivery_company" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_societe_filiere" value="possede&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" parent="1" source="societe_exped" target="filiere" edge="1">
+                <mxCell id="e_company_delivery-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_delivery">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_delivery-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_delivery">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_societe" value="represente" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="company" target="societe_exped" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_filiere_quai" value="appartient&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12" edge="1" parent="1" source="filiere" target="quai">
+                <mxCell id="e_company_societe-cs" value="0,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_societe">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_company_societe-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_company_societe">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_delivery_truck" value="possede" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="delivery_company" target="truck" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="e_filiere_bl" value="regroupe&#xa;1,n / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="filiere" target="bon_livraison">
+                <mxCell id="e_delivery_truck-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_delivery_truck">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_delivery_truck-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_delivery_truck">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_truck_availability" value="disponible" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="truck" target="availability" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_truck_availability-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_availability">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_truck_availability-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_availability">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_truck_transport" value="declare" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="truck" target="transport_declaration" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_truck_transport-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_transport">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_truck_transport-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_transport">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_truck_loading" value="planifie" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="truck" target="loading_plan" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="1980" y="1052"/>
-                            <mxPoint x="833" y="1052"/>
+                            <mxPoint x="2318.4" y="674.8"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="bl_article" value="&lt;b&gt;BlArticle&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;#bonLivraisonId&lt;br&gt;#articleId&lt;br&gt;quantite&lt;br&gt;poidsTotal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="390" y="730" width="220" height="125" as="geometry"/>
+                <mxCell id="e_truck_loading-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_loading">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-30" value="&lt;b&gt;LogistiqueCompany&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;&lt;b&gt;&lt;u&gt;code&lt;/u&gt;&lt;/b&gt;&lt;br&gt;couleur&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;#companyId&lt;br&gt;#expediteurCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top" vertex="1" parent="1">
-                    <mxGeometry x="1101" y="387" width="230" height="215" as="geometry"/>
+                <mxCell id="e_truck_loading-ct" value="0,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_truck_loading">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-31" value="represente&#xa;0,1 / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="5ink73KHIqXWHUQT9Rnp-30" target="company">
+                <mxCell id="e_article_blarticle" value="concerne" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="article" target="bl_article" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="1286" y="284" as="sourcePoint"/>
-                        <mxPoint x="1413" y="316" as="targetPoint"/>
+                        <mxPoint x="532" y="782.6" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_article_blarticle-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_article_blarticle">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_article_blarticle-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_article_blarticle">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_bl_blarticle" value="contient" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="bon_livraison" target="bl_article" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="854" y="1100.1" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_bl_blarticle-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_bl_blarticle">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_bl_blarticle-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_bl_blarticle">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_loading_bl" value="contient" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="loading_plan" target="bon_livraison" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_loading_bl-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_loading_bl">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_loading_bl-ct" value="0,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_loading_bl">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_societe_filiere" value="possede" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="societe_exped" target="filiere" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_societe_filiere-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_societe_filiere">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_societe_filiere-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_societe_filiere">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_filiere_quai" value="appartient" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15" parent="1" source="filiere" target="quai" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e_filiere_quai-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_filiere_quai">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_filiere_quai-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_filiere_quai">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_filiere_bl" value="regroupe" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15;edgeStyle=orthogonalEdgeStyle;" parent="1" source="filiere" target="bon_livraison" edge="1">
+                    <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="1014" y="494"/>
-                            <mxPoint x="1014" y="301"/>
+                            <mxPoint x="2772" y="1472.8"/>
+                            <mxPoint x="1166.2" y="1472.8"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-32" value="possède&lt;br&gt;1,1 / 1,1" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=12;exitX=1.023;exitY=0.623;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.443;entryY=0.997;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="5ink73KHIqXWHUQT9Rnp-30" target="societe_exped">
+                <mxCell id="e_filiere_bl-cs" value="1,n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_filiere_bl">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e_filiere_bl-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="e_filiere_bl">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="bl_article" value="&lt;b&gt;BlArticle&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;#bonLivraisonId&lt;br&gt;#articleId&lt;br&gt;quantite&lt;br&gt;poidsTotal" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="546" y="1022" width="308" height="175" as="geometry"/>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-30" value="&lt;b&gt;LogistiqueCompany&lt;/b&gt;&lt;hr&gt;&lt;b&gt;&lt;u&gt;id&lt;/u&gt;&lt;/b&gt;&lt;br&gt;nom&lt;br&gt;&lt;b&gt;&lt;u&gt;code&lt;/u&gt;&lt;/b&gt;&lt;br&gt;couleur&lt;br&gt;adresse&lt;br&gt;telephone&lt;br&gt;#companyId&lt;br&gt;#expediteurCompanyId&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;verticalAlign=top;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1541.4" y="541.8" width="322" height="301" as="geometry"/>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-31" value="represente" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="5ink73KHIqXWHUQT9Rnp-30" target="company" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="1286" y="284" as="sourcePoint"/>
-                        <mxPoint x="1413" y="316" as="targetPoint"/>
+                        <mxPoint x="1800.4" y="397.6" as="sourcePoint"/>
+                        <mxPoint x="1978.2" y="442.4" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="1505" y="517"/>
+                            <mxPoint x="1419.6" y="691.6"/>
+                            <mxPoint x="1419.6" y="421.4"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-34" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;partenaire&lt;/span&gt;&lt;br style=&quot;forced-color-adjust: none; color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;0,n / 1,1&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="908" y="453" width="63" height="49.33" as="geometry"/>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-31-cs" value="0,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="5ink73KHIqXWHUQT9Rnp-31">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-35" style="edgeStyle=none;html=1;entryX=0.466;entryY=0.971;entryDx=0;entryDy=0;endArrow=none;endFill=0;entryPerimeter=0;" edge="1" parent="1" target="quai">
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-31-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="5ink73KHIqXWHUQT9Rnp-31">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-32" value="possède" style="endArrow=none;html=1;rounded=0;strokeColor=#666666;fontSize=15;exitX=1.023;exitY=0.623;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.443;entryY=0.997;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="5ink73KHIqXWHUQT9Rnp-30" target="societe_exped" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="2173" y="102" as="sourcePoint"/>
+                        <mxPoint x="1800.4" y="397.6" as="sourcePoint"/>
+                        <mxPoint x="1978.2" y="442.4" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="2375" y="102"/>
-                            <mxPoint x="2375" y="640"/>
-                            <mxPoint x="2380" y="975"/>
-                            <mxPoint x="1645" y="980"/>
+                            <mxPoint x="2107" y="723.8"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-36" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;assigné&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;1,n / 1,1&lt;/span&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="2241" y="118" width="73" height="51" as="geometry"/>
-                </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-38" style="edgeStyle=none;html=1;endArrow=none;endFill=0;entryX=-0.004;entryY=0.529;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="5ink73KHIqXWHUQT9Rnp-39" target="audit_log">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="726" y="261" as="targetPoint"/>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-32-cs" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="5ink73KHIqXWHUQT9Rnp-32">
+                    <mxGeometry x="-0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-40" value="" style="edgeStyle=none;html=1;endArrow=none;endFill=0;entryX=-0.004;entryY=0.529;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="user" target="5ink73KHIqXWHUQT9Rnp-39">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="590" y="265" as="sourcePoint"/>
-                        <mxPoint x="737" y="264" as="targetPoint"/>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-32-ct" value="1,1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;fontSize=15;fontStyle=1;" connectable="0" vertex="1" parent="5ink73KHIqXWHUQT9Rnp-32">
+                    <mxGeometry x="0.72" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5ink73KHIqXWHUQT9Rnp-39" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;surveille&lt;/span&gt;&lt;br style=&quot;forced-color-adjust: none; color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;0,n / 1,1&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="638" y="240.34" width="63" height="49.33" as="geometry"/>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-34" value="&lt;span&gt;partenaire&lt;/span&gt;&lt;br&gt;&lt;span&gt;0,n / 1,1&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="1271.2" y="634.2" width="88.2" height="69.1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-35" style="edgeStyle=none;html=1;entryX=0.466;entryY=0.971;entryDx=0;entryDy=0;endArrow=none;endFill=0;entryPerimeter=0;fontSize=15" parent="1" target="quai" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="3042.2" y="142.8" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="3325" y="142.8"/>
+                            <mxPoint x="3325" y="896"/>
+                            <mxPoint x="3332" y="1365"/>
+                            <mxPoint x="2303" y="1372"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-36" value="&lt;span&gt;assigné&lt;/span&gt;&lt;div&gt;&lt;span&gt;1,n / 1,1&lt;/span&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="3137.4" y="165.2" width="102.2" height="71.4" as="geometry"/>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-38" style="edgeStyle=none;html=1;endArrow=none;endFill=0;entryX=-0.004;entryY=0.529;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=15" parent="1" source="5ink73KHIqXWHUQT9Rnp-39" target="audit_log" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1016.4" y="365.4" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-40" value="" style="edgeStyle=none;html=1;endArrow=none;endFill=0;entryX=-0.004;entryY=0.529;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=15" parent="1" source="user" target="5ink73KHIqXWHUQT9Rnp-39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="826" y="371" as="sourcePoint"/>
+                        <mxPoint x="1031.8" y="369.6" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5ink73KHIqXWHUQT9Rnp-39" value="&lt;span&gt;surveille&lt;/span&gt;&lt;br&gt;&lt;span&gt;0,n / 1,1&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16" parent="1" vertex="1">
+                    <mxGeometry x="893.2" y="336.5" width="88.2" height="69.1" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

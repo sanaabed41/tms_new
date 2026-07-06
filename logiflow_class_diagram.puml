@@ -1,0 +1,270 @@
+@startuml LogiFlow_ClassDiagram
+
+title LogiFlow - Diagramme de Classes
+
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+skinparam defaultFontSize 14
+skinparam class {
+  FontSize 16
+  AttributeFontSize 14
+  StereotypeFontSize 13
+  BackgroundColor White
+  BorderColor #555555
+  ArrowColor #444444
+}
+skinparam enum {
+  FontSize 16
+  AttributeFontSize 14
+  BackgroundColor White
+  BorderColor #555555
+}
+skinparam package {
+  FontSize 17
+  FontStyle Bold
+  BorderColor #888888
+}
+skinparam ArrowFontSize 13
+skinparam ArrowColor #444444
+skinparam Padding 6
+
+scale 1.5
+
+' ═══════════════════════════════════════════════════════════════
+'  ÉNUMÉRATIONS
+' ═══════════════════════════════════════════════════════════════
+package "Enumération" #FAFAFA {
+
+  enum BlStatus {
+    DRAFT
+    VALIDATED
+  }
+
+  enum Role {
+    SUPER_ADMIN
+    LOGISTIC_ADMIN
+    TRANSPORT_ADMIN
+    EXPEDITEUR_ADMIN
+    FILIERE_ADMIN
+    MAGASINIER
+    SECURITE
+  }
+
+  enum TypeChargement {
+    VRAC
+    PALETTE
+    FRIGO
+    CITERNE
+  }
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  UTILISATEUR ET ACCÈS
+' ═══════════════════════════════════════════════════════════════
+package "utilisateur et accès" #FFFBE6 {
+
+  class Invitation {
+    +id : String
+    +email : String <<unique>>
+    +role : Role
+    +token : String
+    +expiresAt : DateTime
+    +deliveryCompanyNom : String
+    +createdAt : Date
+  }
+
+  class User {
+    +id : String
+    +nom : String
+    +prenom : String
+    +email : String <<unique>>
+    +password : String
+    +role : Role
+    +companyId : UUID
+    +companyNom : String
+    +isActive : Boolean
+    +isUsed : Boolean
+    +resetPasswordToken : String
+  }
+
+  class AuditLog {
+    +id : String
+    +action : String
+    +actorId : String
+    +actorEmail : String
+    +actorRole : String
+    +targetEmail : String
+    +companyNom : String
+    +ip : String
+    +createdAt : Date
+  }
+
+  User "1" --> "0..*" AuditLog : surveille
+  User "1" --> "1" Invitation : reçoit
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  GESTION DES SOCIÉTÉS
+' ═══════════════════════════════════════════════════════════════
+package "Gestion des Sociétés" #E6F4FF {
+
+  class Company {
+    +id : String
+    +nom : String
+    +adresse : String
+    +telephone : String
+    +type : Boolean
+    +isActive : Boolean
+    +createdAt : Date
+  }
+
+  class LogistiqueCompany {
+    +code : String <<unique>>
+  }
+
+  class ExpediteurCompany {
+    +code : String <<unique>>
+  }
+
+  class DeliveryCompany {
+  }
+
+  Company <|-- LogistiqueCompany
+  Company <|-- ExpediteurCompany
+  Company <|-- DeliveryCompany
+
+  ExpediteurCompany "1" --> "1" LogistiqueCompany : Possède
+  ExpediteurCompany "1" --> "0..*" DeliveryCompany : est_partenaire
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  EXPÉDITEUR
+' ═══════════════════════════════════════════════════════════════
+package "Expéditeur" #FFF0F6 {
+
+  class Quai {
+    +id : String
+    +nom : String
+    +isActive : Boolean
+  }
+
+  class Filiere <<Filière>> {
+    +id : String
+    +nom : String
+    +code : String <<unique>>
+  }
+
+  Quai "1..*" --> "1" Filiere : appartient
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  LOGISTIQUE & PLANNING
+' ═══════════════════════════════════════════════════════════════
+package "Logistique & Planning" #F9F0FF {
+
+  class LoadingPlan {
+    +id : String
+    +reference : String
+    +clientNom : String
+    +dateLivraison : Date
+    +tonnageCharge : Decimal
+    +palettesChargees : Integer
+    +isValidated : Boolean
+    +loadingStatus : String
+    +loadingStartedAt : DateTime
+    +loadingElapsedSeconds : Integer
+    +createdAt : Date
+  }
+
+  class BonLivraison {
+    +id : String <<unique>>
+    +numeroBL : String <<unique>>
+    +clientNom : String
+    +clientAdresse : String
+    +origine : String
+    +destination : String
+    +typeChargement : TypeChargement
+    +libelle : String
+    +tonnageTotal : Decimal
+    +nombrePalettes : Integer
+    +statut : BlStatus
+    +dateLivraison : Date
+    +erpReference : String
+    +notes : Text
+    +ordreChargement : Integer
+    +createdAt : Date
+  }
+
+  class Article {
+    +id : Integer
+    +code : String <<unique>>
+    +libelle : String
+    +poidsUnitaire : Decimal
+    +unite : String
+  }
+
+  class BLArticle {
+    +id : String
+    +quantite : Decimal
+    +poidsTotal : Decimal
+  }
+
+  LoadingPlan "0..1" --> "0..*" BonLivraison : planifie
+  BonLivraison "0..*" *-- "0..*" BLArticle : contient
+  Article "0..*" *-- "0..*" BLArticle
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  TRANSPORT & DISPONIBILITÉ
+' ═══════════════════════════════════════════════════════════════
+package "Transport & Disponibilité" #F6FFED {
+
+  class Truck {
+    +id : String
+    +matricule : String <<unique>>
+    +capaciteTonnage : Decimal
+    +capacitePalettes : Integer
+    +type : String
+    +chauffeurNom : String
+    +chauffeurTel : String
+    +isActive : Boolean
+    +heureArrivee : String
+    +entryStatus : String
+  }
+
+  class TransportDeclaration {
+    +id : String
+    +dateDebut : Date
+    +dateFin : Date
+    +chauffeurNom : String
+    +chauffeurTel : String
+    +logistiqueCompanyId : String
+    +createdAt : Date
+  }
+
+  class TruckAvailability {
+    +id : String
+    +date : Date
+    +createdAt : Date
+  }
+
+  Truck "1" --> "0..*" TransportDeclaration : déclare
+  Truck "1" --> "0..*" TruckAvailability : disponible
+
+}
+
+' ═══════════════════════════════════════════════════════════════
+'  RELATIONS INTER-PACKAGES
+' ═══════════════════════════════════════════════════════════════
+Company "1" --> "0..*" User : gère
+ExpediteurCompany "1" --> "0..*" Quai : possède
+LoadingPlan "0..*" --> "0..1" Quai : affecte
+LoadingPlan "0..*" --> "0..1" Truck : associe
+
+@enduml

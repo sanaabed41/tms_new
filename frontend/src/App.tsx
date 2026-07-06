@@ -45,6 +45,7 @@ import FiliereAdminProfilePage from './pages/filiere-admin/ProfilePage';
 import FiliereAdminQuaisPage from './pages/filiere-admin/QuaisPage';
 import HistoriquePage from './pages/historique/HistoriquePage';
 import TransportPortalPage from './pages/transport-portal/TransportPortalPage';
+import TransportRapportPage from './pages/transport-portal/TransportRapportPage';
 import { Role } from './types';
 
 dayjs.locale('fr');
@@ -207,6 +208,9 @@ const AppRoutes: React.FC = () => {
         } />
         <Route path="/transport-portal" element={
           <ProtectedRoute roles={[Role.TRANSPORT_ADMIN]}><TransportPortalPage /></ProtectedRoute>
+        } />
+        <Route path="/transport-portal/rapport" element={
+          <ProtectedRoute roles={[Role.TRANSPORT_ADMIN]}><TransportRapportPage /></ProtectedRoute>
         } />
       </Route>
 

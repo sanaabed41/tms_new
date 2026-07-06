@@ -1,0 +1,284 @@
+<mxfile host="65bd71144e">
+    <diagram id="6ORlPal3ZjmEXoWJa6ug" name="Page-1">
+        <mxGraphModel dx="1530" dy="1163" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="102" value="Diagramme de Sequence - Suivi du Chargement (Magasinier)" style="text;html=1;align=center;verticalAlign=middle;fontSize=17;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="4" width="1400" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="Magasinier" style="shape=mxgraph.uml.actor;whiteSpace=wrap;html=1;align=center;fillColor=#ffffff;strokeColor=#000000;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="35" y="34" width="90" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="&lt;b&gt;Frontend (React)&lt;/b&gt;" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;verticalAlign=middle;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="34" width="180" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="&lt;b&gt;LoadingPlansController&lt;/b&gt;" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;align=center;verticalAlign=middle;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="34" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" value="&lt;b&gt;LoadingPlansService&lt;/b&gt;" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=center;verticalAlign=middle;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="960" y="34" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="&lt;b&gt;PostgreSQL&lt;/b&gt;" style="rounded=1;arcSize=15;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=center;verticalAlign=middle;fontSize=17;" vertex="1" parent="1">
+                    <mxGeometry x="1320" y="34" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" style="endArrow=none;dashed=1;strokeColor=#555555;strokeWidth=1;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="134" as="sourcePoint"/>
+                        <mxPoint x="80" y="2130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="109" style="endArrow=none;dashed=1;strokeColor=#555555;strokeWidth=1;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="114" as="sourcePoint"/>
+                        <mxPoint x="350" y="2130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="110" style="endArrow=none;dashed=1;strokeColor=#555555;strokeWidth=1;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="114" as="sourcePoint"/>
+                        <mxPoint x="700" y="2130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="111" style="endArrow=none;dashed=1;strokeColor=#555555;strokeWidth=1;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="114" as="sourcePoint"/>
+                        <mxPoint x="1060" y="2130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="112" style="endArrow=none;dashed=1;strokeColor=#555555;strokeWidth=1;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1400" y="114" as="sourcePoint"/>
+                        <mxPoint x="1400" y="2130" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="114" value="Clique sur Démarrer" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="176" as="sourcePoint"/>
+                        <mxPoint x="350" y="176" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="115" value="PATCH /loading-plans/:id/loading-action  { action: START }" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="231" as="sourcePoint"/>
+                        <mxPoint x="700" y="231" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="116" value="loadingAction(planId, START)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="286" as="sourcePoint"/>
+                        <mxPoint x="1060" y="286" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="117" value="UPDATE loadingStatus=IN_PROGRESS, loadingStartedAt=now()" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="341" as="sourcePoint"/>
+                        <mxPoint x="1400" y="341" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="118" value="OK" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1400" y="396" as="sourcePoint"/>
+                        <mxPoint x="1060" y="396" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="119" value="200 OK  { plan }" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="451" as="sourcePoint"/>
+                        <mxPoint x="350" y="451" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="120" value="Démarre timer (calcul depuis loadingStartedAt)" style="endArrow=block;endFill=1;html=1;strokeColor=#333333;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="506" as="sourcePoint"/>
+                        <mxPoint x="350" y="540" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="440" y="506"/>
+                            <mxPoint x="440" y="540"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="121" value="Affiche timer en cours" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="574" as="sourcePoint"/>
+                        <mxPoint x="80" y="574" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="122" style="endArrow=none;dashed=1;strokeColor=#cccccc;strokeWidth=2;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="20" y="614" as="sourcePoint"/>
+                        <mxPoint x="1540" y="614" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="124" value="Clique sur Pause" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="650" as="sourcePoint"/>
+                        <mxPoint x="350" y="650" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="125" value="PATCH /loading-plans/:id/loading-action  { action: PAUSE }" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="705" as="sourcePoint"/>
+                        <mxPoint x="700" y="705" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="126" value="loadingAction(planId, PAUSE)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="760" as="sourcePoint"/>
+                        <mxPoint x="1060" y="760" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="127" value="elapsed = now() - loadingStartedAt + loadingElapsedSeconds" style="endArrow=block;endFill=1;html=1;strokeColor=#333333;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="815" as="sourcePoint"/>
+                        <mxPoint x="1060" y="849" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1158" y="815"/>
+                            <mxPoint x="1158" y="849"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="128" value="UPDATE PAUSED, loadingElapsedSeconds=elapsed, loadingStartedAt=null" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="887" as="sourcePoint"/>
+                        <mxPoint x="1400" y="887" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="129" value="OK" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1400" y="942" as="sourcePoint"/>
+                        <mxPoint x="1060" y="942" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="130" value="200 OK  { plan }" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="997" as="sourcePoint"/>
+                        <mxPoint x="350" y="997" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="131" value="Affiche timer figé" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1052" as="sourcePoint"/>
+                        <mxPoint x="80" y="1052" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="132" style="endArrow=none;dashed=1;strokeColor=#cccccc;strokeWidth=2;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="20" y="1092" as="sourcePoint"/>
+                        <mxPoint x="1540" y="1092" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="134" value="Clique sur Reprendre" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="1128" as="sourcePoint"/>
+                        <mxPoint x="350" y="1128" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="135" value="PATCH /loading-plans/:id/loading-action  { action: START }" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1183" as="sourcePoint"/>
+                        <mxPoint x="700" y="1183" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="136" value="loadingAction(planId, START)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="1238" as="sourcePoint"/>
+                        <mxPoint x="1060" y="1238" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="137" value="UPDATE loadingStatus=IN_PROGRESS, loadingStartedAt=now()" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="1293" as="sourcePoint"/>
+                        <mxPoint x="1400" y="1293" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="138" value="OK" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1400" y="1348" as="sourcePoint"/>
+                        <mxPoint x="1060" y="1348" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="139" value="200 OK  { plan }" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="1403" as="sourcePoint"/>
+                        <mxPoint x="350" y="1403" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="140" value="Reprend timer (elapsed cumulé + temps depuis nouveau startedAt)" style="endArrow=block;endFill=1;html=1;strokeColor=#333333;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1458" as="sourcePoint"/>
+                        <mxPoint x="350" y="1492" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="440" y="1458"/>
+                            <mxPoint x="440" y="1492"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="141" value="Affiche timer en cours" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1526" as="sourcePoint"/>
+                        <mxPoint x="80" y="1526" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" style="endArrow=none;dashed=1;strokeColor=#cccccc;strokeWidth=2;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="20" y="1566" as="sourcePoint"/>
+                        <mxPoint x="1540" y="1566" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="144" value="Clique sur Terminer" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="1602" as="sourcePoint"/>
+                        <mxPoint x="350" y="1602" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="145" value="PATCH /loading-plans/:id/loading-action  { action: DONE }" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="1657" as="sourcePoint"/>
+                        <mxPoint x="700" y="1657" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="146" value="loadingAction(planId, DONE)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="1712" as="sourcePoint"/>
+                        <mxPoint x="1060" y="1712" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="147" value="totalElapsed = now() - loadingStartedAt + loadingElapsedSeconds" style="endArrow=block;endFill=1;html=1;strokeColor=#333333;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="1767" as="sourcePoint"/>
+                        <mxPoint x="1060" y="1801" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1158" y="1767"/>
+                            <mxPoint x="1158" y="1801"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="148" value="UPDATE loadingStatus=DONE, loadingElapsedSeconds=totalElapsed" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1060" y="1839" as="sourcePoint"/>
+                        <mxPoint x="1400" y="1839" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="149" value="OK" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1400" y="1894" as="sourcePoint"/>
+                        <mxPoint x="1060" y="1894" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="150" value="200 OK  { plan }" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="700" y="1949" as="sourcePoint"/>
+                        <mxPoint x="350" y="1949" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="151" value="Affiche chargement terminé" style="endArrow=open;endFill=0;html=1;dashed=1;strokeColor=#006600;fontColor=#006600;fontSize=17;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="2004" as="sourcePoint"/>
+                        <mxPoint x="80" y="2004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

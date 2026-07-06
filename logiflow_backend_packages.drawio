@@ -1,109 +1,109 @@
 <mxfile host="65bd71144e">
     <diagram id="logiflow-backend-packages" name="LogiFlow Backend Packages">
-        <mxGraphModel dx="2005" dy="1948" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="2100" math="0" shadow="0">
+        <mxGraphModel dx="2271" dy="1294" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="2100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="infra" value="Infrastructure Transversale" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#fff7e6;strokeColor=#1890ff;fontStyle=1;fontSize=16" parent="1" vertex="1">
+                <mxCell id="infra" value="Infrastructure Transversale" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#fff7e6;strokeColor=#1890ff;fontStyle=1;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="60" y="100" width="980" height="420" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_auth" value="&lt;b&gt;src/auth/&lt;/b&gt;&lt;hr&gt;auth/auth.module.ts&lt;br&gt;auth/auth.controller.ts&lt;br&gt;auth/auth.service.ts&lt;br&gt;auth/jwt.strategy.ts" style="shape=folder;tabWidth=90;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="infra" vertex="1">
+                <mxCell id="pkg_auth" value="&lt;span&gt;src/auth/&lt;/span&gt;&lt;hr&gt;auth/auth.module.ts&lt;br&gt;auth/auth.controller.ts&lt;br&gt;auth/auth.service.ts&lt;br&gt;auth/jwt.strategy.ts" style="shape=folder;tabWidth=90;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="infra" vertex="1">
                     <mxGeometry x="35" y="55" width="270" height="135" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_common" value="&lt;b&gt;src/common/&lt;/b&gt;&lt;hr&gt;&lt;b&gt;enums&lt;/b&gt;&lt;br&gt;role.enum.ts&lt;br&gt;bl-status.enum.ts&lt;br&gt;company-type.enum.ts&lt;br&gt;&lt;b&gt;decorators&lt;/b&gt;&lt;br&gt;roles.decorator.ts&lt;br&gt;current-user.decorator.ts&lt;br&gt;&lt;b&gt;guards&lt;/b&gt;&lt;br&gt;jwt-auth.guard.ts&lt;br&gt;roles.guard.ts" style="shape=folder;tabWidth=100;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="infra" vertex="1">
+                <mxCell id="pkg_common" value="&lt;span&gt;src/common/&lt;/span&gt;&lt;hr&gt;&lt;span&gt;enums&lt;/span&gt;&lt;br&gt;role.enum.ts&lt;br&gt;bl-status.enum.ts&lt;br&gt;company-type.enum.ts&lt;br&gt;&lt;span&gt;decorators&lt;/span&gt;&lt;br&gt;roles.decorator.ts&lt;br&gt;current-user.decorator.ts&lt;br&gt;&lt;span&gt;guards&lt;/span&gt;&lt;br&gt;jwt-auth.guard.ts&lt;br&gt;roles.guard.ts" style="shape=folder;tabWidth=100;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="infra" vertex="1">
                     <mxGeometry x="350" y="55" width="300" height="300" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_mail" value="&lt;b&gt;src/mail/&lt;/b&gt;&lt;hr&gt;mail/mail.module.ts&lt;br&gt;mail/mail.service.ts" style="shape=folder;tabWidth=90;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="infra" vertex="1">
+                <mxCell id="pkg_mail" value="&lt;span&gt;src/mail/&lt;/span&gt;&lt;hr&gt;mail/mail.module.ts&lt;br&gt;mail/mail.service.ts" style="shape=folder;tabWidth=90;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffe7ba;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="infra" vertex="1">
                     <mxGeometry x="700" y="55" width="235" height="95" as="geometry"/>
                 </mxCell>
-                <mxCell id="business" value="Modules Metier" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#e6f4ff;strokeColor=#1890ff;fontStyle=1;fontSize=16" parent="1" vertex="1">
+                <mxCell id="business" value="Modules Metier" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#e6f4ff;strokeColor=#1890ff;fontStyle=1;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="60" y="570" width="2200" height="870" as="geometry"/>
                 </mxCell>
-                <mxCell id="grp_soc" value="Gestion des Societes &amp; Utilisateurs" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#bae0ff;strokeColor=#1890ff;fontStyle=1;fontSize=14" parent="business" vertex="1">
+                <mxCell id="grp_soc" value="Gestion des Societes &amp;amp; Utilisateurs" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#bae0ff;strokeColor=#1890ff;fontStyle=1;fontSize=13;" parent="business" vertex="1">
                     <mxGeometry x="35" y="55" width="860" height="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_companies" value="&lt;b&gt;src/companies/&lt;/b&gt;&lt;hr&gt;companies.module.ts&lt;br&gt;companies.controller.ts&lt;br&gt;companies.service.ts&lt;br&gt;company.entity.ts" style="shape=folder;tabWidth=120;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_soc" vertex="1">
+                <mxCell id="pkg_companies" value="&lt;span&gt;src/companies/&lt;/span&gt;&lt;hr&gt;companies.module.ts&lt;br&gt;companies.controller.ts&lt;br&gt;companies.service.ts&lt;br&gt;company.entity.ts" style="shape=folder;tabWidth=120;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_soc" vertex="1">
                     <mxGeometry x="25" y="55" width="195" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_users" value="&lt;b&gt;src/users/&lt;/b&gt;&lt;hr&gt;users.module.ts&lt;br&gt;users.controller.ts&lt;br&gt;users.service.ts&lt;br&gt;user.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_soc" vertex="1">
+                <mxCell id="pkg_users" value="&lt;span&gt;src/users/&lt;/span&gt;&lt;hr&gt;users.module.ts&lt;br&gt;users.controller.ts&lt;br&gt;users.service.ts&lt;br&gt;user.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_soc" vertex="1">
                     <mxGeometry x="240" y="55" width="185" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_invitations" value="&lt;b&gt;src/invitations/&lt;/b&gt;&lt;hr&gt;invitations.module.ts&lt;br&gt;invitations.controller.ts&lt;br&gt;invitations.service.ts&lt;br&gt;invitation.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_soc" vertex="1">
+                <mxCell id="pkg_invitations" value="&lt;span&gt;src/invitations/&lt;/span&gt;&lt;hr&gt;invitations.module.ts&lt;br&gt;invitations.controller.ts&lt;br&gt;invitations.service.ts&lt;br&gt;invitation.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_soc" vertex="1">
                     <mxGeometry x="445" y="55" width="200" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_audit" value="&lt;b&gt;src/audit-logs/&lt;/b&gt;&lt;hr&gt;audit-logs.module.ts&lt;br&gt;audit-logs.controller.ts&lt;br&gt;audit-logs.service.ts&lt;br&gt;audit-log.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_soc" vertex="1">
+                <mxCell id="pkg_audit" value="&lt;span&gt;src/audit-logs/&lt;/span&gt;&lt;hr&gt;audit-logs.module.ts&lt;br&gt;audit-logs.controller.ts&lt;br&gt;audit-logs.service.ts&lt;br&gt;audit-log.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#bae0ff;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_soc" vertex="1">
                     <mxGeometry x="665" y="55" width="175" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="grp_exped" value="Portails Expediteur" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#d9f7be;strokeColor=#1890ff;fontStyle=1;fontSize=14" parent="business" vertex="1">
+                <mxCell id="grp_exped" value="Portails Expediteur" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" parent="business" vertex="1">
                     <mxGeometry x="925" y="55" width="560" height="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_expediteurs" value="&lt;b&gt;src/expediteurs/&lt;/b&gt;&lt;hr&gt;expediteurs.module.ts&lt;br&gt;expediteurs.controller.ts&lt;br&gt;expediteurs.service.ts&lt;br&gt;societe-expeditrice.entity.ts&lt;br&gt;filiere.entity.ts" style="shape=folder;tabWidth=130;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d9f7be;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_exped" vertex="1">
+                <mxCell id="pkg_expediteurs" value="&lt;span&gt;src/expediteurs/&lt;/span&gt;&lt;hr&gt;expediteurs.module.ts&lt;br&gt;expediteurs.controller.ts&lt;br&gt;expediteurs.service.ts&lt;br&gt;societe-expeditrice.entity.ts&lt;br&gt;filiere.entity.ts" style="shape=folder;tabWidth=130;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_exped" vertex="1">
                     <mxGeometry x="30" y="55" width="240" height="155" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_expediteur_portal" value="&lt;b&gt;src/expediteur-portal/&lt;/b&gt;&lt;hr&gt;expediteur-portal.module.ts&lt;br&gt;expediteur-portal.controller.ts&lt;br&gt;expediteur-portal.service.ts" style="shape=folder;tabWidth=155;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d9f7be;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_exped" vertex="1">
+                <mxCell id="pkg_expediteur_portal" value="&lt;span&gt;src/expediteur-portal/&lt;/span&gt;&lt;hr&gt;expediteur-portal.module.ts&lt;br&gt;expediteur-portal.controller.ts&lt;br&gt;expediteur-portal.service.ts" style="shape=folder;tabWidth=155;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_exped" vertex="1">
                     <mxGeometry x="300" y="55" width="230" height="125" as="geometry"/>
                 </mxCell>
-                <mxCell id="grp_transport" value="Gestion du Transport" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#b7eb8f;strokeColor=#1890ff;fontStyle=1;fontSize=14" parent="business" vertex="1">
+                <mxCell id="grp_transport" value="Gestion du Transport" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" parent="business" vertex="1">
                     <mxGeometry x="35" y="410" width="1090" height="420" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_delivery" value="&lt;b&gt;src/delivery-companies/&lt;/b&gt;&lt;hr&gt;delivery-companies.module.ts&lt;br&gt;delivery-companies.controller.ts&lt;br&gt;delivery-companies.service.ts&lt;br&gt;delivery-company.entity.ts" style="shape=folder;tabWidth=165;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#b7eb8f;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_transport" vertex="1">
+                <mxCell id="pkg_delivery" value="&lt;span&gt;src/delivery-companies/&lt;/span&gt;&lt;hr&gt;delivery-companies.module.ts&lt;br&gt;delivery-companies.controller.ts&lt;br&gt;delivery-companies.service.ts&lt;br&gt;delivery-company.entity.ts" style="shape=folder;tabWidth=165;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_transport" vertex="1">
                     <mxGeometry x="25" y="55" width="245" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_trucks" value="&lt;b&gt;src/trucks/&lt;/b&gt;&lt;hr&gt;trucks.module.ts&lt;br&gt;trucks.controller.ts&lt;br&gt;trucks.service.ts&lt;br&gt;truck.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#b7eb8f;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_transport" vertex="1">
+                <mxCell id="pkg_trucks" value="&lt;span&gt;src/trucks/&lt;/span&gt;&lt;hr&gt;trucks.module.ts&lt;br&gt;trucks.controller.ts&lt;br&gt;trucks.service.ts&lt;br&gt;truck.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_transport" vertex="1">
                     <mxGeometry x="300" y="55" width="195" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_chauffeurs" value="&lt;b&gt;src/chauffeurs/&lt;/b&gt;&lt;hr&gt;chauffeurs.module.ts&lt;br&gt;chauffeurs.controller.ts&lt;br&gt;chauffeurs.service.ts&lt;br&gt;chauffeur.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#b7eb8f;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_transport" vertex="1">
+                <mxCell id="pkg_chauffeurs" value="&lt;span&gt;src/chauffeurs/&lt;/span&gt;&lt;hr&gt;chauffeurs.module.ts&lt;br&gt;chauffeurs.controller.ts&lt;br&gt;chauffeurs.service.ts&lt;br&gt;chauffeur.entity.ts" style="shape=folder;tabWidth=125;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_transport" vertex="1">
                     <mxGeometry x="520" y="55" width="205" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_availability" value="&lt;b&gt;src/truck-availability/&lt;/b&gt;&lt;hr&gt;truck-availability.module.ts&lt;br&gt;truck-availability.controller.ts&lt;br&gt;truck-availability.service.ts&lt;br&gt;truck-availability.entity.ts" style="shape=folder;tabWidth=165;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#b7eb8f;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_transport" vertex="1">
+                <mxCell id="pkg_availability" value="&lt;span&gt;src/truck-availability/&lt;/span&gt;&lt;hr&gt;truck-availability.module.ts&lt;br&gt;truck-availability.controller.ts&lt;br&gt;truck-availability.service.ts&lt;br&gt;truck-availability.entity.ts" style="shape=folder;tabWidth=165;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_transport" vertex="1">
                     <mxGeometry x="755" y="55" width="300" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_transport_portal" value="&lt;b&gt;src/transport-portal/&lt;/b&gt;&lt;hr&gt;transport-portal.module.ts&lt;br&gt;transport-portal.controller.ts&lt;br&gt;transport-portal.service.ts&lt;br&gt;transport-declaration.entity.ts" style="shape=folder;tabWidth=155;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#b7eb8f;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_transport" vertex="1">
+                <mxCell id="pkg_transport_portal" value="&lt;span&gt;src/transport-portal/&lt;/span&gt;&lt;hr&gt;transport-portal.module.ts&lt;br&gt;transport-portal.controller.ts&lt;br&gt;transport-portal.service.ts&lt;br&gt;transport-declaration.entity.ts" style="shape=folder;tabWidth=155;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_transport" vertex="1">
                     <mxGeometry x="365" y="265" width="300" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="grp_logistique" value="Logistique &amp; Planning" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#ffd6e7;strokeColor=#1890ff;fontStyle=1;fontSize=14" parent="business" vertex="1">
+                <mxCell id="grp_logistique" value="Logistique &amp;amp; Planning" style="swimlane;html=1;startSize=28;rounded=0;fillColor=#ffd6e7;strokeColor=#1890ff;fontStyle=1;fontSize=13;" parent="business" vertex="1">
                     <mxGeometry x="1160" y="410" width="1020" height="420" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_articles" value="&lt;b&gt;src/articles/&lt;/b&gt;&lt;hr&gt;articles.module.ts&lt;br&gt;articles.controller.ts&lt;br&gt;articles.service.ts&lt;br&gt;article.entity.ts" style="shape=folder;tabWidth=105;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_logistique" vertex="1">
+                <mxCell id="pkg_articles" value="&lt;span&gt;src/articles/&lt;/span&gt;&lt;hr&gt;articles.module.ts&lt;br&gt;articles.controller.ts&lt;br&gt;articles.service.ts&lt;br&gt;article.entity.ts" style="shape=folder;tabWidth=105;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_logistique" vertex="1">
                     <mxGeometry x="25" y="55" width="200" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_bons" value="&lt;b&gt;src/bons-livraison/&lt;/b&gt;&lt;hr&gt;bons-livraison.module.ts&lt;br&gt;bons-livraison.controller.ts&lt;br&gt;bons-livraison.service.ts&lt;br&gt;bon-livraison.entity.ts&lt;br&gt;bl-article.entity.ts" style="shape=folder;tabWidth=145;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_logistique" vertex="1">
+                <mxCell id="pkg_bons" value="&lt;span&gt;src/bons-livraison/&lt;/span&gt;&lt;hr&gt;bons-livraison.module.ts&lt;br&gt;bons-livraison.controller.ts&lt;br&gt;bons-livraison.service.ts&lt;br&gt;bon-livraison.entity.ts&lt;br&gt;bl-article.entity.ts" style="shape=folder;tabWidth=145;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_logistique" vertex="1">
                     <mxGeometry x="255" y="55" width="245" height="155" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_loading" value="&lt;b&gt;src/loading-plans/&lt;/b&gt;&lt;hr&gt;loading-plans.module.ts&lt;br&gt;loading-plans.controller.ts&lt;br&gt;loading-plans.service.ts&lt;br&gt;loading-plan.entity.ts" style="shape=folder;tabWidth=145;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_logistique" vertex="1">
+                <mxCell id="pkg_loading" value="&lt;span&gt;src/loading-plans/&lt;/span&gt;&lt;hr&gt;loading-plans.module.ts&lt;br&gt;loading-plans.controller.ts&lt;br&gt;loading-plans.service.ts&lt;br&gt;loading-plan.entity.ts" style="shape=folder;tabWidth=145;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_logistique" vertex="1">
                     <mxGeometry x="530" y="55" width="245" height="140" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_quais" value="&lt;b&gt;src/quais/&lt;/b&gt;&lt;hr&gt;quais.module.ts&lt;br&gt;quais.controller.ts&lt;br&gt;quais.service.ts&lt;br&gt;quai.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_logistique" vertex="1">
+                <mxCell id="pkg_quais" value="&lt;span&gt;src/quais/&lt;/span&gt;&lt;hr&gt;quais.module.ts&lt;br&gt;quais.controller.ts&lt;br&gt;quais.service.ts&lt;br&gt;quai.entity.ts" style="shape=folder;tabWidth=95;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_logistique" vertex="1">
                     <mxGeometry x="805" y="55" width="180" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="pkg_erp" value="&lt;b&gt;src/erp/&lt;/b&gt;&lt;hr&gt;erp.module.ts&lt;br&gt;erp.controller.ts&lt;br&gt;erp.service.ts" style="shape=folder;tabWidth=85;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=12" parent="grp_logistique" vertex="1">
+                <mxCell id="pkg_erp" value="&lt;span&gt;src/erp/&lt;/span&gt;&lt;hr&gt;erp.module.ts&lt;br&gt;erp.controller.ts&lt;br&gt;erp.service.ts" style="shape=folder;tabWidth=85;tabHeight=22;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#ffd6e7;strokeColor=#1890ff;align=left;spacingLeft=10;verticalAlign=top;fontSize=13;fontStyle=1" parent="grp_logistique" vertex="1">
                     <mxGeometry x="430" y="290" width="185" height="105" as="geometry"/>
                 </mxCell>
-                <mxCell id="data" value="Base de Donnees" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#f9f0ff;strokeColor=#1890ff;fontStyle=1;fontSize=16" parent="1" vertex="1">
+                <mxCell id="data" value="Base de Donnees" style="swimlane;html=1;startSize=32;rounded=0;fillColor=#f9f0ff;strokeColor=#1890ff;fontStyle=1;fontSize=13;" parent="1" vertex="1">
                     <mxGeometry x="1060" y="190" width="680" height="240" as="geometry"/>
                 </mxCell>
-                <mxCell id="typeorm" value="&lt;b&gt;PostgreSQL&lt;/b&gt;&lt;hr&gt;TypeORM Repository&lt;Entity&gt;" style="shape=cylinder3d;boundedLbl=1;backgroundOutline=1;size=15;html=1;whiteSpace=wrap;fillColor=#e9d8fd;strokeColor=#1890ff;fontSize=13" parent="data" vertex="1">
+                <mxCell id="typeorm" value="&lt;span&gt;PostgreSQL&lt;/span&gt;&lt;hr&gt;TypeORM Repository" style="shape=cylinder3d;boundedLbl=1;backgroundOutline=1;size=15;html=1;whiteSpace=wrap;fillColor=#e9d8fd;strokeColor=#1890ff;fontSize=13;fontStyle=1" parent="data" vertex="1">
                     <mxGeometry x="190" y="70" width="300" height="115" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_auth_common" value="utilise / protege / verifie" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="pkg_auth" target="pkg_common" edge="1">
+                <mxCell id="dep_auth_common" value="utilise / protege / verifie" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="pkg_auth" target="pkg_common" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_invit_mail" value="envoie credentials" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="pkg_invitations" target="pkg_mail" edge="1">
+                <mxCell id="dep_invit_mail" value="envoie credentials" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="pkg_invitations" target="pkg_mail" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_loading_bons" value="assigne BL" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="pkg_loading" target="pkg_bons" edge="1">
+                <mxCell id="dep_loading_bons" value="assigne BL" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="pkg_loading" target="pkg_bons" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_loading_quais" value="affecte quai" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="pkg_loading" target="pkg_quais" edge="1">
+                <mxCell id="dep_loading_quais" value="affecte quai" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="pkg_loading" target="pkg_quais" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_exportal_expediteurs" value="delegue" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="pkg_expediteur_portal" target="pkg_expediteurs" edge="1">
+                <mxCell id="dep_exportal_expediteurs" value="delegue" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="pkg_expediteur_portal" target="pkg_expediteurs" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_services_db" value="accede via TypeORM" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="business" target="typeorm" edge="1">
+                <mxCell id="dep_services_db" value="accede via TypeORM" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="business" target="typeorm" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="dep_business_infra" value="utilise" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=11" parent="1" source="business" target="infra" edge="1">
+                <mxCell id="dep_business_infra" value="utilise" style="endArrow=open;html=1;rounded=0;dashed=1;strokeColor=#444444;fontSize=13;fontStyle=1" parent="1" source="business" target="infra" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>

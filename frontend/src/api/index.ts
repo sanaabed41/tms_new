@@ -109,6 +109,8 @@ export const loadingPlansAPI = {
   getQuaisLibres: (date?: string) => api.get('/loading-plans/quais-libres', { params: { date } }),
   reorderBls: (planId: string, blIds: string[]) => api.put(`/loading-plans/${planId}/reorder-bls`, { blIds }),
   delete: (id: string) => api.delete(`/loading-plans/${id}`),
+  sendReport: (date: string, companyNom: string) =>
+    api.post('/loading-plans/send-report', { companyNom }, { params: { date } }),
 };
 
 // Quais
@@ -121,12 +123,12 @@ export const quaisAPI = {
 
 export const truckAvailabilityAPI = {
   getByDate: (date: string) => api.get('/truck-availability', { params: { date } }),
-  bulkSet: (truckIds: string[], date: string) => api.post('/truck-availability/bulk-set', { truckIds, date }),
-  bulkSetRange: (truckIds: string[], dateDebut: string, dateFin: string) =>
-    api.post('/truck-availability/bulk-set-range', { truckIds, dateDebut, dateFin }),
+  // bulkSet: (truckIds: string[], date: string) => api.post('/truck-availability/bulk-set', { truckIds, date }),
+  // bulkSetRange: (truckIds: string[], dateDebut: string, dateFin: string) =>
+  //   api.post('/truck-availability/bulk-set-range', { truckIds, dateDebut, dateFin }),
   getByDateRange: (dateDebut: string, dateFin: string) =>
     api.get('/truck-availability/range', { params: { dateDebut, dateFin } }),
-  remove: (id: string) => api.delete(`/truck-availability/${id}`),
+  // remove: (id: string) => api.delete(`/truck-availability/${id}`),
 };
 
 export const adminAPI = {
@@ -179,6 +181,7 @@ export const chauffeursAPI = {
 
 export const transportPortalAPI = {
   getFleet: () => api.get('/transport-portal/fleet'),
+  getRapport: (date: string) => api.get('/transport-portal/rapport', { params: { date } }),
   createTruck: (data: any) => api.post('/transport-portal/trucks', data),
   updateTruck: (id: string, data: any) => api.put(`/transport-portal/trucks/${id}`, data),
   removeTruck: (id: string) => api.delete(`/transport-portal/trucks/${id}`),

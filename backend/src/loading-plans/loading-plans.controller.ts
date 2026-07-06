@@ -75,6 +75,16 @@ export class LoadingPlansController {
     return this.service.assignBl(id, blId, user.id, force);
   }
 
+  @Post('send-report')
+  @Roles(Role.LOGISTIC_ADMIN, Role.SUPER_ADMIN)
+  sendReport(
+    @CurrentUser() user: any,
+    @Query('date') date: string,
+    @Body('companyNom') companyNom: string,
+  ) {
+    return this.service.sendReport(user.companyId, date, companyNom);
+  }
+
   @Put('validate-all')
   @Roles(Role.LOGISTIC_ADMIN)
   validateAll(@CurrentUser() user: any, @Query('date') date: string, @Body('signature') signature?: string) {

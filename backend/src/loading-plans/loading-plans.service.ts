@@ -5,7 +5,10 @@ import { LoadingPlan } from './loading-plan.entity';
 import { BonLivraison } from '../bons-livraison/bon-livraison.entity';
 import { Truck } from '../trucks/truck.entity';
 import { Quai } from '../quais/quai.entity';
+import { User } from '../users/user.entity';
 import { BlStatus } from '../common/enums/bl-status.enum';
+import { Role } from '../common/enums/role.enum';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class LoadingPlansService {
@@ -14,6 +17,8 @@ export class LoadingPlansService {
     @InjectRepository(BonLivraison) private blRepo: Repository<BonLivraison>,
     @InjectRepository(Truck) private truckRepo: Repository<Truck>,
     @InjectRepository(Quai) private quaiRepo: Repository<Quai>,
+    @InjectRepository(User) private userRepo: Repository<User>,
+    private mailService: MailService,
   ) {}
 
   private baseQuery(companyId: string) {
@@ -31,6 +36,26 @@ export class LoadingPlansService {
         '(CAST(lp."logistiqueCompanyId" AS text) = :companyId OR company.id = CAST(:companyId AS uuid))',
         { companyId },
       );
+  }
+
+  async sendReport(companyId: string, date: string, companyNom: string) {
+    const plans = await this.findAll(companyId, date);
+    const transportAdmins = await this.userRepo.find({
+      where: { company: { id: companyId }, role: Role.TRANSPORT_ADMIN, isActive: true },
+      relations: ['company'],
+    });
+
+    if (transportAdmins.length === 0) {
+      return { sent: 0, message: 'Aucun administrateur transport actif trouvé.' };
+    }
+
+    const results = await Promise.all(
+      transportAdmins.map((u) =>
+        this.mailService.sendDailyReport(u.email, date, companyNom, plans),
+      ),
+    );
+
+    return { sent: transportAdmins.length, emails: transportAdmins.map((u) => u.email), results };
   }
 
   findAll(companyId: string, date?: string) {

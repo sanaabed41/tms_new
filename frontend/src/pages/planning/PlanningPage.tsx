@@ -6,7 +6,7 @@ import {
 import {
   Row, Col, Card, DatePicker, Typography, Spin, Empty, Badge, message,
   Divider, Tag, Button, Tooltip, Input, Select, Collapse, Space,
-  Popconfirm, notification, Segmented, Modal, Checkbox,
+  Popconfirm, notification, Segmented, Modal,
 } from 'antd';
 import {
   FileTextOutlined, EnvironmentOutlined, PrinterOutlined,
@@ -14,7 +14,7 @@ import {
   CheckCircleOutlined, ExclamationCircleOutlined, WarningOutlined,
   ApartmentOutlined, PlusSquareOutlined, MinusSquareOutlined,
   CaretRightOutlined, CaretDownOutlined, FileExcelOutlined,
-  SettingOutlined,
+  SettingOutlined, SendOutlined,
 } from '@ant-design/icons';
 import { exportPlanning } from '../../utils/exportExcel';
 import dayjs from 'dayjs';
@@ -328,9 +328,6 @@ const PlanningPage: React.FC = () => {
   const [detailBl, setDetailBl] = useState<BonLivraison | null>(null);
   const [viewPlan, setViewPlan] = useState<LoadingPlan | null>(null);
   const [availabilities, setAvailabilities] = useState<TruckAvailability[]>([]);
-  const [availModalOpen, setAvailModalOpen] = useState(false);
-  const [availSelected, setAvailSelected] = useState<string[]>([]);
-  const [availSaving, setAvailSaving] = useState(false);
   const [openCompanies, setOpenCompanies] = useState<string[]>([]);
   const [blPage, setBlPage] = useState(1);
   const [blGroupBy, setBlGroupBy] = useState<'destination' | 'expediteur'>('destination');
@@ -391,7 +388,25 @@ const PlanningPage: React.FC = () => {
 
   const [printCompanyPlans, setPrintCompanyPlans] = useState<LoadingPlan[]>([]);
   const [printCompanyNom, setPrintCompanyNom] = useState('');
+  const [sendingReport, setSendingReport] = useState(false);
   const { user } = useAuth();
+
+  const handleSendReport = async () => {
+    try {
+      setSendingReport(true);
+      const res = await loadingPlansAPI.sendReport(selectedDate, user?.company?.nom || 'LogiFlow');
+      const { sent, emails } = res.data;
+      if (sent === 0) {
+        message.warning('Aucun administrateur transport actif trouvé.');
+      } else {
+        message.success(`Rapport envoyé à ${sent} administrateur(s) transport : ${emails.join(', ')}`);
+      }
+    } catch {
+      message.error('Erreur lors de l\'envoi du rapport.');
+    } finally {
+      setSendingReport(false);
+    }
+  };
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -794,25 +809,6 @@ const PlanningPage: React.FC = () => {
     setTimeout(() => handleCompanyPrint(), 200);
   };
 
-  const openAvailModal = () => {
-    setAvailSelected(availabilities.map((a) => a.truck.id));
-    setAvailModalOpen(true);
-  };
-
-  const saveAvailability = async () => {
-    setAvailSaving(true);
-    try {
-      await truckAvailabilityAPI.bulkSet(availSelected, selectedDate);
-      message.success('Disponibilités mises à jour');
-      setAvailModalOpen(false);
-      fetchData();
-    } catch {
-      message.error('Erreur lors de la sauvegarde');
-    } finally {
-      setAvailSaving(false);
-    }
-  };
-
   // BL list scroll handler for infinite load
   const handleBlScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
@@ -889,6 +885,17 @@ const PlanningPage: React.FC = () => {
               disabled={plans.filter((p) => p.bonsLivraison?.length > 0).length === 0}
             >
               Bilan journalier
+            </Button>
+          </Tooltip>
+          <Tooltip title="Envoyer le rapport aux administrateurs transport">
+            <Button
+              icon={<SendOutlined />}
+              loading={sendingReport}
+              onClick={handleSendReport}
+              disabled={plans.filter((p) => p.bonsLivraison?.length > 0).length === 0}
+              type="primary"
+            >
+              Envoyer au Transport
             </Button>
           </Tooltip>
           <DatePicker
@@ -1091,9 +1098,6 @@ const PlanningPage: React.FC = () => {
                   </Button>
                 );
               })()}
-              <Button size="small" icon={<TruckOutlined />} onClick={openAvailModal}>
-                Disponibilités
-              </Button>
             </div>
           </div>
 
@@ -1313,55 +1317,6 @@ const PlanningPage: React.FC = () => {
         </div>
       </Modal>
 
-      {/* Truck availability management modal */}
-      <Modal
-        title={`Camions disponibles — ${dayjs(selectedDate).format('dddd DD MMMM YYYY')}`}
-        open={availModalOpen}
-        onCancel={() => setAvailModalOpen(false)}
-        onOk={saveAvailability}
-        okText="Enregistrer"
-        cancelText="Annuler"
-        confirmLoading={availSaving}
-        width={620}
-      >
-        <div style={{ marginBottom: 8 }}>
-          <Text type="secondary" style={{ fontSize: 12 }}>
-            Cochez les camions disponibles pour cette journée. Seuls les camions cochés apparaîtront dans le planning.
-          </Text>
-        </div>
-        {(() => {
-          const groups: Record<string, { nom: string; trucks: Truck[] }> = {};
-          trucks.forEach((t) => {
-            const key = t.deliveryCompany?.id || '__unknown__';
-            const nom = t.deliveryCompany?.nom || 'Société inconnue';
-            if (!groups[key]) groups[key] = { nom, trucks: [] };
-            groups[key].trucks.push(t);
-          });
-          return Object.entries(groups).sort(([, a], [, b]) => a.nom.localeCompare(b.nom)).map(([key, group]) => (
-            <div key={key} style={{ marginBottom: 12 }}>
-              <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 6, color: '#1890ff' }}>
-                <TruckOutlined style={{ marginRight: 6 }} />{group.nom}
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
-                {group.trucks.map((t) => (
-                  <Checkbox
-                    key={t.id}
-                    checked={availSelected.includes(t.id)}
-                    onChange={(e) =>
-                      setAvailSelected((prev) =>
-                        e.target.checked ? [...prev, t.id] : prev.filter((id) => id !== t.id),
-                      )
-                    }
-                  >
-                    <Text style={{ fontSize: 12 }}>{t.matricule}</Text>
-                    {t.type && <Text type="secondary" style={{ fontSize: 10, marginLeft: 4 }}>({t.type})</Text>}
-                  </Checkbox>
-                ))}
-              </div>
-            </div>
-          ));
-        })()}
-      </Modal>
 
     </DndContext>
   );

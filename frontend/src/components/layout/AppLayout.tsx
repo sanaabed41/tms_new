@@ -82,6 +82,7 @@ const securiteMenu = [
 
 const transportAdminMenu = [
   { key: '/transport-portal', icon: <TruckOutlined />, label: 'Mes Camions' },
+  { key: '/transport-portal/rapport', icon: <FileTextOutlined />, label: 'Rapport de chargement' },
 ];
 
 const AppLayout: React.FC = () => {
