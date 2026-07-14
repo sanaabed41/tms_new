@@ -36,53 +36,6 @@ let TruckAvailabilityService = class TruckAvailabilityService {
             .addOrderBy('truck.matricule')
             .getMany();
     }
-    async addTruck(companyId, truckId, date) {
-        const truck = await this.truckRepo.findOne({ where: { id: truckId } });
-        if (!truck)
-            throw new common_1.NotFoundException('Truck not found');
-        const existing = await this.repo.findOne({ where: { truck: { id: truckId }, date } });
-        if (existing)
-            throw new common_1.ConflictException('Truck already declared available for this date');
-        const availability = this.repo.create({
-            date,
-            truck: { id: truckId },
-            company: { id: companyId },
-        });
-        return this.repo.save(availability);
-    }
-    async bulkSet(companyId, truckIds, date) {
-        await this.repo
-            .createQueryBuilder()
-            .delete()
-            .from(truck_availability_entity_1.TruckAvailability)
-            .where('date = :date AND "companyId" = :companyId', { date, companyId })
-            .execute();
-        if (truckIds.length === 0)
-            return { set: 0 };
-        const trucks = await this.truckRepo.findBy({ id: (0, typeorm_2.In)(truckIds) });
-        const entities = trucks.map((truck) => this.repo.create({ date, truck, company: { id: companyId } }));
-        await this.repo.save(entities);
-        return { set: entities.length };
-    }
-    async bulkSetRange(companyId, truckIds, dateDebut, dateFin) {
-        if (truckIds.length === 0)
-            return { set: 0 };
-        const trucks = await this.truckRepo.findBy({ id: (0, typeorm_2.In)(truckIds) });
-        const entities = [];
-        const start = new Date(dateDebut);
-        const end = new Date(dateFin);
-        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-            const dateStr = d.toISOString().split('T')[0];
-            for (const truck of trucks) {
-                const exists = await this.repo.findOne({ where: { truck: { id: truck.id }, date: dateStr } });
-                if (!exists) {
-                    entities.push(this.repo.create({ date: dateStr, truck, company: { id: companyId } }));
-                }
-            }
-        }
-        await this.repo.save(entities);
-        return { set: entities.length };
-    }
     async getByDateRange(companyId, dateDebut, dateFin) {
         return this.repo.createQueryBuilder('ta')
             .leftJoinAndSelect('ta.truck', 'truck')
@@ -94,12 +47,6 @@ let TruckAvailabilityService = class TruckAvailabilityService {
             .orderBy('ta.date')
             .addOrderBy('truck.matricule')
             .getMany();
-    }
-    async remove(companyId, id) {
-        const ta = await this.repo.findOne({ where: { id } });
-        if (!ta)
-            throw new common_1.NotFoundException('Availability not found');
-        await this.repo.delete(id);
     }
 };
 exports.TruckAvailabilityService = TruckAvailabilityService;

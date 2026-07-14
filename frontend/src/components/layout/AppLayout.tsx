@@ -86,7 +86,7 @@ const transportAdminMenu = [
 ];
 
 const AppLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

@@ -20,6 +20,13 @@ export declare class MailService {
         messageId: any;
         preview?: undefined;
     }>;
+    sendDailyReport(to: string, date: string, companyNom: string, plans: any[]): Promise<{
+        preview: string;
+        messageId?: undefined;
+    } | {
+        messageId: any;
+        preview?: undefined;
+    }>;
     sendResetPassword(email: string, prenom: string, token: string, frontUrl: string): Promise<{
         preview: string;
         messageId?: undefined;

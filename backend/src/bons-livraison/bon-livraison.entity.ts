@@ -28,6 +28,9 @@ export class BonLivraison {
   clientNom!: string;
 
   @Column({ nullable: true })
+  clientTelephone!: string;
+
+  @Column({ nullable: true })
   clientAdresse!: string;
 
   @Column({ nullable: true })

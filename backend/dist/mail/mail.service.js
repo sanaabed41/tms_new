@@ -161,6 +161,64 @@ let MailService = MailService_1 = class MailService {
       </div>`;
         return this.send(email, `Invitation à rejoindre ${companyNom} - LogiFlow`, html);
     }
+    async sendDailyReport(to, date, companyNom, plans) {
+        const validatedPlans = plans.filter((p) => p.bonsLivraison?.length > 0);
+        const totalBls = validatedPlans.reduce((s, p) => s + p.bonsLivraison.length, 0);
+        const totalTonnage = validatedPlans.reduce((s, p) => s + Number(p.tonnageCharge || 0), 0);
+        const rows = validatedPlans.map((plan) => {
+            const bls = plan.bonsLivraison.map((bl) => `<tr>
+          <td style="padding:6px 8px;border-bottom:1px solid #f0f0f0">${bl.numeroBl}</td>
+          <td style="padding:6px 8px;border-bottom:1px solid #f0f0f0">${bl.clientNom || '—'}</td>
+          <td style="padding:6px 8px;border-bottom:1px solid #f0f0f0">${bl.origine || '—'} → ${bl.destination || '—'}</td>
+          <td style="padding:6px 8px;border-bottom:1px solid #f0f0f0;text-align:center">${bl.tonnageTotal} T</td>
+        </tr>`).join('');
+            return `
+        <div style="margin-bottom:24px;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden">
+          <div style="background:#001529;color:white;padding:10px 16px;display:flex;justify-content:space-between">
+            <span style="font-weight:700">🚛 ${plan.truck?.matricule}</span>
+            <span style="font-size:12px;color:#90CAF9">${plan.truck?.deliveryCompany?.nom || ''} — Capacité : ${plan.truck?.capaciteTonnage}T</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+              <tr style="background:#f5f5f5">
+                <th style="padding:8px;text-align:left;border-bottom:2px solid #e8e8e8">N° BL</th>
+                <th style="padding:8px;text-align:left;border-bottom:2px solid #e8e8e8">Client</th>
+                <th style="padding:8px;text-align:left;border-bottom:2px solid #e8e8e8">Trajet</th>
+                <th style="padding:8px;text-align:center;border-bottom:2px solid #e8e8e8">Tonnage</th>
+              </tr>
+            </thead>
+            <tbody>${bls}</tbody>
+          </table>
+        </div>`;
+        }).join('');
+        const html = `
+      <div style="font-family:Arial,sans-serif;max-width:700px;margin:auto;border:1px solid #e8e8e8;border-radius:8px;overflow:hidden">
+        <div style="background:#001529;padding:20px 24px;text-align:center">
+          <h1 style="color:white;margin:0;font-size:22px">🚛 LogiFlow</h1>
+          <p style="color:#90CAF9;margin:4px 0 0;font-size:13px">Rapport journalier de chargement</p>
+        </div>
+        <div style="padding:24px;background:#f9f9f9">
+          <h2 style="color:#001529;margin-top:0">Bilan du ${new Date(date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</h2>
+          <p style="color:#555">Société : <strong>${companyNom}</strong></p>
+          <div style="display:flex;gap:16px;margin-bottom:24px">
+            ${[
+            ['Camions utilisés', validatedPlans.length],
+            ['Bons de livraison', totalBls],
+            ['Tonnage total', `${totalTonnage.toFixed(1)} T`],
+        ].map(([label, val]) => `
+              <div style="flex:1;background:white;border:1px solid #e8e8e8;border-radius:6px;padding:12px;text-align:center">
+                <div style="font-size:11px;color:#888;margin-bottom:4px">${label}</div>
+                <div style="font-size:20px;font-weight:700;color:#001529">${val}</div>
+              </div>`).join('')}
+          </div>
+          ${rows || '<p style="color:#999;text-align:center">Aucun plan validé pour cette date.</p>'}
+        </div>
+        <div style="background:#001529;padding:12px;text-align:center">
+          <p style="color:#555d6b;margin:0;font-size:11px">© 2025 LogiFlow — Ce rapport a été généré automatiquement</p>
+        </div>
+      </div>`;
+        return this.send(to, `Rapport de chargement — ${date} — ${companyNom}`, html);
+    }
     async sendResetPassword(email, prenom, token, frontUrl) {
         const link = `${frontUrl}/reset-password/${token}`;
         const html = `

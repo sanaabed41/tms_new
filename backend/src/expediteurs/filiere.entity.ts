@@ -15,6 +15,9 @@ export class Filiere {
   }})
   code!: string;
 
+  @Column({ nullable: true })
+  adresse!: string;
+
   @ManyToOne(() => SocieteExpeditrice, (s) => s.filieres, { onDelete: 'CASCADE' })
   societeExpeditrice!: SocieteExpeditrice;
 }

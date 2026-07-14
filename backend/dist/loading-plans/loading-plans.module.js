@@ -13,6 +13,7 @@ const loading_plan_entity_1 = require("./loading-plan.entity");
 const bon_livraison_entity_1 = require("../bons-livraison/bon-livraison.entity");
 const truck_entity_1 = require("../trucks/truck.entity");
 const quai_entity_1 = require("../quais/quai.entity");
+const user_entity_1 = require("../users/user.entity");
 const loading_plans_service_1 = require("./loading-plans.service");
 const loading_plans_controller_1 = require("./loading-plans.controller");
 let LoadingPlansModule = class LoadingPlansModule {
@@ -20,7 +21,7 @@ let LoadingPlansModule = class LoadingPlansModule {
 exports.LoadingPlansModule = LoadingPlansModule;
 exports.LoadingPlansModule = LoadingPlansModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([loading_plan_entity_1.LoadingPlan, bon_livraison_entity_1.BonLivraison, truck_entity_1.Truck, quai_entity_1.Quai])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([loading_plan_entity_1.LoadingPlan, bon_livraison_entity_1.BonLivraison, truck_entity_1.Truck, quai_entity_1.Quai, user_entity_1.User])],
         providers: [loading_plans_service_1.LoadingPlansService],
         controllers: [loading_plans_controller_1.LoadingPlansController],
         exports: [loading_plans_service_1.LoadingPlansService],

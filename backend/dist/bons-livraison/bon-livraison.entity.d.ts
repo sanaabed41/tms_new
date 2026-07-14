@@ -14,6 +14,7 @@ export declare class BonLivraison {
     id: string;
     numeroBl: string;
     clientNom: string;
+    clientTelephone: string;
     clientAdresse: string;
     origine: string;
     destination: string;

@@ -28,6 +28,7 @@ let BonLivraison = class BonLivraison {
     id;
     numeroBl;
     clientNom;
+    clientTelephone;
     clientAdresse;
     origine;
     destination;
@@ -59,6 +60,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], BonLivraison.prototype, "clientNom", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], BonLivraison.prototype, "clientTelephone", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)

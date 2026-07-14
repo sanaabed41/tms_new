@@ -14,6 +14,12 @@ export class TruckAvailability {
   @Column({ type: 'date' })
   date!: string;
 
+  @Column({ type: 'varchar', length: 20, default: 'DISPONIBLE' })
+  statut!: string; // DISPONIBLE | INDISPONIBLE
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  motif!: string | null; // ex: "En panne", "Révision", "Accident"
+
   @ManyToOne(() => Truck, { eager: true, onDelete: 'CASCADE' })
   truck!: Truck;
 

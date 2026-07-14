@@ -20,17 +20,24 @@ const loading_plan_entity_1 = require("./loading-plan.entity");
 const bon_livraison_entity_1 = require("../bons-livraison/bon-livraison.entity");
 const truck_entity_1 = require("../trucks/truck.entity");
 const quai_entity_1 = require("../quais/quai.entity");
+const user_entity_1 = require("../users/user.entity");
 const bl_status_enum_1 = require("../common/enums/bl-status.enum");
+const role_enum_1 = require("../common/enums/role.enum");
+const mail_service_1 = require("../mail/mail.service");
 let LoadingPlansService = class LoadingPlansService {
     repo;
     blRepo;
     truckRepo;
     quaiRepo;
-    constructor(repo, blRepo, truckRepo, quaiRepo) {
+    userRepo;
+    mailService;
+    constructor(repo, blRepo, truckRepo, quaiRepo, userRepo, mailService) {
         this.repo = repo;
         this.blRepo = blRepo;
         this.truckRepo = truckRepo;
         this.quaiRepo = quaiRepo;
+        this.userRepo = userRepo;
+        this.mailService = mailService;
     }
     baseQuery(companyId) {
         return this.repo.createQueryBuilder('lp')
@@ -44,6 +51,18 @@ let LoadingPlansService = class LoadingPlansService {
             .leftJoinAndSelect('bla.article', 'article')
             .leftJoinAndSelect('lp.validatedBy', 'user')
             .where('(CAST(lp."logistiqueCompanyId" AS text) = :companyId OR company.id = CAST(:companyId AS uuid))', { companyId });
+    }
+    async sendReport(companyId, date, companyNom) {
+        const plans = await this.findAll(companyId, date);
+        const transportAdmins = await this.userRepo.find({
+            where: { company: { id: companyId }, role: role_enum_1.Role.TRANSPORT_ADMIN, isActive: true },
+            relations: ['company'],
+        });
+        if (transportAdmins.length === 0) {
+            return { sent: 0, message: 'Aucun administrateur transport actif trouvé.' };
+        }
+        const results = await Promise.all(transportAdmins.map((u) => this.mailService.sendDailyReport(u.email, date, companyNom, plans)));
+        return { sent: transportAdmins.length, emails: transportAdmins.map((u) => u.email), results };
     }
     findAll(companyId, date) {
         const qb = this.baseQuery(companyId);
@@ -389,9 +408,12 @@ exports.LoadingPlansService = LoadingPlansService = __decorate([
     __param(1, (0, typeorm_1.InjectRepository)(bon_livraison_entity_1.BonLivraison)),
     __param(2, (0, typeorm_1.InjectRepository)(truck_entity_1.Truck)),
     __param(3, (0, typeorm_1.InjectRepository)(quai_entity_1.Quai)),
+    __param(4, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository,
-        typeorm_2.Repository])
+        typeorm_2.Repository,
+        typeorm_2.Repository,
+        mail_service_1.MailService])
 ], LoadingPlansService);
 //# sourceMappingURL=loading-plans.service.js.map

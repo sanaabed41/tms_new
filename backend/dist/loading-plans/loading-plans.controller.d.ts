@@ -20,6 +20,23 @@ export declare class LoadingPlansController {
     findOne(id: string): Promise<import("./loading-plan.entity").LoadingPlan>;
     create(dto: any, user: any): Promise<import("./loading-plan.entity").LoadingPlan>;
     assignBl(id: string, blId: string, user: any, force: boolean): Promise<import("./loading-plan.entity").LoadingPlan>;
+    sendReport(user: any, date: string, companyNom: string): Promise<{
+        sent: number;
+        message: string;
+        emails?: undefined;
+        results?: undefined;
+    } | {
+        sent: number;
+        emails: string[];
+        results: ({
+            preview: string;
+            messageId?: undefined;
+        } | {
+            messageId: any;
+            preview?: undefined;
+        })[];
+        message?: undefined;
+    }>;
     validateAll(user: any, date: string, signature?: string): Promise<{
         validated: number;
     }>;

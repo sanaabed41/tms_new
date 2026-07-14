@@ -41,6 +41,11 @@ let TransportPortalController = class TransportPortalController {
     removeTruck(user, id) {
         return this.service.removeTruck(id, user.deliveryCompanyId);
     }
+    getRapport(user, date) {
+        if (!user.deliveryCompanyId)
+            return [];
+        return this.service.getRapport(user.deliveryCompanyId, date);
+    }
     getDeclarations(user, dateFrom, dateTo) {
         return this.service.getDeclarationsForLogistique(user.companyId, dateFrom, dateTo);
     }
@@ -82,6 +87,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], TransportPortalController.prototype, "removeTruck", null);
+__decorate([
+    (0, common_1.Get)('rapport'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.TRANSPORT_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], TransportPortalController.prototype, "getRapport", null);
 __decorate([
     (0, common_1.Get)('declarations'),
     (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),

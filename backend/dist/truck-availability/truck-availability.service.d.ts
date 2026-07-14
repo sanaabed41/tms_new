@@ -6,13 +6,5 @@ export declare class TruckAvailabilityService {
     private truckRepo;
     constructor(repo: Repository<TruckAvailability>, truckRepo: Repository<Truck>);
     findByDate(companyId: string, date: string): Promise<TruckAvailability[]>;
-    addTruck(companyId: string, truckId: string, date: string): Promise<TruckAvailability>;
-    bulkSet(companyId: string, truckIds: string[], date: string): Promise<{
-        set: number;
-    }>;
-    bulkSetRange(companyId: string, truckIds: string[], dateDebut: string, dateFin: string): Promise<{
-        set: number;
-    }>;
     getByDateRange(companyId: string, dateDebut: string, dateFin: string): Promise<TruckAvailability[]>;
-    remove(companyId: string, id: string): Promise<void>;
 }

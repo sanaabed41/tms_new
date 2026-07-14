@@ -16,6 +16,8 @@ const company_entity_1 = require("../companies/company.entity");
 let TruckAvailability = class TruckAvailability {
     id;
     date;
+    statut;
+    motif;
     truck;
     company;
     createdAt;
@@ -29,6 +31,14 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'date' }),
     __metadata("design:type", String)
 ], TruckAvailability.prototype, "date", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 20, default: 'DISPONIBLE' }),
+    __metadata("design:type", String)
+], TruckAvailability.prototype, "statut", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 100, nullable: true }),
+    __metadata("design:type", Object)
+], TruckAvailability.prototype, "motif", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => truck_entity_1.Truck, { eager: true, onDelete: 'CASCADE' }),
     __metadata("design:type", truck_entity_1.Truck)

@@ -38,17 +38,30 @@ exports.AppModule = AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],
-                useFactory: (config) => ({
-                    type: 'postgres',
-                    host: config.get('DB_HOST'),
-                    port: +config.get('DB_PORT'),
-                    username: config.get('DB_USERNAME'),
-                    password: config.get('DB_PASSWORD'),
-                    database: config.get('DB_NAME'),
-                    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-                    synchronize: true,
-                    logging: false,
-                }),
+                useFactory: (config) => {
+                    const url = config.get('DATABASE_URL');
+                    if (url) {
+                        return {
+                            type: 'postgres',
+                            url,
+                            entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                            synchronize: true,
+                            logging: false,
+                            ssl: { rejectUnauthorized: false },
+                        };
+                    }
+                    return {
+                        type: 'postgres',
+                        host: config.get('DB_HOST'),
+                        port: +config.get('DB_PORT'),
+                        username: config.get('DB_USERNAME'),
+                        password: config.get('DB_PASSWORD'),
+                        database: config.get('DB_NAME'),
+                        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+                        synchronize: true,
+                        logging: false,
+                    };
+                },
             }),
             mail_module_1.MailModule,
             auth_module_1.AuthModule,

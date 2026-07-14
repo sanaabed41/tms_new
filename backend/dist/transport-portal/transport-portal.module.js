@@ -13,12 +13,13 @@ const transport_portal_controller_1 = require("./transport-portal.controller");
 const transport_portal_service_1 = require("./transport-portal.service");
 const transport_declaration_entity_1 = require("./transport-declaration.entity");
 const truck_entity_1 = require("../trucks/truck.entity");
+const loading_plan_entity_1 = require("../loading-plans/loading-plan.entity");
 let TransportPortalModule = class TransportPortalModule {
 };
 exports.TransportPortalModule = TransportPortalModule;
 exports.TransportPortalModule = TransportPortalModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([transport_declaration_entity_1.TransportDeclaration, truck_entity_1.Truck])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([transport_declaration_entity_1.TransportDeclaration, truck_entity_1.Truck, loading_plan_entity_1.LoadingPlan])],
         controllers: [transport_portal_controller_1.TransportPortalController],
         providers: [transport_portal_service_1.TransportPortalService],
     })

@@ -1,10 +1,12 @@
 import { Repository } from 'typeorm';
 import { TransportDeclaration } from './transport-declaration.entity';
 import { Truck } from '../trucks/truck.entity';
+import { LoadingPlan } from '../loading-plans/loading-plan.entity';
 export declare class TransportPortalService {
     private declRepo;
     private truckRepo;
-    constructor(declRepo: Repository<TransportDeclaration>, truckRepo: Repository<Truck>);
+    private planRepo;
+    constructor(declRepo: Repository<TransportDeclaration>, truckRepo: Repository<Truck>, planRepo: Repository<LoadingPlan>);
     getMyFleet(deliveryCompanyId: string): Promise<{
         declaration: TransportDeclaration | null;
         id: string;
@@ -14,7 +16,7 @@ export declare class TransportPortalService {
         type: string;
         isActive: boolean;
         deliveryCompany: import("../delivery-companies/delivery-company.entity").DeliveryCompany;
-        loadingPlans: import("../loading-plans/loading-plan.entity").LoadingPlan[];
+        loadingPlans: LoadingPlan[];
     }[]>;
     createTruck(dto: {
         matricule: string;
@@ -39,5 +41,9 @@ export declare class TransportPortalService {
         disponible?: boolean;
     }, deliveryCompanyId: string, logistiqueCompanyId: string, userId: string): Promise<Truck | null>;
     removeTruck(truckId: string, deliveryCompanyId: string): Promise<Truck>;
+    getRapport(deliveryCompanyId: string, date: string): Promise<{
+        truck: Truck;
+        plan: LoadingPlan | null;
+    }[]>;
     getDeclarationsForLogistique(logistiqueCompanyId: string, dateFrom?: string, dateTo?: string): Promise<TransportDeclaration[]>;
 }

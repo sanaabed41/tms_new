@@ -18,12 +18,15 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const transport_declaration_entity_1 = require("./transport-declaration.entity");
 const truck_entity_1 = require("../trucks/truck.entity");
+const loading_plan_entity_1 = require("../loading-plans/loading-plan.entity");
 let TransportPortalService = class TransportPortalService {
     declRepo;
     truckRepo;
-    constructor(declRepo, truckRepo) {
+    planRepo;
+    constructor(declRepo, truckRepo, planRepo) {
         this.declRepo = declRepo;
         this.truckRepo = truckRepo;
+        this.planRepo = planRepo;
     }
     async getMyFleet(deliveryCompanyId) {
         const trucks = await this.truckRepo.find({
@@ -127,6 +130,27 @@ let TransportPortalService = class TransportPortalService {
             .execute();
         return this.truckRepo.remove(truck);
     }
+    async getRapport(deliveryCompanyId, date) {
+        const trucks = await this.truckRepo.find({
+            where: { deliveryCompany: { id: deliveryCompanyId }, isActive: true },
+            relations: ['deliveryCompany'],
+        });
+        const plans = await this.planRepo
+            .createQueryBuilder('lp')
+            .leftJoinAndSelect('lp.truck', 'truck')
+            .leftJoinAndSelect('truck.deliveryCompany', 'dc')
+            .leftJoinAndSelect('lp.bonsLivraison', 'bl')
+            .leftJoinAndSelect('bl.filiere', 'filiere')
+            .leftJoinAndSelect('bl.societeExpeditrice', 'soc')
+            .where('dc.id = :deliveryCompanyId', { deliveryCompanyId })
+            .andWhere('lp.dateLivraison = :date', { date })
+            .orderBy('bl.ordreChargement', 'ASC')
+            .getMany();
+        return trucks.map((truck) => ({
+            truck,
+            plan: plans.find((p) => p.truck?.id === truck.id) ?? null,
+        }));
+    }
     getDeclarationsForLogistique(logistiqueCompanyId, dateFrom, dateTo) {
         const qb = this.declRepo
             .createQueryBuilder('d')
@@ -146,7 +170,9 @@ exports.TransportPortalService = TransportPortalService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(transport_declaration_entity_1.TransportDeclaration)),
     __param(1, (0, typeorm_1.InjectRepository)(truck_entity_1.Truck)),
+    __param(2, (0, typeorm_1.InjectRepository)(loading_plan_entity_1.LoadingPlan)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], TransportPortalService);
 //# sourceMappingURL=transport-portal.service.js.map

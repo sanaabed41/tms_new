@@ -16,6 +16,7 @@ let Filiere = class Filiere {
     id;
     nom;
     code;
+    adresse;
     societeExpeditrice;
 };
 exports.Filiere = Filiere;
@@ -34,6 +35,10 @@ __decorate([
         } }),
     __metadata("design:type", String)
 ], Filiere.prototype, "code", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Filiere.prototype, "adresse", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => societe_expeditrice_entity_1.SocieteExpeditrice, (s) => s.filieres, { onDelete: 'CASCADE' }),
     __metadata("design:type", societe_expeditrice_entity_1.SocieteExpeditrice)

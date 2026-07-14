@@ -18,5 +18,9 @@ export declare class TransportPortalController {
     };
     updateTruck(user: any, id: string, dto: any): Promise<import("../trucks/truck.entity").Truck | null>;
     removeTruck(user: any, id: string): Promise<import("../trucks/truck.entity").Truck>;
+    getRapport(user: any, date: string): never[] | Promise<{
+        truck: import("../trucks/truck.entity").Truck;
+        plan: import("../loading-plans/loading-plan.entity").LoadingPlan | null;
+    }[]>;
     getDeclarations(user: any, dateFrom?: string, dateTo?: string): Promise<import("./transport-declaration.entity").TransportDeclaration[]>;
 }

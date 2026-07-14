@@ -51,6 +51,9 @@ let LoadingPlansController = class LoadingPlansController {
     assignBl(id, blId, user, force) {
         return this.service.assignBl(id, blId, user.id, force);
     }
+    sendReport(user, date, companyNom) {
+        return this.service.sendReport(user.companyId, date, companyNom);
+    }
     validateAll(user, date, signature) {
         return this.service.validateAll(user.companyId, date, user.id, signature);
     }
@@ -161,6 +164,16 @@ __decorate([
     __metadata("design:paramtypes", [String, String, Object, Boolean]),
     __metadata("design:returntype", void 0)
 ], LoadingPlansController.prototype, "assignBl", null);
+__decorate([
+    (0, common_1.Post)('send-report'),
+    (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN, role_enum_1.Role.SUPER_ADMIN),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Query)('date')),
+    __param(2, (0, common_1.Body)('companyNom')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:returntype", void 0)
+], LoadingPlansController.prototype, "sendReport", null);
 __decorate([
     (0, common_1.Put)('validate-all'),
     (0, roles_decorator_1.Roles)(role_enum_1.Role.LOGISTIC_ADMIN),
