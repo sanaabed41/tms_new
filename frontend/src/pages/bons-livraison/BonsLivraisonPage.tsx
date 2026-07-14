@@ -194,6 +194,7 @@ const BonsLivraisonPage: React.FC = () => {
       render: (nom: string, bl: BonLivraison) => (
         <div>
           <Text strong style={{ fontSize: 13 }}>{nom}</Text>
+          {bl.clientTelephone && <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>📞 {bl.clientTelephone}</Text>}
           {bl.clientAdresse && <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>{bl.clientAdresse}</Text>}
         </div>
       ),

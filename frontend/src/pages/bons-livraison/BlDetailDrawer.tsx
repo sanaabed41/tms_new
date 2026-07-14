@@ -106,6 +106,9 @@ const BlDetailDrawer: React.FC<Props> = ({ bl, onClose }) => {
           <Text type="secondary" style={{ fontSize: 11 }}>Client</Text>
           <div>
             <Text strong style={{ fontSize: 13 }}>{bl.clientNom}</Text>
+            {bl.clientTelephone && (
+              <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>📞 {bl.clientTelephone}</Text>
+            )}
             {bl.clientAdresse && (
               <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>📍 {bl.clientAdresse}</Text>
             )}

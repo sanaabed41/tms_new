@@ -39,6 +39,14 @@ export class TransportPortalController {
     return this.service.removeTruck(id, user.deliveryCompanyId);
   }
 
+  @Put('trucks/:id/availability')
+  @Roles(Role.TRANSPORT_ADMIN)
+  setAvailability(@CurrentUser() user: any, @Param('id') id: string, @Body() dto: any) {
+    if (!user.deliveryCompanyId) return { error: 'No delivery company assigned' };
+    const date = dto.date || new Date().toISOString().split('T')[0];
+    return this.service.setAvailability(id, user.deliveryCompanyId, user.companyId, date, dto.statut, dto.motif);
+  }
+
   @Get('rapport')
   @Roles(Role.TRANSPORT_ADMIN)
   getRapport(@CurrentUser() user: any, @Query('date') date: string) {

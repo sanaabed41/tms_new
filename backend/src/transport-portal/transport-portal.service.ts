@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { TransportDeclaration } from './transport-declaration.entity';
 import { Truck } from '../trucks/truck.entity';
 import { LoadingPlan } from '../loading-plans/loading-plan.entity';
+import { TruckAvailability } from '../truck-availability/truck-availability.entity';
 
 @Injectable()
 export class TransportPortalService {
@@ -11,23 +12,30 @@ export class TransportPortalService {
     @InjectRepository(TransportDeclaration) private declRepo: Repository<TransportDeclaration>,
     @InjectRepository(Truck) private truckRepo: Repository<Truck>,
     @InjectRepository(LoadingPlan) private planRepo: Repository<LoadingPlan>,
+    @InjectRepository(TruckAvailability) private availRepo: Repository<TruckAvailability>,
   ) {}
 
-  // ── Flotte : camions + leur disponibilité ────────────────────────────────
+  private today() { return new Date().toISOString().split('T')[0]; }
+
+  // ── Flotte : camions + disponibilité du jour ─────────────────────────────
 
   async getMyFleet(deliveryCompanyId: string) {
     const trucks = await this.truckRepo.find({
       where: { deliveryCompany: { id: deliveryCompanyId } },
     });
-    const declarations = await this.declRepo
-      .createQueryBuilder('d')
-      .leftJoinAndSelect('d.truck', 'truck')
+    const date = this.today();
+    const avails = await this.availRepo
+      .createQueryBuilder('ta')
+      .leftJoin('ta.truck', 'truck')
       .leftJoin('truck.deliveryCompany', 'dc')
       .where('dc.id = :id', { id: deliveryCompanyId })
+      .andWhere('ta.date = :date', { date })
+      .select(['ta.id', 'ta.statut', 'ta.motif', 'ta.date', 'truck.id'])
       .getMany();
+
     return trucks.map((truck) => ({
       ...truck,
-      declaration: declarations.find((d) => d.truck.id === truck.id) ?? null,
+      todayAvailability: avails.find((a) => a.truck?.id === truck.id) ?? null,
     }));
   }
 
@@ -35,40 +43,39 @@ export class TransportPortalService {
     dto: {
       matricule: string;
       capaciteTonnage: number;
-      capacitePalettes: number;
+      capacitePalettes?: number;
       type?: string;
-      dateDebut?: string;
-      dateFin?: string | null;
       chauffeurNom?: string | null;
       chauffeurTel?: string | null;
-      disponible?: boolean;
     },
     deliveryCompanyId: string,
     logistiqueCompanyId: string,
-    userId: string,
+    _userId: string,
   ) {
     const truck = await this.truckRepo.save(
       this.truckRepo.create({
         matricule: dto.matricule,
         capaciteTonnage: dto.capaciteTonnage,
-        capacitePalettes: dto.capacitePalettes,
+        capacitePalettes: dto.capacitePalettes ?? 0,
         ...(dto.type && { type: dto.type }),
+        chauffeurNom: dto.chauffeurNom ?? null,
+        chauffeurTel: dto.chauffeurTel ?? null,
         isActive: true,
         deliveryCompany: { id: deliveryCompanyId },
       }),
     );
 
-    if (dto.dateDebut) {
-      await this.declRepo.save(
-        this.declRepo.create({
+    // Auto-créer une disponibilité DISPONIBLE pour aujourd'hui
+    const date = this.today();
+    const existing = await this.availRepo.findOne({ where: { truck: { id: truck.id }, date } });
+    if (!existing) {
+      await this.availRepo.save(
+        this.availRepo.create({
           truck: { id: truck.id },
-          dateDebut: dto.dateDebut,
-          dateFin: dto.dateFin ?? null,
-          chauffeurNom: dto.chauffeurNom ?? null,
-          chauffeurTel: dto.chauffeurTel ?? null,
-          isActive: dto.disponible !== false,
-          logistiqueCompanyId,
-          declaredByUserId: userId,
+          date,
+          statut: 'DISPONIBLE',
+          motif: null,
+          company: { id: logistiqueCompanyId },
         }),
       );
     }
@@ -83,15 +90,12 @@ export class TransportPortalService {
       capaciteTonnage?: number;
       capacitePalettes?: number;
       type?: string;
-      dateDebut?: string;
-      dateFin?: string | null;
       chauffeurNom?: string | null;
       chauffeurTel?: string | null;
-      disponible?: boolean;
     },
     deliveryCompanyId: string,
-    logistiqueCompanyId: string,
-    userId: string,
+    _logistiqueCompanyId: string,
+    _userId: string,
   ) {
     const truck = await this.truckRepo.findOne({
       where: { id: truckId },
@@ -105,41 +109,43 @@ export class TransportPortalService {
       ...(dto.capaciteTonnage !== undefined && { capaciteTonnage: dto.capaciteTonnage }),
       ...(dto.capacitePalettes !== undefined && { capacitePalettes: dto.capacitePalettes }),
       ...(dto.type !== undefined && { type: dto.type }),
+      ...(dto.chauffeurNom !== undefined && { chauffeurNom: dto.chauffeurNom }),
+      ...(dto.chauffeurTel !== undefined && { chauffeurTel: dto.chauffeurTel }),
     });
 
-    if (dto.dateDebut !== undefined) {
-      const existing = await this.declRepo.findOne({ where: { truck: { id: truckId } } });
-      if (existing) {
-        Object.assign(existing, {
-          dateDebut: dto.dateDebut,
-          dateFin: dto.dateFin ?? null,
-          chauffeurNom: dto.chauffeurNom ?? null,
-          chauffeurTel: dto.chauffeurTel ?? null,
-          ...(dto.disponible !== undefined && { isActive: dto.disponible }),
-        });
-        await this.declRepo.save(existing);
-      } else {
-        await this.declRepo.save(
-          this.declRepo.create({
-            truck: { id: truckId },
-            dateDebut: dto.dateDebut,
-            dateFin: dto.dateFin ?? null,
-            chauffeurNom: dto.chauffeurNom ?? null,
-            chauffeurTel: dto.chauffeurTel ?? null,
-            isActive: dto.disponible !== false,
-            logistiqueCompanyId,
-            declaredByUserId: userId,
-          }),
-        );
-      }
-    } else if (dto.disponible !== undefined) {
-      const existing = await this.declRepo.findOne({ where: { truck: { id: truckId } } });
-      if (existing) {
-        await this.declRepo.update(existing.id, { isActive: dto.disponible });
-      }
-    }
-
     return this.truckRepo.findOne({ where: { id: truckId } });
+  }
+
+  async setAvailability(
+    truckId: string,
+    deliveryCompanyId: string,
+    logistiqueCompanyId: string,
+    date: string,
+    statut: 'DISPONIBLE' | 'INDISPONIBLE',
+    motif?: string,
+  ) {
+    const truck = await this.truckRepo.findOne({
+      where: { id: truckId },
+      relations: ['deliveryCompany'],
+    });
+    if (!truck) throw new NotFoundException('Camion non trouvé');
+    if (truck.deliveryCompany?.id !== deliveryCompanyId) throw new ForbiddenException('Accès interdit');
+
+    const existing = await this.availRepo.findOne({ where: { truck: { id: truckId }, date } });
+    if (existing) {
+      await this.availRepo.update(existing.id, { statut, motif: motif ?? null });
+    } else {
+      await this.availRepo.save(
+        this.availRepo.create({
+          truck: { id: truckId },
+          date,
+          statut,
+          motif: motif ?? null,
+          company: { id: logistiqueCompanyId },
+        }),
+      );
+    }
+    return { truckId, date, statut, motif: motif ?? null };
   }
 
   async removeTruck(truckId: string, deliveryCompanyId: string) {
@@ -150,8 +156,6 @@ export class TransportPortalService {
     if (!truck) throw new NotFoundException('Camion non trouvé');
     if (truck.deliveryCompany?.id !== deliveryCompanyId) throw new ForbiddenException('Accès interdit');
 
-    // Delete declaration manually (onDelete: CASCADE on the FK handles it at DB level,
-    // but explicit delete avoids issues if the TypeORM entity-remove path bypasses it)
     await this.declRepo
       .createQueryBuilder()
       .delete()

@@ -185,6 +185,8 @@ export const transportPortalAPI = {
   createTruck: (data: any) => api.post('/transport-portal/trucks', data),
   updateTruck: (id: string, data: any) => api.put(`/transport-portal/trucks/${id}`, data),
   removeTruck: (id: string) => api.delete(`/transport-portal/trucks/${id}`),
+  setAvailability: (truckId: string, data: { statut: string; motif?: string; date?: string }) =>
+    api.put(`/transport-portal/trucks/${truckId}/availability`, data),
   getDeclarations: (dateFrom?: string, dateTo?: string) => api.get('/transport-portal/declarations', { params: { dateFrom, dateTo } }),
 };
 

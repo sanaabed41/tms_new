@@ -1,28 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Typography, Table, Tag, Button, Modal, Form, Select, DatePicker,
-  Input, InputNumber, Switch, Space, message, Popconfirm, Row, Col,
-  Divider, Badge,
+  Typography, Table, Tag, Button, Modal, Form,
+  Input, InputNumber, Space, message, Popconfirm, Row, Col,
+  Badge, Select,
 } from 'antd';
 import {
   TruckOutlined, PlusOutlined, EditOutlined, DeleteOutlined,
-  CheckCircleOutlined, ClockCircleOutlined, PhoneOutlined, UserOutlined,
-  CalendarOutlined, ExclamationCircleOutlined,
+  CheckCircleOutlined, StopOutlined, PhoneOutlined, UserOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import dayjs from 'dayjs';
 import { transportPortalAPI } from '../../api';
 
 const { Title, Text } = Typography;
 
-const TRUCK_TYPES = ['Plateau', 'Frigorifique', 'Semi-remorque', 'Citerne', 'Benne', 'Fourgon'];
+const TRUCK_TYPES = ['Plateau', 'Frigorifique', 'Semi-remorque', 'Citerne', 'Benne', 'Fourgon', 'FRIGO', 'VRAC', 'PALETTE', 'CITERNE'];
 
-interface Declaration {
+interface TodayAvailability {
   id: string;
-  dateDebut: string;
-  dateFin: string | null;
-  chauffeurNom: string | null;
-  chauffeurTel: string | null;
-  isActive: boolean;
+  statut: 'DISPONIBLE' | 'INDISPONIBLE';
+  motif: string | null;
+  date: string;
 }
 
 interface FleetEntry {
@@ -32,17 +29,21 @@ interface FleetEntry {
   capacitePalettes: number;
   type: string | null;
   isActive: boolean;
-  declaration: Declaration | null;
+  chauffeurNom: string | null;
+  chauffeurTel: string | null;
+  todayAvailability: TodayAvailability | null;
 }
 
 const TransportPortalPage: React.FC = () => {
   const [fleet, setFleet] = useState<FleetEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [availModalOpen, setAvailModalOpen] = useState(false);
   const [editingTruck, setEditingTruck] = useState<FleetEntry | null>(null);
+  const [availTruck, setAvailTruck] = useState<FleetEntry | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [hasAvailability, setHasAvailability] = useState(false);
   const [form] = Form.useForm();
+  const [availForm] = Form.useForm();
 
   const fetchFleet = useCallback(async () => {
     setLoading(true);
@@ -58,28 +59,31 @@ const TransportPortalPage: React.FC = () => {
 
   const openCreate = () => {
     setEditingTruck(null);
-    setHasAvailability(false);
     form.resetFields();
-    form.setFieldsValue({ disponible: true });
     setModalOpen(true);
   };
 
   const openEdit = (entry: FleetEntry) => {
     setEditingTruck(entry);
-    const decl = entry.declaration;
-    setHasAvailability(!!decl);
     form.setFieldsValue({
       matricule: entry.matricule,
       type: entry.type,
       capaciteTonnage: entry.capaciteTonnage,
       capacitePalettes: entry.capacitePalettes,
-      dateDebut: decl?.dateDebut ? dayjs(decl.dateDebut) : null,
-      dateFin: decl?.dateFin ? dayjs(decl.dateFin) : null,
-      chauffeurNom: decl?.chauffeurNom ?? '',
-      chauffeurTel: decl?.chauffeurTel ?? '',
-      disponible: decl?.isActive ?? true,
+      chauffeurNom: entry.chauffeurNom ?? '',
+      chauffeurTel: entry.chauffeurTel ?? '',
     });
     setModalOpen(true);
+  };
+
+  const openAvailModal = (entry: FleetEntry) => {
+    setAvailTruck(entry);
+    const currentStatut = entry.todayAvailability?.statut ?? 'DISPONIBLE';
+    availForm.setFieldsValue({
+      statut: currentStatut,
+      motif: entry.todayAvailability?.motif ?? '',
+    });
+    setAvailModalOpen(true);
   };
 
   const handleSubmit = async (values: any) => {
@@ -90,22 +94,16 @@ const TransportPortalPage: React.FC = () => {
         type: values.type ?? null,
         capaciteTonnage: values.capaciteTonnage,
         capacitePalettes: values.capacitePalettes ?? 0,
+        chauffeurNom: values.chauffeurNom || null,
+        chauffeurTel: values.chauffeurTel || null,
       };
-
-      if (hasAvailability && values.dateDebut) {
-        payload.dateDebut = values.dateDebut.format('YYYY-MM-DD');
-        payload.dateFin = values.dateFin ? values.dateFin.format('YYYY-MM-DD') : null;
-        payload.chauffeurNom = values.chauffeurNom || null;
-        payload.chauffeurTel = values.chauffeurTel || null;
-        payload.disponible = values.disponible !== false;
-      }
 
       if (editingTruck) {
         await transportPortalAPI.updateTruck(editingTruck.id, payload);
         message.success('Camion mis à jour');
       } else {
         await transportPortalAPI.createTruck(payload);
-        message.success('Camion ajouté');
+        message.success('Camion ajouté — disponible par défaut aujourd\'hui');
       }
       setModalOpen(false);
       fetchFleet();
@@ -116,15 +114,21 @@ const TransportPortalPage: React.FC = () => {
     }
   };
 
-  const handleToggleDisponible = async (entry: FleetEntry) => {
+  const handleAvailSubmit = async (values: any) => {
+    if (!availTruck) return;
+    setSubmitting(true);
     try {
-      await transportPortalAPI.updateTruck(entry.id, {
-        disponible: !entry.declaration?.isActive,
+      await transportPortalAPI.setAvailability(availTruck.id, {
+        statut: values.statut,
+        motif: values.statut === 'INDISPONIBLE' ? (values.motif || null) : null,
       });
-      message.success(entry.declaration?.isActive ? 'Marqué indisponible' : 'Marqué disponible');
+      message.success(values.statut === 'DISPONIBLE' ? 'Camion marqué disponible' : 'Camion marqué indisponible');
+      setAvailModalOpen(false);
       fetchFleet();
-    } catch {
-      message.error('Erreur');
+    } catch (err: any) {
+      message.error(err.response?.data?.message || 'Erreur');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -138,9 +142,9 @@ const TransportPortalPage: React.FC = () => {
     }
   };
 
-  const available = fleet.filter((f) => f.declaration?.isActive);
-  const unavailable = fleet.filter((f) => f.declaration && !f.declaration.isActive);
-  const noDeclaration = fleet.filter((f) => !f.declaration);
+  const disponibles  = fleet.filter((f) => f.todayAvailability?.statut === 'DISPONIBLE');
+  const indisponibles = fleet.filter((f) => f.todayAvailability?.statut === 'INDISPONIBLE');
+  const sansRecord   = fleet.filter((f) => !f.todayAvailability);
 
   const columns = [
     {
@@ -167,43 +171,20 @@ const TransportPortalPage: React.FC = () => {
       ),
     },
     {
-      title: 'Disponibilité',
-      key: 'disponibilite',
-      render: (_: any, entry: FleetEntry) => {
-        const decl = entry.declaration;
-        if (!decl) return <Text type="secondary" style={{ fontSize: 11 }}>Non renseignée</Text>;
-        return (
-          <Space size={4}>
-            <CalendarOutlined style={{ color: '#fa8c16', fontSize: 11 }} />
-            <Text style={{ fontSize: 12 }}>{dayjs(decl.dateDebut).format('DD/MM/YYYY')}</Text>
-            {decl.dateFin ? (
-              <>
-                <Text type="secondary" style={{ fontSize: 11 }}>→</Text>
-                <Text style={{ fontSize: 12 }}>{dayjs(decl.dateFin).format('DD/MM/YYYY')}</Text>
-              </>
-            ) : (
-              <Tag color="blue" style={{ fontSize: 10 }}>Illimitée</Tag>
-            )}
-          </Space>
-        );
-      },
-    },
-    {
       title: 'Chauffeur',
       key: 'chauffeur',
       render: (_: any, entry: FleetEntry) => {
-        const decl = entry.declaration;
-        if (!decl?.chauffeurNom) return <Text type="secondary" style={{ fontSize: 11 }}>—</Text>;
+        if (!entry.chauffeurNom) return <Text type="secondary" style={{ fontSize: 11 }}>—</Text>;
         return (
           <Space direction="vertical" size={1}>
             <Space size={4}>
               <UserOutlined style={{ fontSize: 11, color: '#595959' }} />
-              <Text style={{ fontSize: 12 }}>{decl.chauffeurNom}</Text>
+              <Text style={{ fontSize: 12 }}>{entry.chauffeurNom}</Text>
             </Space>
-            {decl.chauffeurTel && (
+            {entry.chauffeurTel && (
               <Space size={4}>
                 <PhoneOutlined style={{ fontSize: 10, color: '#8c8c8c' }} />
-                <Text type="secondary" style={{ fontSize: 11 }}>{decl.chauffeurTel}</Text>
+                <Text type="secondary" style={{ fontSize: 11 }}>{entry.chauffeurTel}</Text>
               </Space>
             )}
           </Space>
@@ -211,33 +192,42 @@ const TransportPortalPage: React.FC = () => {
       },
     },
     {
-      title: 'Statut',
+      title: 'Statut aujourd\'hui',
       key: 'statut',
-      width: 120,
       render: (_: any, entry: FleetEntry) => {
-        const decl = entry.declaration;
-        if (!decl) return <Tag style={{ fontSize: 11 }}>Aucune dispo</Tag>;
+        const avail = entry.todayAvailability;
+        if (!avail) {
+          return <Tag color="default" style={{ fontSize: 11 }}>Non renseigné</Tag>;
+        }
+        if (avail.statut === 'DISPONIBLE') {
+          return <Tag color="success" icon={<CheckCircleOutlined />}>Disponible</Tag>;
+        }
         return (
-          <Switch
-            checked={decl.isActive}
-            checkedChildren="Disponible"
-            unCheckedChildren="Indispo"
-            onChange={() => handleToggleDisponible(entry)}
-            style={{ backgroundColor: decl.isActive ? '#52c41a' : undefined }}
-          />
+          <Space direction="vertical" size={1}>
+            <Tag color="error" icon={<StopOutlined />}>Indisponible</Tag>
+            {avail.motif && <Text type="secondary" style={{ fontSize: 10 }}>{avail.motif}</Text>}
+          </Space>
         );
       },
     },
     {
       title: '',
       key: 'actions',
-      width: 80,
+      width: 120,
       render: (_: any, entry: FleetEntry) => (
         <Space size={4}>
           <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(entry)} />
+          <Button
+            size="small"
+            icon={entry.todayAvailability?.statut === 'DISPONIBLE' ? <StopOutlined /> : <CheckCircleOutlined />}
+            style={{
+              color: entry.todayAvailability?.statut === 'DISPONIBLE' ? '#fa8c16' : '#52c41a',
+              borderColor: entry.todayAvailability?.statut === 'DISPONIBLE' ? '#fa8c16' : '#52c41a',
+            }}
+            onClick={() => openAvailModal(entry)}
+          />
           <Popconfirm
-            title={`Supprimer le camion ${entry.matricule} ?`}
-            description="Le camion et sa disponibilité seront supprimés."
+            title={`Supprimer ${entry.matricule} ?`}
             icon={<ExclamationCircleOutlined style={{ color: '#ff4d4f' }} />}
             onConfirm={() => handleDelete(entry.id)}
             okText="Supprimer"
@@ -256,7 +246,7 @@ const TransportPortalPage: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
         <div>
           <Title level={3} style={{ margin: 0 }}>Ma Flotte</Title>
-          <Text type="secondary">Gérez vos camions et leur disponibilité</Text>
+          <Text type="secondary">Gérez vos camions et leur disponibilité du jour</Text>
         </div>
         <Button
           type="primary"
@@ -274,8 +264,17 @@ const TransportPortalPage: React.FC = () => {
           <div style={{ background: '#f6ffed', borderRadius: 8, border: '1px solid #b7eb8f', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
             <CheckCircleOutlined style={{ fontSize: 26, color: '#52c41a' }} />
             <div>
-              <div style={{ fontSize: 26, fontWeight: 800, color: '#52c41a', lineHeight: 1 }}>{available.length}</div>
-              <div style={{ fontSize: 12, color: '#8c8c8c' }}>Disponibles</div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: '#52c41a', lineHeight: 1 }}>{disponibles.length}</div>
+              <div style={{ fontSize: 12, color: '#8c8c8c' }}>Disponibles aujourd'hui</div>
+            </div>
+          </div>
+        </Col>
+        <Col span={8}>
+          <div style={{ background: '#fff2e8', borderRadius: 8, border: '1px solid #ffbb96', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <StopOutlined style={{ fontSize: 26, color: '#fa8c16' }} />
+            <div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: '#fa8c16', lineHeight: 1 }}>{indisponibles.length + sansRecord.length}</div>
+              <div style={{ fontSize: 12, color: '#8c8c8c' }}>Indisponibles / non renseignés</div>
             </div>
           </div>
         </Col>
@@ -288,15 +287,6 @@ const TransportPortalPage: React.FC = () => {
             </div>
           </div>
         </Col>
-        <Col span={8}>
-          <div style={{ background: '#fff', borderRadius: 8, border: '1px solid #f0f0f0', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
-            <ClockCircleOutlined style={{ fontSize: 26, color: '#bfbfbf' }} />
-            <div>
-              <div style={{ fontSize: 26, fontWeight: 800, color: '#bfbfbf', lineHeight: 1 }}>{noDeclaration.length}</div>
-              <div style={{ fontSize: 12, color: '#8c8c8c' }}>Sans disponibilité</div>
-            </div>
-          </div>
-        </Col>
       </Row>
 
       {/* Table */}
@@ -304,8 +294,8 @@ const TransportPortalPage: React.FC = () => {
         <div style={{ padding: '14px 20px', borderBottom: '1px solid #f0f0f0', background: '#fafafa', display: 'flex', alignItems: 'center', gap: 10 }}>
           <TruckOutlined style={{ color: '#13c2c2' }} />
           <Text strong>Mes camions</Text>
-          <Badge count={available.length} style={{ backgroundColor: '#52c41a' }} />
-          <Text type="secondary" style={{ fontSize: 11 }}>/ {fleet.length} total</Text>
+          <Badge count={disponibles.length} style={{ backgroundColor: '#52c41a' }} />
+          <Text type="secondary" style={{ fontSize: 11 }}>disponibles / {fleet.length} total</Text>
         </div>
         <Table
           dataSource={fleet}
@@ -318,7 +308,7 @@ const TransportPortalPage: React.FC = () => {
         />
       </div>
 
-      {/* Modal ajouter / modifier */}
+      {/* Modal ajouter / modifier camion */}
       <Modal
         title={
           <Space>
@@ -333,104 +323,94 @@ const TransportPortalPage: React.FC = () => {
         cancelText="Annuler"
         confirmLoading={submitting}
         okButtonProps={{ style: { background: '#13c2c2', borderColor: '#13c2c2' } }}
-        width={520}
+        width={480}
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit} style={{ marginTop: 12 }}>
-
-          {/* ── Infos camion ── */}
-          <Divider style={{ fontSize: 12, color: '#666', margin: '0 0 12px' }}>
-            Informations du camion
-          </Divider>
           <Row gutter={12}>
-            <Col span={12}>
-              <Form.Item
-                name="matricule"
-                label="Matricule"
-                rules={[{ required: true, message: 'Matricule requis' }]}
-              >
-                <Input
-                  placeholder="123TUN01"
-                  style={{ fontFamily: 'monospace', textTransform: 'uppercase' }}
-                  disabled={!!editingTruck}
-                />
+            <Col span={14}>
+              <Form.Item name="matricule" label="Matricule" rules={[{ required: true, message: 'Matricule requis' }]}>
+                <Input placeholder="TU-123-456" size="large" style={{ fontFamily: 'monospace' }} />
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={10}>
               <Form.Item name="type" label="Type">
-                <Select
-                  placeholder="Type de camion"
-                  allowClear
-                  options={TRUCK_TYPES.map((t) => ({ value: t, label: t }))}
-                />
+                <Select placeholder="Type" size="large" allowClear>
+                  {TRUCK_TYPES.map((t) => <Select.Option key={t} value={t}>{t}</Select.Option>)}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={12}>
             <Col span={12}>
-              <Form.Item
-                name="capaciteTonnage"
-                label="Capacité (tonnes)"
-                rules={[{ required: true, message: 'Capacité requise' }]}
-              >
-                <InputNumber min={0.1} step={0.5} style={{ width: '100%' }} placeholder="10" addonAfter="T" />
+              <Form.Item name="capaciteTonnage" label="Capacité (tonnes)" rules={[{ required: true, message: 'Requis' }]}>
+                <InputNumber min={1} max={100} size="large" style={{ width: '100%' }} addonAfter="T" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="capacitePalettes" label="Nb palettes">
-                <InputNumber min={0} style={{ width: '100%' }} placeholder="20" />
+              <Form.Item name="capacitePalettes" label="Capacité (palettes)">
+                <InputNumber min={0} max={50} size="large" style={{ width: '100%' }} addonAfter="pal." />
               </Form.Item>
             </Col>
           </Row>
-
-          {/* ── Disponibilité ── */}
-          <Divider style={{ fontSize: 12, color: '#666', margin: '4px 0 12px' }}>
-            <Space size={8}>
-              Disponibilité
-              <Switch
-                size="small"
-                checked={hasAvailability}
-                onChange={setHasAvailability}
-                checkedChildren="Renseignée"
-                unCheckedChildren="Non renseignée"
-              />
-            </Space>
-          </Divider>
-
-          {hasAvailability && (
-            <>
-              <Row gutter={12}>
-                <Col span={12}>
-                  <Form.Item
-                    name="dateDebut"
-                    label="Date de début"
-                    rules={[{ required: true, message: 'Date requise' }]}
-                  >
-                    <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="dateFin" label="Date de fin (optionnel)">
-                    <DatePicker format="DD/MM/YYYY" style={{ width: '100%' }} />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={12}>
-                <Col span={12}>
-                  <Form.Item name="chauffeurNom" label="Nom du chauffeur">
-                    <Input prefix={<UserOutlined />} placeholder="Nom du chauffeur" />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item name="chauffeurTel" label="Téléphone">
-                    <Input prefix={<PhoneOutlined />} placeholder="+216 XX XXX XXX" />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Form.Item name="disponible" label="Statut de disponibilité" valuePropName="checked">
-                <Switch checkedChildren="Disponible" unCheckedChildren="Indisponible" defaultChecked />
+          <Row gutter={12}>
+            <Col span={12}>
+              <Form.Item name="chauffeurNom" label="Nom du chauffeur">
+                <Input prefix={<UserOutlined />} placeholder="Ben Ali Mohamed" size="large" />
               </Form.Item>
-            </>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="chauffeurTel" label="Téléphone">
+                <Input prefix={<PhoneOutlined />} placeholder="+216 20 000 000" size="large" />
+              </Form.Item>
+            </Col>
+          </Row>
+          {!editingTruck && (
+            <div style={{ background: '#f6ffed', border: '1px solid #b7eb8f', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#52c41a' }}>
+              ✓ Le camion sera automatiquement marqué <strong>Disponible</strong> pour aujourd'hui.
+            </div>
           )}
+        </Form>
+      </Modal>
+
+      {/* Modal disponibilité */}
+      <Modal
+        title={
+          <Space>
+            <TruckOutlined style={{ color: '#13c2c2' }} />
+            Disponibilité — {availTruck?.matricule}
+          </Space>
+        }
+        open={availModalOpen}
+        onCancel={() => setAvailModalOpen(false)}
+        onOk={() => availForm.submit()}
+        okText="Confirmer"
+        cancelText="Annuler"
+        confirmLoading={submitting}
+        width={380}
+      >
+        <Form form={availForm} layout="vertical" onFinish={handleAvailSubmit} style={{ marginTop: 12 }}>
+          <Form.Item name="statut" label="Statut" rules={[{ required: true }]}>
+            <Select size="large">
+              <Select.Option value="DISPONIBLE">
+                <Space><CheckCircleOutlined style={{ color: '#52c41a' }} />Disponible</Space>
+              </Select.Option>
+              <Select.Option value="INDISPONIBLE">
+                <Space><StopOutlined style={{ color: '#ff4d4f' }} />Indisponible</Space>
+              </Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            noStyle
+            shouldUpdate={(prev, curr) => prev.statut !== curr.statut}
+          >
+            {({ getFieldValue }) =>
+              getFieldValue('statut') === 'INDISPONIBLE' ? (
+                <Form.Item name="motif" label="Motif d'indisponibilité">
+                  <Input placeholder="Ex : En panne, Révision, Accident…" size="large" />
+                </Form.Item>
+              ) : null
+            }
+          </Form.Item>
         </Form>
       </Modal>
     </div>

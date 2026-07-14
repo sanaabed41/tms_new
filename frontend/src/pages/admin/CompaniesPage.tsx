@@ -5,9 +5,9 @@ import {
 } from 'antd';
 import {
   EyeOutlined, StopOutlined, ExclamationCircleOutlined, DeleteOutlined,
-  UserOutlined, BankOutlined, CheckCircleOutlined, ApartmentOutlined,
+  UserOutlined, BankOutlined, CheckCircleOutlined, ApartmentOutlined, TruckOutlined,
 } from '@ant-design/icons';
-import { companiesAPI, usersAPI } from '../../api';
+import { companiesAPI, usersAPI, deliveryCompaniesAPI } from '../../api';
 import { Company, User, Role, CompanyType } from '../../types';
 import dayjs from 'dayjs';
 
@@ -23,10 +23,22 @@ interface AdminRow {
   user: User | null;
 }
 
+interface TransportRow {
+  key: string;
+  dcId: string;
+  dcNom: string;
+  dcAdresse?: string;
+  dcTelephone?: string;
+  dcCreatedAt: string;
+  dcIsActive: boolean;
+  user: User | null;
+}
+
 const CompaniesPage: React.FC = () => {
   const [logistiqueRows, setLogistiqueRows] = useState<AdminRow[]>([]);
   const [expediteurRows, setExpediteurRows] = useState<AdminRow[]>([]);
   const [filiereRows, setFiliereRows] = useState<AdminRow[]>([]);
+  const [transportRows, setTransportRows] = useState<TransportRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -35,8 +47,14 @@ const CompaniesPage: React.FC = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const companiesRes = await companiesAPI.getAll();
+      const [companiesRes, dcRes, allUsersRes] = await Promise.all([
+        companiesAPI.getAll(),
+        deliveryCompaniesAPI.getAll(),
+        usersAPI.getAll(),
+      ]);
       const all: Company[] = companiesRes.data;
+      const deliveryCompanies: any[] = dcRes.data;
+      const allUsers: User[] = allUsersRes.data;
 
       const logistique = all.filter((c) => c.type === CompanyType.LOGISTIQUE);
       const expediteur = all.filter((c) => c.type === CompanyType.EXPEDITEUR);
@@ -93,6 +111,21 @@ const CompaniesPage: React.FC = () => {
         });
       });
       setFiliereRows(filiereAdmins);
+
+      // Transport companies (DeliveryCompany entities)
+      const transportAdmins = allUsers.filter((u) => u.role === Role.TRANSPORT_ADMIN);
+      setTransportRows(
+        deliveryCompanies.map((dc) => ({
+          key: dc.id,
+          dcId: dc.id,
+          dcNom: dc.nom,
+          dcAdresse: dc.adresse,
+          dcTelephone: dc.telephone,
+          dcCreatedAt: dc.createdAt,
+          dcIsActive: dc.isActive,
+          user: transportAdmins.find((u) => (u as any).deliveryCompany?.id === dc.id) ?? null,
+        })),
+      );
     } finally {
       setLoading(false);
     }
@@ -323,6 +356,109 @@ const CompaniesPage: React.FC = () => {
           footer={() => (
             <Text type="secondary" style={{ fontSize: 12 }}>
               {activeCount(filiereRows)} compte{activeCount(filiereRows) > 1 ? 's' : ''} actif{activeCount(filiereRows) > 1 ? 's' : ''} / {filiereRows.length} total
+            </Text>
+          )}
+        />
+      ),
+    },
+    {
+      key: 'transport',
+      label: (
+        <Space>
+          <TruckOutlined />
+          Soc. Transport
+          <Badge count={transportRows.length} color="cyan" />
+        </Space>
+      ),
+      children: (
+        <Table
+          dataSource={transportRows}
+          rowKey="key"
+          size="middle"
+          pagination={{ pageSize: 15 }}
+          locale={{ emptyText: 'Aucune société de transport' }}
+          columns={[
+            {
+              title: 'Société de transport',
+              key: 'dc',
+              render: (_: any, row: TransportRow) => (
+                <div>
+                  <Text strong>{row.dcNom}</Text>
+                  {row.dcAdresse && <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>{row.dcAdresse}</Text>}
+                  {row.dcTelephone && <Text type="secondary" style={{ fontSize: 11, display: 'block' }}>{row.dcTelephone}</Text>}
+                </div>
+              ),
+            },
+            {
+              title: 'Admin Transport',
+              key: 'admin',
+              render: (_: any, row: TransportRow) => {
+                if (!row.user) return <Tag color="warning">Aucun admin assigné</Tag>;
+                return (
+                  <div>
+                    <Text style={{ fontSize: 13 }}>{row.user.prenom} {row.user.nom}</Text>
+                    <br />
+                    <Text type="secondary" style={{ fontSize: 11 }}>{row.user.email}</Text>
+                  </div>
+                );
+              },
+            },
+            {
+              title: 'Statut',
+              key: 'status',
+              render: (_: any, row: TransportRow) => {
+                if (!row.user) return <Text type="secondary">-</Text>;
+                return (
+                  <Switch
+                    checked={row.user.isActive}
+                    checkedChildren="Actif"
+                    unCheckedChildren="Inactif"
+                    onChange={() => handleToggle(row.user!)}
+                    size="small"
+                  />
+                );
+              },
+            },
+            {
+              title: 'Ajouté le',
+              key: 'createdAt',
+              render: (_: any, row: TransportRow) => dayjs(row.dcCreatedAt).format('DD/MM/YYYY'),
+            },
+            {
+              title: 'Actions',
+              key: 'actions',
+              render: (_: any, row: TransportRow) => (
+                <Space>
+                  {row.user?.isActive && (
+                    <Popconfirm
+                      title={`Désactiver ${row.user.prenom} ${row.user.nom} ?`}
+                      description="L'accès sera révoqué."
+                      icon={<ExclamationCircleOutlined style={{ color: '#ff4d4f' }} />}
+                      onConfirm={() => handleDeactivate(row.user!)}
+                      okText="Désactiver"
+                      cancelText="Annuler"
+                      okButtonProps={{ danger: true }}
+                    >
+                      <Button size="small" danger icon={<StopOutlined />}>Désactiver</Button>
+                    </Popconfirm>
+                  )}
+                  {row.user && !row.user.isActive && (
+                    <Button
+                      size="small"
+                      icon={<CheckCircleOutlined />}
+                      style={{ color: '#52c41a', borderColor: '#52c41a' }}
+                      onClick={() => handleToggle(row.user!)}
+                    >
+                      Activer
+                    </Button>
+                  )}
+                </Space>
+              ),
+            },
+          ]}
+          footer={() => (
+            <Text type="secondary" style={{ fontSize: 12 }}>
+              {transportRows.filter((r) => r.user?.isActive).length} actif{transportRows.filter((r) => r.user?.isActive).length > 1 ? 's' : ''} / {transportRows.length} total
             </Text>
           )}
         />

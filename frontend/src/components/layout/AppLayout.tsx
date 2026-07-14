@@ -127,7 +127,10 @@ const AppLayout: React.FC = () => {
       const match = [...securiteMenu].reverse().find(m => location.pathname.startsWith(m.key));
       return match?.key ?? '/securite';
     }
-    if (isTransportAdmin) return '/transport-portal';
+    if (isTransportAdmin) {
+      const match = [...transportAdminMenu].reverse().find(m => location.pathname.startsWith(m.key));
+      return match?.key ?? '/transport-portal';
+    }
     return location.pathname;
   })();
 

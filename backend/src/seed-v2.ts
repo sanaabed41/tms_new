@@ -141,14 +141,14 @@ async function bootstrap() {
     { prenom: 'Directrice', nom: 'Rose Blanche', password: PWD, role: Role.EXPEDITEUR_ADMIN, isActive: true, company: rbGroupe },
   );
 
-  await upsert(userRepo,
+  const rapidAdmin = await upsert(userRepo,
     { email: 'admin@rapid-transport.tn' },
-    { prenom: 'Admin', nom: 'Rapid Transport', password: PWD, role: Role.TRANSPORT_ADMIN, isActive: true, company: rapidTransportCo },
+    { prenom: 'Admin', nom: 'Rapid Transport', password: PWD, role: Role.TRANSPORT_ADMIN, isActive: true, company: transfood },
   );
 
-  await upsert(userRepo,
+  const nordAdmin = await upsert(userRepo,
     { email: 'admin@nord-express.tn' },
-    { prenom: 'Admin', nom: 'Nord Express', password: PWD, role: Role.TRANSPORT_ADMIN, isActive: true, company: nordExpressCo },
+    { prenom: 'Admin', nom: 'Nord Express', password: PWD, role: Role.TRANSPORT_ADMIN, isActive: true, company: transfood },
   );
 
   console.log('  ✓ SUPER_ADMIN · LOGISTIC_ADMIN · EXPEDITEUR_ADMIN · 2× TRANSPORT_ADMIN');
@@ -265,6 +265,10 @@ async function bootstrap() {
     { nom: 'Nord Express Transport' },
     { adresse: 'Route de Bizerte Km 12, Mateur', telephone: '+216 72 600 100', isActive: true, company: transfood },
   );
+
+  // Lier les admins transport à leur société de livraison
+  await userRepo.update(rapidAdmin.id, { deliveryCompany: { id: dcRapid.id } } as any);
+  await userRepo.update(nordAdmin.id,  { deliveryCompany: { id: dcNord.id } } as any);
 
   const truckDefs = [
     // Rapid Transport SARL

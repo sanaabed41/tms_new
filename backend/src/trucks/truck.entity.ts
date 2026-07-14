@@ -22,6 +22,12 @@ export class Truck {
   @Column({ default: true })
   isActive: boolean;
 
+  @Column({ type: 'varchar', nullable: true })
+  chauffeurNom: string | null;
+
+  @Column({ type: 'varchar', nullable: true })
+  chauffeurTel: string | null;
+
   @ManyToOne(() => DeliveryCompany, (dc) => dc.camions)
   deliveryCompany: DeliveryCompany;
 
