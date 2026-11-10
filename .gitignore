@@ -30,3 +30,7 @@ Thumbs.db
 
 # SQL test files
 *.sql
+
+# Local Docker Compose secrets
+/.env
+
