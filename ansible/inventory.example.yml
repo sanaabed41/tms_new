@@ -1,0 +1,8 @@
+all:
+  children:
+    k3s_servers:
+      hosts:
+        k3s-server:
+          ansible_host: 192.168.88.141 # Update if the VM address changes
+          ansible_user: sana
+          ansible_ssh_private_key_file: ~/.ssh/id_ed25519

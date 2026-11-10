@@ -34,3 +34,7 @@ Thumbs.db
 # Local Docker Compose secrets
 /.env
 
+
+# Local Ansible inventory
+/ansible/inventory.yml
+
