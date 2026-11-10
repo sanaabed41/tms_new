@@ -35,7 +35,7 @@ import { TransportPortalModule } from './transport-portal/transport-portal.modul
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
             logging: false,
-            ssl: { rejectUnauthorized: false },
+            ssl: config.get<string>('DB_SSL') === 'true' ? { rejectUnauthorized: true } : undefined,
           };
         }
         return {
@@ -72,3 +72,4 @@ import { TransportPortalModule } from './transport-portal/transport-portal.modul
   ],
 })
 export class AppModule {}
+
