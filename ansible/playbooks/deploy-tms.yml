@@ -152,7 +152,7 @@
 
     - name: Show application resources
       ansible.builtin.command:
-        argv: ["{{ k3s }}", kubectl, get, pods, services, ingress, --namespace, "{{ k8s_namespace }}", -o, wide]
+        argv: ["{{ k3s }}", kubectl, get, pods,services,ingress, --namespace, "{{ k8s_namespace }}", -o, wide]
       register: tms_resources
       changed_when: false
 
