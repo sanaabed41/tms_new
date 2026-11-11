@@ -30,7 +30,7 @@
       confirm: true
 
   vars:
-    namespace: tms-new
+    k8s_namespace: tms-new
     remote_dir: /root/tms-new-deploy
     k3s: /usr/local/bin/k3s
 
@@ -79,19 +79,6 @@
         - "{{ remote_dir }}/02-postgres.yaml"
       changed_when: false
 
-    - name: Wait for PostgreSQL
-      ansible.builtin.command:
-        argv:
-          - "{{ k3s }}"
-          - kubectl
-          - rollout
-          - status
-          - statefulset/postgres
-          - --namespace
-          - "{{ namespace }}"
-          - --timeout=300s
-      changed_when: false
-
     - name: Render and apply secrets without logging credentials
       block:
         - name: Render GHCR pull secret
@@ -128,6 +115,19 @@
             - "{{ remote_dir }}/ghcr-secret.yaml"
             - "{{ remote_dir }}/app-secret.yaml"
 
+    - name: Wait for PostgreSQL
+      ansible.builtin.command:
+        argv:
+          - "{{ k3s }}"
+          - kubectl
+          - rollout
+          - status
+          - statefulset/postgres
+          - --namespace
+          - "{{ k8s_namespace }}"
+          - --timeout=300s
+      changed_when: false
+
     - name: Apply application and ingress
       ansible.builtin.command:
         argv: ["{{ k3s }}", kubectl, apply, -f, "{{ item }}"]
@@ -145,14 +145,14 @@
           - status
           - "deployment/{{ item }}"
           - --namespace
-          - "{{ namespace }}"
+          - "{{ k8s_namespace }}"
           - --timeout=300s
       loop: [backend, frontend]
       changed_when: false
 
     - name: Show application resources
       ansible.builtin.command:
-        argv: ["{{ k3s }}", kubectl, get, pods, services, ingress, --namespace, "{{ namespace }}", -o, wide]
+        argv: ["{{ k3s }}", kubectl, get, pods, services, ingress, --namespace, "{{ k8s_namespace }}", -o, wide]
       register: tms_resources
       changed_when: false
 

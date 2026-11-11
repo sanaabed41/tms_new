@@ -106,6 +106,9 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 5
       volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
         - name: tmp
           emptyDir: {}
         - name: postgres-run
